@@ -1,0 +1,653 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple API"
+  version: "0.0.1"
+  title: "Data engineering toolkit API"
+  contact:
+    email: "jeanbaptistepoullet@statrgy.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/detapi/0.0.1"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "https"
+paths:
+  /typedefs:
+    post:
+      tags:
+      - "admins"
+      summary: "create type definitions"
+      description: "Create type definitions"
+      operationId: "add_typedefs"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "Typedefs"
+        description: "Typedefs"
+        required: false
+        schema:
+          $ref: "#/definitions/TypedefsItem"
+      responses:
+        201:
+          description: "item created"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+      x-swagger-router-controller: "swagger_server.controllers.admins_controller"
+  /typedefs/classificationdefs:
+    get:
+      tags:
+      - "developers"
+      summary: "get classification defs"
+      description: "Get the classification or tag definitions\n"
+      operationId: "typedefs_classificationdefs_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A list of classifications defs."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ClassificationDefsItem"
+        400:
+          description: "invalid input, object invalid"
+        401:
+          description: "Access token is missing or invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /typedefs/entitydefs:
+    get:
+      tags:
+      - "developers"
+      summary: "get entity defs"
+      description: "Get the entity definitions\n"
+      operationId: "typedefs_entitydefs_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A list of entity defs."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EntityDefsItem"
+        400:
+          description: "invalid input, object invalid"
+        401:
+          description: "Access token is missing or invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /typedefs/enumdefs:
+    get:
+      tags:
+      - "developers"
+      summary: "get enum defs"
+      description: "Get the enum definitions\n"
+      operationId: "typedefs_enumdefs_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A list of enum defs."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/EnumDefsItem"
+        400:
+          description: "invalid input, object invalid"
+        401:
+          description: "Access token is missing or invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /entity/hdfs_path:
+    post:
+      tags:
+      - "developers"
+      summary: "create hdfs_path"
+      description: "Add hdfs path\n"
+      operationId: "create_hdfs_path"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "hdfsPath"
+        description: "Hdfs path to add"
+        required: false
+        schema:
+          $ref: "#/definitions/HdfsPathItem"
+      responses:
+        201:
+          description: "item created"
+        400:
+          description: "invalid input, object invalid"
+        409:
+          description: "an existing item already exists"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /entity/hdfs_path/maintain:
+    post:
+      tags:
+      - "developers"
+      summary: "Maintenance of hdfs_path"
+      description: "Maintenance of hdfs_path - archiving/compressing/purging\n"
+      operationId: "hdfs_maintenance"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "hdfsPath"
+        description: "Hdfs path to maintain"
+        required: false
+        schema:
+          $ref: "#/definitions/HdfsPathItem"
+      - name: "mode"
+        in: "query"
+        required: false
+        type: "string"
+        enum:
+        - "all"
+        - "archive"
+        - "purge"
+        - "compress"
+      responses:
+        400:
+          description: "invalid input, object invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /process:
+    post:
+      tags:
+      - "developers"
+      summary: "Create process"
+      description: "Maintenance of hdfs_path - archiving/compressing/purging\n"
+      operationId: "create_process"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "process"
+        description: "Create process"
+        required: false
+        schema:
+          $ref: "#/definitions/Process"
+      responses:
+        400:
+          description: "invalid input, object invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /clusters:
+    get:
+      tags:
+      - "developers"
+      summary: "get cluster names"
+      description: "Get the cluster names\n"
+      operationId: "clusters_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A list of clusters."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cluster"
+        400:
+          description: "invalid input, object invalid"
+        401:
+          description: "Access token is missing or invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /clusters/{cluster_id}:
+    get:
+      tags:
+      - "developers"
+      summary: "get cluster info"
+      description: "Get the cluster info\n"
+      operationId: "clusters_cluster_id_get"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cluster_id"
+        in: "path"
+        description: "cluster identifier"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Cluster info."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cluster"
+        400:
+          description: "invalid input, object invalid"
+        401:
+          description: "Access token is missing or invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+  /clusters/{cluster_id}/services:
+    get:
+      tags:
+      - "developers"
+      summary: "get cluster services"
+      description: "Get the services from the specified cluster\n"
+      operationId: "clusters_cluster_id_services_get"
+      parameters:
+      - name: "cluster_id"
+        in: "path"
+        description: "cluster identifier"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Cluster services."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cluster"
+        400:
+          description: "invalid input, object invalid"
+        401:
+          description: "Access token is missing or invalid"
+      x-swagger-router-controller: "swagger_server.controllers.developers_controller"
+definitions:
+  ElementDefsItem:
+    type: "object"
+    required:
+    - "ordinal"
+    - "value"
+    properties:
+      value:
+        type: "string"
+        example: "dwh"
+      ordinal:
+        type: "integer"
+        example: 1
+    example:
+      value: "dwh"
+      ordinal: 1
+  EntityDefsItem:
+    type: "object"
+    required:
+    - "description"
+    - "name"
+    properties:
+      category:
+        type: "string"
+        example: "ENTITY"
+        enum:
+        - "ENTITY"
+      name:
+        type: "string"
+        example: "data_delivery"
+      description:
+        type: "string"
+        example: "A subtype of Process that delivers data on the ata lake."
+      typeVersion:
+        type: "string"
+        example: "1.0"
+      attributeDefs:
+        type: "array"
+        items:
+          $ref: "#/definitions/AttributeDefsItem"
+      superTypes:
+        type: "array"
+        example:
+        - "Process"
+        items:
+          type: "string"
+    example:
+      superTypes:
+      - "Process"
+      typeVersion: "1.0"
+      attributeDefs:
+      - isIndexable: false
+        name: "delivery_application_acronym"
+        typeName: "data_delivery_apps"
+        isUnique: false
+        isOptional: false
+        valuesMaxCount: 1
+        cardinality: "SINGLE"
+        valuesMinCount: 1
+      - isIndexable: false
+        name: "delivery_application_acronym"
+        typeName: "data_delivery_apps"
+        isUnique: false
+        isOptional: false
+        valuesMaxCount: 1
+        cardinality: "SINGLE"
+        valuesMinCount: 1
+      name: "data_delivery"
+      description: "A subtype of Process that delivers data on the ata lake."
+      category: "ENTITY"
+  ClassificationDefsItem:
+    type: "object"
+    required:
+    - "description"
+    - "name"
+    properties:
+      category:
+        type: "string"
+        example: "CLASSIFICATION"
+        enum:
+        - "CLASSIFICATION"
+      name:
+        type: "string"
+        example: "CL_WR"
+      description:
+        type: "string"
+        example: "Competition Law Wholesale and Retail"
+      superTypes:
+        type: "array"
+        items:
+          type: "string"
+      attributeDefs:
+        type: "array"
+        items:
+          $ref: "#/definitions/AttributeDefsItem"
+    example:
+      superTypes:
+      - "superTypes"
+      - "superTypes"
+      attributeDefs:
+      - isIndexable: false
+        name: "delivery_application_acronym"
+        typeName: "data_delivery_apps"
+        isUnique: false
+        isOptional: false
+        valuesMaxCount: 1
+        cardinality: "SINGLE"
+        valuesMinCount: 1
+      - isIndexable: false
+        name: "delivery_application_acronym"
+        typeName: "data_delivery_apps"
+        isUnique: false
+        isOptional: false
+        valuesMaxCount: 1
+        cardinality: "SINGLE"
+        valuesMinCount: 1
+      name: "CL_WR"
+      description: "Competition Law Wholesale and Retail"
+      category: "CLASSIFICATION"
+  EnumDefsItem:
+    type: "object"
+    required:
+    - "description"
+    - "name"
+    properties:
+      category:
+        type: "string"
+        example: "ENUM"
+        enum:
+        - "ENUM"
+      name:
+        type: "string"
+        example: "data_delivery_apps"
+      description:
+        type: "string"
+        example: "Enumeration of data delivery applications"
+      typeVersion:
+        type: "string"
+        example: "1.0"
+      elementDefs:
+        type: "array"
+        items:
+          $ref: "#/definitions/ElementDefsItem"
+    example:
+      typeVersion: "1.0"
+      name: "data_delivery_apps"
+      description: "Enumeration of data delivery applications"
+      elementDefs:
+      - value: "dwh"
+        ordinal: 1
+      - value: "dwh"
+        ordinal: 1
+      category: "ENUM"
+  AttributeDefsItem:
+    type: "object"
+    required:
+    - "name"
+    - "typeName"
+    properties:
+      name:
+        type: "string"
+        example: "delivery_application_acronym"
+      typeName:
+        type: "string"
+        example: "data_delivery_apps"
+      isOptional:
+        type: "boolean"
+        example: false
+      cardinality:
+        type: "string"
+        example: "SINGLE"
+      valuesMinCount:
+        type: "integer"
+        example: 1
+      valuesMaxCount:
+        type: "integer"
+        example: 1
+      isUnique:
+        type: "boolean"
+        example: false
+      isIndexable:
+        type: "boolean"
+        example: false
+    example:
+      isIndexable: false
+      name: "delivery_application_acronym"
+      typeName: "data_delivery_apps"
+      isUnique: false
+      isOptional: false
+      valuesMaxCount: 1
+      cardinality: "SINGLE"
+      valuesMinCount: 1
+  HdfsPathItem:
+    type: "object"
+    required:
+    - "path"
+    properties:
+      name:
+        type: "string"
+        example: "ada_root"
+      qualifiedName:
+        type: "string"
+        example: "envs_p0_dwh_ada@prod-datalake"
+      path:
+        type: "string"
+        example: "/env/p0/dwh/ada"
+      clusterName:
+        type: "string"
+        example: "prod-datalake"
+    example:
+      path: "/env/p0/dwh/ada"
+      qualifiedName: "envs_p0_dwh_ada@prod-datalake"
+      clusterName: "prod-datalake"
+      name: "ada_root"
+  Cluster:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "prod-datalake"
+    example:
+      name: "prod-datalake"
+  Process:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "ada_hdfs2staging"
+      inputs:
+        type: "array"
+        items:
+          $ref: "#/definitions/Dataset"
+      outputs:
+        type: "array"
+        items:
+          $ref: "#/definitions/Dataset"
+    example:
+      outputs:
+      - name: "/env/p0/dwh/ada/hdfsfile"
+      - name: "/env/p0/dwh/ada/hdfsfile"
+      inputs:
+      - name: "/env/p0/dwh/ada/hdfsfile"
+      - name: "/env/p0/dwh/ada/hdfsfile"
+      name: "ada_hdfs2staging"
+  Dataset:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "/env/p0/dwh/ada/hdfsfile"
+    description: "Dataset"
+    example:
+      name: "/env/p0/dwh/ada/hdfsfile"
+  TypedefsItem:
+    type: "object"
+    properties:
+      classificationDefs:
+        type: "array"
+        items:
+          $ref: "#/definitions/ClassificationDefsItem"
+      enumDefs:
+        type: "array"
+        items:
+          $ref: "#/definitions/EnumDefsItem"
+      entityDefs:
+        type: "array"
+        items:
+          $ref: "#/definitions/EntityDefsItem"
+    example:
+      entityDefs:
+      - superTypes:
+        - "Process"
+        typeVersion: "1.0"
+        attributeDefs:
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        name: "data_delivery"
+        description: "A subtype of Process that delivers data on the ata lake."
+        category: "ENTITY"
+      - superTypes:
+        - "Process"
+        typeVersion: "1.0"
+        attributeDefs:
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        name: "data_delivery"
+        description: "A subtype of Process that delivers data on the ata lake."
+        category: "ENTITY"
+      enumDefs:
+      - typeVersion: "1.0"
+        name: "data_delivery_apps"
+        description: "Enumeration of data delivery applications"
+        elementDefs:
+        - value: "dwh"
+          ordinal: 1
+        - value: "dwh"
+          ordinal: 1
+        category: "ENUM"
+      - typeVersion: "1.0"
+        name: "data_delivery_apps"
+        description: "Enumeration of data delivery applications"
+        elementDefs:
+        - value: "dwh"
+          ordinal: 1
+        - value: "dwh"
+          ordinal: 1
+        category: "ENUM"
+      classificationDefs:
+      - superTypes:
+        - "superTypes"
+        - "superTypes"
+        attributeDefs:
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        name: "CL_WR"
+        description: "Competition Law Wholesale and Retail"
+        category: "CLASSIFICATION"
+      - superTypes:
+        - "superTypes"
+        - "superTypes"
+        attributeDefs:
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        - isIndexable: false
+          name: "delivery_application_acronym"
+          typeName: "data_delivery_apps"
+          isUnique: false
+          isOptional: false
+          valuesMaxCount: 1
+          cardinality: "SINGLE"
+          valuesMinCount: 1
+        name: "CL_WR"
+        description: "Competition Law Wholesale and Retail"
+        category: "CLASSIFICATION"
+responses:
+  UnauthorizedError:
+    description: "Access token is missing or invalid"
+  BadRequest:
+    description: "invalid input, object invalid"

@@ -23,7 +23,7 @@ class TestDevelopersController(BaseTestCase):
         get cluster info
         """
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/clusters/{cluster_id}'.format(cluster_id='cluster_id_example'),
+            '/detapi/0.0.1/clusters/{cluster_id}'.format(cluster_id='cluster_id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -34,7 +34,7 @@ class TestDevelopersController(BaseTestCase):
         get cluster services
         """
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/clusters/{cluster_id}/services'.format(cluster_id='cluster_id_example'),
+            '/detapi/0.0.1/clusters/{cluster_id}/services'.format(cluster_id='cluster_id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -45,7 +45,7 @@ class TestDevelopersController(BaseTestCase):
         get cluster names
         """
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/clusters',
+            '/detapi/0.0.1/clusters',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -57,7 +57,7 @@ class TestDevelopersController(BaseTestCase):
         """
         hdfsPath = HdfsPathItem()
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/entity/hdfs_path',
+            '/detapi/0.0.1/entity/hdfs_path',
             method='POST',
             data=json.dumps(hdfsPath),
             content_type='application/json')
@@ -71,7 +71,7 @@ class TestDevelopersController(BaseTestCase):
         """
         process = Process()
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/process',
+            '/detapi/0.0.1/process',
             method='POST',
             data=json.dumps(process),
             content_type='application/json')
@@ -86,7 +86,7 @@ class TestDevelopersController(BaseTestCase):
         hdfsPath = HdfsPathItem()
         query_string = [('mode', 'mode_example')]
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/entity/hdfs_path/maintain',
+            '/detapi/0.0.1/entity/hdfs_path/maintain',
             method='POST',
             data=json.dumps(hdfsPath),
             content_type='application/json',
@@ -100,7 +100,7 @@ class TestDevelopersController(BaseTestCase):
         get classification defs
         """
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/typedefs/classificationdefs',
+            '/detapi/0.0.1/typedefs/classificationdefs',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -111,7 +111,7 @@ class TestDevelopersController(BaseTestCase):
         get entity defs
         """
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/typedefs/entitydefs',
+            '/detapi/0.0.1/typedefs/entitydefs',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -122,7 +122,7 @@ class TestDevelopersController(BaseTestCase):
         get enum defs
         """
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/typedefs/enumdefs',
+            '/detapi/0.0.1/typedefs/enumdefs',
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

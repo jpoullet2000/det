@@ -19,7 +19,7 @@ class TestAdminsController(BaseTestCase):
         """
         Typedefs = TypedefsItem()
         response = self.client.open(
-            '/jpoullet2000/detapi/0.0.1/typedefs',
+            '/detapi/0.0.1/typedefs',
             method='POST',
             data=json.dumps(Typedefs),
             content_type='application/json')

@@ -468,7 +468,11 @@
         "env" : {
           "$ref" : "#/definitions/Environments"
         },
-        "delivery_ingestion" : null
+        "delivery_ingestion" : {
+          "type" : "string",
+          "example" : "delivery",
+          "enum" : [ "delivery", "ingestion" ]
+        }
       }
     },
     "Cluster" : {

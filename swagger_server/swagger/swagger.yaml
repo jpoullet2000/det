@@ -475,7 +475,6 @@ definitions:
         example: "data"
         enum:
         - "data"
-        - "code"
       env:
         $ref: "#/definitions/Environments"
     example:

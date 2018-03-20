@@ -66,7 +66,7 @@ class HdfsPathItem(Model):
         :param datacode: The datacode of this HdfsPathItem.
         :type datacode: str
         """
-        allowed_values = ["data", "code"]  # noqa: E501
+        allowed_values = ["data"]  # noqa: E501
         if datacode not in allowed_values:
             raise ValueError(
                 "Invalid value for `datacode` ({0}), must be one of {1}"

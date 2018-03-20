@@ -459,26 +459,15 @@ definitions:
       valuesMinCount: 1
   HdfsPathItem:
     type: "object"
-    required:
-    - "path"
     properties:
-      name:
+      datacode:
         type: "string"
-        example: "ada_root"
-      qualifiedName:
-        type: "string"
-        example: "envs_p0_dwh_ada@prod-datalake"
-      path:
-        type: "string"
-        example: "/env/p0/dwh/ada"
-      clusterName:
-        type: "string"
-        example: "prod-datalake"
+        example: "data"
+        enum:
+        - "data"
+        - "code"
     example:
-      path: "/env/p0/dwh/ada"
-      qualifiedName: "envs_p0_dwh_ada@prod-datalake"
-      clusterName: "prod-datalake"
-      name: "ada_root"
+      datacode: "data"
   Cluster:
     type: "object"
     properties:

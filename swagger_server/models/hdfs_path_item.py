@@ -15,36 +15,21 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None, qualified_name=None, path=None, cluster_name=None):  # noqa: E501
+    def __init__(self, datacode=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
-        :param name: The name of this HdfsPathItem.  # noqa: E501
-        :type name: str
-        :param qualified_name: The qualified_name of this HdfsPathItem.  # noqa: E501
-        :type qualified_name: str
-        :param path: The path of this HdfsPathItem.  # noqa: E501
-        :type path: str
-        :param cluster_name: The cluster_name of this HdfsPathItem.  # noqa: E501
-        :type cluster_name: str
+        :param datacode: The datacode of this HdfsPathItem.  # noqa: E501
+        :type datacode: str
         """
         self.swagger_types = {
-            'name': str,
-            'qualified_name': str,
-            'path': str,
-            'cluster_name': str
+            'datacode': str
         }
 
         self.attribute_map = {
-            'name': 'name',
-            'qualified_name': 'qualifiedName',
-            'path': 'path',
-            'cluster_name': 'clusterName'
+            'datacode': 'datacode'
         }
 
-        self._name = name
-        self._qualified_name = qualified_name
-        self._path = path
-        self._cluster_name = cluster_name
+        self._datacode = datacode
 
     @classmethod
     def from_dict(cls, dikt):
@@ -58,87 +43,28 @@ class HdfsPathItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self):
-        """Gets the name of this HdfsPathItem.
+    def datacode(self):
+        """Gets the datacode of this HdfsPathItem.
 
 
-        :return: The name of this HdfsPathItem.
+        :return: The datacode of this HdfsPathItem.
         :rtype: str
         """
-        return self._name
+        return self._datacode
 
-    @name.setter
-    def name(self, name):
-        """Sets the name of this HdfsPathItem.
+    @datacode.setter
+    def datacode(self, datacode):
+        """Sets the datacode of this HdfsPathItem.
 
 
-        :param name: The name of this HdfsPathItem.
-        :type name: str
+        :param datacode: The datacode of this HdfsPathItem.
+        :type datacode: str
         """
+        allowed_values = ["data", "code"]  # noqa: E501
+        if datacode not in allowed_values:
+            raise ValueError(
+                "Invalid value for `datacode` ({0}), must be one of {1}"
+                .format(datacode, allowed_values)
+            )
 
-        self._name = name
-
-    @property
-    def qualified_name(self):
-        """Gets the qualified_name of this HdfsPathItem.
-
-
-        :return: The qualified_name of this HdfsPathItem.
-        :rtype: str
-        """
-        return self._qualified_name
-
-    @qualified_name.setter
-    def qualified_name(self, qualified_name):
-        """Sets the qualified_name of this HdfsPathItem.
-
-
-        :param qualified_name: The qualified_name of this HdfsPathItem.
-        :type qualified_name: str
-        """
-
-        self._qualified_name = qualified_name
-
-    @property
-    def path(self):
-        """Gets the path of this HdfsPathItem.
-
-
-        :return: The path of this HdfsPathItem.
-        :rtype: str
-        """
-        return self._path
-
-    @path.setter
-    def path(self, path):
-        """Sets the path of this HdfsPathItem.
-
-
-        :param path: The path of this HdfsPathItem.
-        :type path: str
-        """
-        if path is None:
-            raise ValueError("Invalid value for `path`, must not be `None`")  # noqa: E501
-
-        self._path = path
-
-    @property
-    def cluster_name(self):
-        """Gets the cluster_name of this HdfsPathItem.
-
-
-        :return: The cluster_name of this HdfsPathItem.
-        :rtype: str
-        """
-        return self._cluster_name
-
-    @cluster_name.setter
-    def cluster_name(self, cluster_name):
-        """Sets the cluster_name of this HdfsPathItem.
-
-
-        :param cluster_name: The cluster_name of this HdfsPathItem.
-        :type cluster_name: str
-        """
-
-        self._cluster_name = cluster_name
+        self._datacode = datacode

@@ -451,14 +451,22 @@
         }
       }
     },
+    "Environments" : {
+      "type" : "string",
+      "example" : "d0",
+      "enum" : [ "p0", "a7", "t0", "d0" ]
+    },
     "HdfsPathItem" : {
       "type" : "object",
-      "required" : [ "data_code" ],
+      "required" : [ "data_code", "env" ],
       "properties" : {
         "datacode" : {
           "type" : "string",
           "example" : "data",
           "enum" : [ "data", "code" ]
+        },
+        "env" : {
+          "$ref" : "#/parameters/environments"
         }
       }
     },

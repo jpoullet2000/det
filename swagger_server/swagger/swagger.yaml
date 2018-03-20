@@ -457,8 +457,18 @@ definitions:
       valuesMaxCount: 1
       cardinality: "SINGLE"
       valuesMinCount: 1
+  Environments:
+    type: "string"
+    example: "d0"
+    enum:
+    - "p0"
+    - "a7"
+    - "t0"
+    - "d0"
   HdfsPathItem:
     type: "object"
+    required:
+    - "env"
     properties:
       datacode:
         type: "string"
@@ -466,7 +476,10 @@ definitions:
         enum:
         - "data"
         - "code"
+      env:
+        $ref: "#/parameters/environments"
     example:
+      env: ""
       datacode: "data"
   Cluster:
     type: "object"

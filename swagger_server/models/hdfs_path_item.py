@@ -6,6 +6,7 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
+from swagger_server.models.parametersenvironments import Parametersenvironments  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -15,21 +16,26 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, datacode=None):  # noqa: E501
+    def __init__(self, datacode=None, env=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
         :param datacode: The datacode of this HdfsPathItem.  # noqa: E501
         :type datacode: str
+        :param env: The env of this HdfsPathItem.  # noqa: E501
+        :type env: Parametersenvironments
         """
         self.swagger_types = {
-            'datacode': str
+            'datacode': str,
+            'env': Parametersenvironments
         }
 
         self.attribute_map = {
-            'datacode': 'datacode'
+            'datacode': 'datacode',
+            'env': 'env'
         }
 
         self._datacode = datacode
+        self._env = env
 
     @classmethod
     def from_dict(cls, dikt):
@@ -68,3 +74,26 @@ class HdfsPathItem(Model):
             )
 
         self._datacode = datacode
+
+    @property
+    def env(self):
+        """Gets the env of this HdfsPathItem.
+
+
+        :return: The env of this HdfsPathItem.
+        :rtype: Parametersenvironments
+        """
+        return self._env
+
+    @env.setter
+    def env(self, env):
+        """Sets the env of this HdfsPathItem.
+
+
+        :param env: The env of this HdfsPathItem.
+        :type env: Parametersenvironments
+        """
+        if env is None:
+            raise ValueError("Invalid value for `env`, must not be `None`")  # noqa: E501
+
+        self._env = env

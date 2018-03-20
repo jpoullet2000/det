@@ -10,6 +10,7 @@ from swagger_server.models.dataset import Dataset
 from swagger_server.models.element_defs_item import ElementDefsItem
 from swagger_server.models.entity_defs_item import EntityDefsItem
 from swagger_server.models.enum_defs_item import EnumDefsItem
+from swagger_server.models.environments import Environments
 from swagger_server.models.hdfs_path_item import HdfsPathItem
 from swagger_server.models.process import Process
 from swagger_server.models.typedefs_item import TypedefsItem

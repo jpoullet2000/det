@@ -457,8 +457,8 @@
       "properties" : {
         "datacode" : {
           "type" : "string",
-          "enum" : [ "data", "code" ],
-          "example" : "data"
+          "example" : "data",
+          "enum" : [ "data", "code" ]
         }
       }
     },

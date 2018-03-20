@@ -477,6 +477,15 @@ definitions:
     enum:
     - "s1"
     - "s2"
+  FunctionalBlockItem:
+    type: "string"
+    example: "s1"
+    enum:
+    - "s1"
+    - "s2"
+  Retainable:
+    type: "integer"
+    example: 365
   HdfsPathItem:
     type: "object"
     required:
@@ -503,6 +512,8 @@ definitions:
       classification:
         sg: "s1"
         cl: "s1"
+        fb: "s1"
+        retainable: 365
       datacode: "data"
   Cluster:
     type: "object"
@@ -678,9 +689,15 @@ definitions:
         $ref: "#/definitions/SecurityGovernanceItem"
       cl:
         $ref: "#/definitions/CompetitionLawItem"
+      fb:
+        $ref: "#/definitions/FunctionalBlockItem"
+      retainable:
+        $ref: "#/definitions/Retainable"
     example:
       sg: "s1"
       cl: "s1"
+      fb: "s1"
+      retainable: 365
 parameters:
   HdfsMaintenanceServices:
     name: "HdfsMaintenanceService"

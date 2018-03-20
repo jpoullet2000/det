@@ -466,7 +466,7 @@
           "enum" : [ "data", "code" ]
         },
         "env" : {
-          "$ref" : "#/parameters/environments"
+          "$ref" : "#/definitions/Environments"
         }
       }
     },

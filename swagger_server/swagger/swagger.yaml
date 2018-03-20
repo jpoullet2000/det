@@ -141,7 +141,7 @@ paths:
     post:
       tags:
       - "developers"
-      summary: "maintenance of hdfs_path"
+      summary: "Maintenance of hdfs_path"
       description: "Maintenance of hdfs_path - archiving/compressing/purging\n"
       operationId: "hdfs_maintenance"
       consumes:
@@ -155,7 +155,7 @@ paths:
         required: false
         schema:
           $ref: "#/definitions/HdfsPathItem"
-      - name: "mode"
+      - name: "HdfsMaintenanceService"
         in: "query"
         description: "all/archive/purge/compress"
         required: false
@@ -647,6 +647,18 @@ definitions:
         name: "CL_WR"
         description: "Competition Law Wholesale and Retail"
         category: "CLASSIFICATION"
+parameters:
+  HdfsMaintenanceServices:
+    name: "HdfsMaintenanceService"
+    in: "query"
+    description: "all/archive/purge/compress"
+    required: false
+    type: "string"
+    enum:
+    - "all"
+    - "archive"
+    - "purge"
+    - "compress"
 responses:
   UnauthorizedError:
     description: "Access token is missing or invalid"

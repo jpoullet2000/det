@@ -81,10 +81,10 @@ class TestDevelopersController(BaseTestCase):
     def test_hdfs_maintenance(self):
         """Test case for hdfs_maintenance
 
-        maintenance of hdfs_path
+        Maintenance of hdfs_path
         """
         hdfsPath = HdfsPathItem()
-        query_string = [('mode', 'mode_example')]
+        query_string = [('HdfsMaintenanceService', 'HdfsMaintenanceService_example')]
         response = self.client.open(
             '/detapi/0.0.1/entity/hdfs_path/maintain',
             method='POST',

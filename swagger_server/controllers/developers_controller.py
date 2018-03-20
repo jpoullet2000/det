@@ -77,15 +77,15 @@ def create_process(process=None):  # noqa: E501
     return 'do some magic!'
 
 
-def hdfs_maintenance(hdfsPath=None, mode=None):  # noqa: E501
-    """maintenance of hdfs_path
+def hdfs_maintenance(hdfsPath=None, HdfsMaintenanceService=None):  # noqa: E501
+    """Maintenance of hdfs_path
 
     Maintenance of hdfs_path - archiving/compressing/purging  # noqa: E501
 
     :param hdfsPath: Hdfs path to maintain
     :type hdfsPath: dict | bytes
-    :param mode: all/archive/purge/compress
-    :type mode: str
+    :param HdfsMaintenanceService: all/archive/purge/compress
+    :type HdfsMaintenanceService: str
 
     :rtype: None
     """

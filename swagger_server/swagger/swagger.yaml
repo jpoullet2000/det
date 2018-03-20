@@ -157,6 +157,7 @@ paths:
           $ref: "#/definitions/HdfsPathItem"
       - name: "mode"
         in: "query"
+        description: "all/archive/purge/compress"
         required: false
         type: "string"
         enum:

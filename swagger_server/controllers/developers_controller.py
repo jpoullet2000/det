@@ -84,7 +84,7 @@ def hdfs_maintenance(hdfsPath=None, mode=None):  # noqa: E501
 
     :param hdfsPath: Hdfs path to maintain
     :type hdfsPath: dict | bytes
-    :param mode: 
+    :param mode: all/archive/purge/compress
     :type mode: str
 
     :rtype: None

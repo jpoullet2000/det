@@ -460,13 +460,21 @@
       "type" : "object",
       "required" : [ "data_code", "env" ],
       "properties" : {
-        "datacode" : {
+        "data_code" : {
           "type" : "string",
           "example" : "data",
           "enum" : [ "data", "code" ]
         },
         "env" : {
           "$ref" : "#/definitions/Environments"
+        },
+        "clustername" : {
+          "type" : "string",
+          "example" : "bdlab"
+        },
+        "delivery_ingestion" : {
+          "type" : "string",
+          "enum" : [ "delivery", "ingestion" ]
         }
       }
     },

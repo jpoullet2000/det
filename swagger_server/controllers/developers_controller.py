@@ -78,7 +78,7 @@ def create_process(process=None):  # noqa: E501
 
 
 def hdfs_maintenance(hdfsPath=None, mode=None):  # noqa: E501
-    """Maintenance of hdfs_path
+    """maintenance of hdfs_path
 
     Maintenance of hdfs_path - archiving/compressing/purging  # noqa: E501
 

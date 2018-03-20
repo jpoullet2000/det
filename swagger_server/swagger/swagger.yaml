@@ -141,7 +141,7 @@ paths:
     post:
       tags:
       - "developers"
-      summary: "Maintenance of hdfs_path"
+      summary: "maintenance of hdfs_path"
       description: "Maintenance of hdfs_path - archiving/compressing/purging\n"
       operationId: "hdfs_maintenance"
       consumes:

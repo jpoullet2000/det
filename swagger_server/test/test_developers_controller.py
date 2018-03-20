@@ -81,7 +81,7 @@ class TestDevelopersController(BaseTestCase):
     def test_hdfs_maintenance(self):
         """Test case for hdfs_maintenance
 
-        Maintenance of hdfs_path
+        maintenance of hdfs_path
         """
         hdfsPath = HdfsPathItem()
         query_string = [('mode', 'mode_example')]

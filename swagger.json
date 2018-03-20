@@ -159,7 +159,7 @@
     "/entity/hdfs_path/maintain" : {
       "post" : {
         "tags" : [ "developers" ],
-        "summary" : "maintenance of hdfs_path",
+        "summary" : "Maintenance of hdfs_path",
         "operationId" : "hdfsMaintenance",
         "description" : "Maintenance of hdfs_path - archiving/compressing/purging\n",
         "consumes" : [ "application/json" ],
@@ -172,11 +172,7 @@
             "$ref" : "#/definitions/HdfsPathItem"
           }
         }, {
-          "in" : "query",
-          "name" : "mode",
-          "type" : "string",
-          "enum" : [ "all", "archive", "purge", "compress" ],
-          "description" : "all/archive/purge/compress"
+          "$ref" : "#/parameters/HdfsMaintenanceServices"
         } ],
         "responses" : {
           "400" : {
@@ -295,6 +291,15 @@
           }
         }
       }
+    }
+  },
+  "parameters" : {
+    "HdfsMaintenanceServices" : {
+      "in" : "query",
+      "name" : "HdfsMaintenanceService",
+      "description" : "all/archive/purge/compress",
+      "type" : "string",
+      "enum" : [ "all", "archive", "purge", "compress" ]
     }
   },
   "definitions" : {

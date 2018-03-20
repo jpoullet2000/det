@@ -475,10 +475,16 @@ definitions:
         example: "data"
         enum:
         - "data"
-        - "code"
       env:
         $ref: "#/definitions/Environments"
+      delivery_ingestion:
+        type: "string"
+        example: "delivery"
+        enum:
+        - "delivery"
+        - "ingestion"
     example:
+      delivery_ingestion: "delivery"
       env: "d0"
       datacode: "data"
   Cluster:

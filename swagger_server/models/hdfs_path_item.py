@@ -16,26 +16,31 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, datacode=None, env=None):  # noqa: E501
+    def __init__(self, datacode=None, env=None, delivery_ingestion=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
         :param datacode: The datacode of this HdfsPathItem.  # noqa: E501
         :type datacode: str
         :param env: The env of this HdfsPathItem.  # noqa: E501
         :type env: Environments
+        :param delivery_ingestion: The delivery_ingestion of this HdfsPathItem.  # noqa: E501
+        :type delivery_ingestion: str
         """
         self.swagger_types = {
             'datacode': str,
-            'env': Environments
+            'env': Environments,
+            'delivery_ingestion': str
         }
 
         self.attribute_map = {
             'datacode': 'datacode',
-            'env': 'env'
+            'env': 'env',
+            'delivery_ingestion': 'delivery_ingestion'
         }
 
         self._datacode = datacode
         self._env = env
+        self._delivery_ingestion = delivery_ingestion
 
     @classmethod
     def from_dict(cls, dikt):
@@ -66,7 +71,7 @@ class HdfsPathItem(Model):
         :param datacode: The datacode of this HdfsPathItem.
         :type datacode: str
         """
-        allowed_values = ["data", "code"]  # noqa: E501
+        allowed_values = ["data"]  # noqa: E501
         if datacode not in allowed_values:
             raise ValueError(
                 "Invalid value for `datacode` ({0}), must be one of {1}"
@@ -97,3 +102,30 @@ class HdfsPathItem(Model):
             raise ValueError("Invalid value for `env`, must not be `None`")  # noqa: E501
 
         self._env = env
+
+    @property
+    def delivery_ingestion(self):
+        """Gets the delivery_ingestion of this HdfsPathItem.
+
+
+        :return: The delivery_ingestion of this HdfsPathItem.
+        :rtype: str
+        """
+        return self._delivery_ingestion
+
+    @delivery_ingestion.setter
+    def delivery_ingestion(self, delivery_ingestion):
+        """Sets the delivery_ingestion of this HdfsPathItem.
+
+
+        :param delivery_ingestion: The delivery_ingestion of this HdfsPathItem.
+        :type delivery_ingestion: str
+        """
+        allowed_values = ["delivery", "ingestion"]  # noqa: E501
+        if delivery_ingestion not in allowed_values:
+            raise ValueError(
+                "Invalid value for `delivery_ingestion` ({0}), must be one of {1}"
+                .format(delivery_ingestion, allowed_values)
+            )
+
+        self._delivery_ingestion = delivery_ingestion

@@ -466,6 +466,15 @@
       "example" : "s1",
       "enum" : [ "s1", "s2" ]
     },
+    "FunctionalBlockItem" : {
+      "type" : "string",
+      "example" : "s1",
+      "enum" : [ "s1", "s2" ]
+    },
+    "Retainable" : {
+      "type" : "integer",
+      "example" : 365
+    },
     "HdfsPathItem" : {
       "type" : "object",
       "required" : [ "env" ],
@@ -491,6 +500,12 @@
             },
             "cl" : {
               "$ref" : "#/definitions/CompetitionLawItem"
+            },
+            "fb" : {
+              "$ref" : "#/definitions/FunctionalBlockItem"
+            },
+            "retainable" : {
+              "$ref" : "#/definitions/Retainable"
             }
           }
         }

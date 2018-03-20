@@ -471,6 +471,12 @@ definitions:
     enum:
     - "s1"
     - "s2"
+  CompetitionLawItem:
+    type: "string"
+    example: "s1"
+    enum:
+    - "s1"
+    - "s2"
   HdfsPathItem:
     type: "object"
     required:
@@ -496,6 +502,7 @@ definitions:
       env: "d0"
       classification:
         sg: "s1"
+        cl: "s1"
       datacode: "data"
   Cluster:
     type: "object"
@@ -669,8 +676,11 @@ definitions:
     properties:
       sg:
         $ref: "#/definitions/SecurityGovernanceItem"
+      cl:
+        $ref: "#/definitions/CompetitionLawItem"
     example:
       sg: "s1"
+      cl: "s1"
 parameters:
   HdfsMaintenanceServices:
     name: "HdfsMaintenanceService"

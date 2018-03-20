@@ -6,6 +6,7 @@ from __future__ import absolute_import
 from swagger_server.models.attribute_defs_item import AttributeDefsItem
 from swagger_server.models.classification_defs_item import ClassificationDefsItem
 from swagger_server.models.cluster import Cluster
+from swagger_server.models.competition_law_item import CompetitionLawItem
 from swagger_server.models.dataset import Dataset
 from swagger_server.models.element_defs_item import ElementDefsItem
 from swagger_server.models.entity_defs_item import EntityDefsItem

@@ -461,6 +461,11 @@
       "example" : "s1",
       "enum" : [ "s1", "s2" ]
     },
+    "CompetitionLawItem" : {
+      "type" : "string",
+      "example" : "s1",
+      "enum" : [ "s1", "s2" ]
+    },
     "HdfsPathItem" : {
       "type" : "object",
       "required" : [ "env" ],
@@ -483,6 +488,9 @@
           "properties" : {
             "sg" : {
               "$ref" : "#/definitions/SecurityGovernanceItem"
+            },
+            "cl" : {
+              "$ref" : "#/definitions/CompetitionLawItem"
             }
           }
         }

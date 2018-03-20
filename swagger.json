@@ -159,7 +159,7 @@
     "/entity/hdfs_path/maintain" : {
       "post" : {
         "tags" : [ "developers" ],
-        "summary" : "Maintenance of hdfs_path",
+        "summary" : "maintenance of hdfs_path",
         "operationId" : "hdfsMaintenance",
         "description" : "Maintenance of hdfs_path - archiving/compressing/purging\n",
         "consumes" : [ "application/json" ],

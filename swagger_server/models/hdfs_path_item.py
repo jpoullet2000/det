@@ -16,36 +16,26 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, data_code=None, env=None, clustername=None, delivery_ingestion=None):  # noqa: E501
+    def __init__(self, datacode=None, env=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
-        :param data_code: The data_code of this HdfsPathItem.  # noqa: E501
-        :type data_code: str
+        :param datacode: The datacode of this HdfsPathItem.  # noqa: E501
+        :type datacode: str
         :param env: The env of this HdfsPathItem.  # noqa: E501
         :type env: Environments
-        :param clustername: The clustername of this HdfsPathItem.  # noqa: E501
-        :type clustername: str
-        :param delivery_ingestion: The delivery_ingestion of this HdfsPathItem.  # noqa: E501
-        :type delivery_ingestion: str
         """
         self.swagger_types = {
-            'data_code': str,
-            'env': Environments,
-            'clustername': str,
-            'delivery_ingestion': str
+            'datacode': str,
+            'env': Environments
         }
 
         self.attribute_map = {
-            'data_code': 'data_code',
-            'env': 'env',
-            'clustername': 'clustername',
-            'delivery_ingestion': 'delivery_ingestion'
+            'datacode': 'datacode',
+            'env': 'env'
         }
 
-        self._data_code = data_code
+        self._datacode = datacode
         self._env = env
-        self._clustername = clustername
-        self._delivery_ingestion = delivery_ingestion
 
     @classmethod
     def from_dict(cls, dikt):
@@ -59,31 +49,31 @@ class HdfsPathItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def data_code(self):
-        """Gets the data_code of this HdfsPathItem.
+    def datacode(self):
+        """Gets the datacode of this HdfsPathItem.
 
 
-        :return: The data_code of this HdfsPathItem.
+        :return: The datacode of this HdfsPathItem.
         :rtype: str
         """
-        return self._data_code
+        return self._datacode
 
-    @data_code.setter
-    def data_code(self, data_code):
-        """Sets the data_code of this HdfsPathItem.
+    @datacode.setter
+    def datacode(self, datacode):
+        """Sets the datacode of this HdfsPathItem.
 
 
-        :param data_code: The data_code of this HdfsPathItem.
-        :type data_code: str
+        :param datacode: The datacode of this HdfsPathItem.
+        :type datacode: str
         """
         allowed_values = ["data", "code"]  # noqa: E501
-        if data_code not in allowed_values:
+        if datacode not in allowed_values:
             raise ValueError(
-                "Invalid value for `data_code` ({0}), must be one of {1}"
-                .format(data_code, allowed_values)
+                "Invalid value for `datacode` ({0}), must be one of {1}"
+                .format(datacode, allowed_values)
             )
 
-        self._data_code = data_code
+        self._datacode = datacode
 
     @property
     def env(self):
@@ -107,51 +97,3 @@ class HdfsPathItem(Model):
             raise ValueError("Invalid value for `env`, must not be `None`")  # noqa: E501
 
         self._env = env
-
-    @property
-    def clustername(self):
-        """Gets the clustername of this HdfsPathItem.
-
-
-        :return: The clustername of this HdfsPathItem.
-        :rtype: str
-        """
-        return self._clustername
-
-    @clustername.setter
-    def clustername(self, clustername):
-        """Sets the clustername of this HdfsPathItem.
-
-
-        :param clustername: The clustername of this HdfsPathItem.
-        :type clustername: str
-        """
-
-        self._clustername = clustername
-
-    @property
-    def delivery_ingestion(self):
-        """Gets the delivery_ingestion of this HdfsPathItem.
-
-
-        :return: The delivery_ingestion of this HdfsPathItem.
-        :rtype: str
-        """
-        return self._delivery_ingestion
-
-    @delivery_ingestion.setter
-    def delivery_ingestion(self, delivery_ingestion):
-        """Sets the delivery_ingestion of this HdfsPathItem.
-
-
-        :param delivery_ingestion: The delivery_ingestion of this HdfsPathItem.
-        :type delivery_ingestion: str
-        """
-        allowed_values = ["delivery", "ingestion"]  # noqa: E501
-        if delivery_ingestion not in allowed_values:
-            raise ValueError(
-                "Invalid value for `delivery_ingestion` ({0}), must be one of {1}"
-                .format(delivery_ingestion, allowed_values)
-            )
-
-        self._delivery_ingestion = delivery_ingestion

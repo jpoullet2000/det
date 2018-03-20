@@ -468,10 +468,9 @@ definitions:
   HdfsPathItem:
     type: "object"
     required:
-    - "data_code"
     - "env"
     properties:
-      data_code:
+      datacode:
         type: "string"
         example: "data"
         enum:
@@ -479,19 +478,9 @@ definitions:
         - "code"
       env:
         $ref: "#/definitions/Environments"
-      clustername:
-        type: "string"
-        example: "bdlab"
-      delivery_ingestion:
-        type: "string"
-        enum:
-        - "delivery"
-        - "ingestion"
     example:
-      clustername: "bdlab"
-      delivery_ingestion: "delivery"
       env: "d0"
-      data_code: "data"
+      datacode: "data"
   Cluster:
     type: "object"
     properties:

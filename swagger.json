@@ -458,15 +458,20 @@
     },
     "HdfsPathItem" : {
       "type" : "object",
-      "required" : [ "data_code", "env" ],
+      "required" : [ "env" ],
       "properties" : {
         "datacode" : {
           "type" : "string",
           "example" : "data",
-          "enum" : [ "data", "code" ]
+          "enum" : [ "data" ]
         },
         "env" : {
           "$ref" : "#/definitions/Environments"
+        },
+        "delivery_ingestion" : {
+          "type" : "string",
+          "example" : "delivery",
+          "enum" : [ "delivery", "ingestion" ]
         }
       }
     },

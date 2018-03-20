@@ -477,9 +477,9 @@ definitions:
         - "data"
         - "code"
       env:
-        $ref: "#/parameters/environments"
+        $ref: "#/definitions/Environments"
     example:
-      env: ""
+      env: "d0"
       datacode: "data"
   Cluster:
     type: "object"

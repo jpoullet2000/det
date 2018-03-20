@@ -6,7 +6,7 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
-from swagger_server.models.parametersenvironments import Parametersenvironments  # noqa: F401,E501
+from swagger_server.models.environments import Environments  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -22,11 +22,11 @@ class HdfsPathItem(Model):
         :param datacode: The datacode of this HdfsPathItem.  # noqa: E501
         :type datacode: str
         :param env: The env of this HdfsPathItem.  # noqa: E501
-        :type env: Parametersenvironments
+        :type env: Environments
         """
         self.swagger_types = {
             'datacode': str,
-            'env': Parametersenvironments
+            'env': Environments
         }
 
         self.attribute_map = {
@@ -81,7 +81,7 @@ class HdfsPathItem(Model):
 
 
         :return: The env of this HdfsPathItem.
-        :rtype: Parametersenvironments
+        :rtype: Environments
         """
         return self._env
 
@@ -91,7 +91,7 @@ class HdfsPathItem(Model):
 
 
         :param env: The env of this HdfsPathItem.
-        :type env: Parametersenvironments
+        :type env: Environments
         """
         if env is None:
             raise ValueError("Invalid value for `env`, must not be `None`")  # noqa: E501

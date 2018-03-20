@@ -465,6 +465,12 @@ definitions:
     - "a7"
     - "t0"
     - "d0"
+  SecurityGovernanceItem:
+    type: "string"
+    example: "s1"
+    enum:
+    - "s1"
+    - "s2"
   HdfsPathItem:
     type: "object"
     required:
@@ -483,9 +489,13 @@ definitions:
         enum:
         - "delivery"
         - "ingestion"
+      classification:
+        $ref: "#/definitions/HdfsPathItem_classification"
     example:
       delivery_ingestion: "delivery"
       env: "d0"
+      classification:
+        sg: "s1"
       datacode: "data"
   Cluster:
     type: "object"
@@ -655,6 +665,12 @@ definitions:
         name: "CL_WR"
         description: "Competition Law Wholesale and Retail"
         category: "CLASSIFICATION"
+  HdfsPathItem_classification:
+    properties:
+      sg:
+        $ref: "#/definitions/SecurityGovernanceItem"
+    example:
+      sg: "s1"
 parameters:
   HdfsMaintenanceServices:
     name: "HdfsMaintenanceService"

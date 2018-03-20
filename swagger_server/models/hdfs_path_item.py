@@ -7,6 +7,7 @@ from typing import List, Dict  # noqa: F401
 
 from swagger_server.models.base_model_ import Model
 from swagger_server.models.environments import Environments  # noqa: F401,E501
+from swagger_server.models.hdfs_path_item_classification import HdfsPathItemClassification  # noqa: F401,E501
 from swagger_server import util
 
 
@@ -16,7 +17,7 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, datacode=None, env=None, delivery_ingestion=None):  # noqa: E501
+    def __init__(self, datacode=None, env=None, delivery_ingestion=None, classification=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
         :param datacode: The datacode of this HdfsPathItem.  # noqa: E501
@@ -25,22 +26,27 @@ class HdfsPathItem(Model):
         :type env: Environments
         :param delivery_ingestion: The delivery_ingestion of this HdfsPathItem.  # noqa: E501
         :type delivery_ingestion: str
+        :param classification: The classification of this HdfsPathItem.  # noqa: E501
+        :type classification: HdfsPathItemClassification
         """
         self.swagger_types = {
             'datacode': str,
             'env': Environments,
-            'delivery_ingestion': str
+            'delivery_ingestion': str,
+            'classification': HdfsPathItemClassification
         }
 
         self.attribute_map = {
             'datacode': 'datacode',
             'env': 'env',
-            'delivery_ingestion': 'delivery_ingestion'
+            'delivery_ingestion': 'delivery_ingestion',
+            'classification': 'classification'
         }
 
         self._datacode = datacode
         self._env = env
         self._delivery_ingestion = delivery_ingestion
+        self._classification = classification
 
     @classmethod
     def from_dict(cls, dikt):
@@ -129,3 +135,24 @@ class HdfsPathItem(Model):
             )
 
         self._delivery_ingestion = delivery_ingestion
+
+    @property
+    def classification(self):
+        """Gets the classification of this HdfsPathItem.
+
+
+        :return: The classification of this HdfsPathItem.
+        :rtype: HdfsPathItemClassification
+        """
+        return self._classification
+
+    @classification.setter
+    def classification(self, classification):
+        """Sets the classification of this HdfsPathItem.
+
+
+        :param classification: The classification of this HdfsPathItem.
+        :type classification: HdfsPathItemClassification
+        """
+
+        self._classification = classification

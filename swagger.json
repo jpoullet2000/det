@@ -175,7 +175,8 @@
           "in" : "query",
           "name" : "mode",
           "type" : "string",
-          "enum" : [ "all", "archive", "purge", "compress" ]
+          "enum" : [ "all", "archive", "purge", "compress" ],
+          "description" : "all/archive/purge/compress"
         } ],
         "responses" : {
           "400" : {

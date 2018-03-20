@@ -55,7 +55,7 @@ class TestDevelopersController(BaseTestCase):
 
         create hdfs_path
         """
-        hdfsPath = HdfsPathItem(path='/data/p0/app')
+        hdfsPath = HdfsPathItem()
         response = self.client.open(
             '/detapi/0.0.1/entity/hdfs_path',
             method='POST',
@@ -83,8 +83,8 @@ class TestDevelopersController(BaseTestCase):
 
         Maintenance of hdfs_path
         """
-        hdfsPath = HdfsPathItem(path='/data/p0')
-        query_string = [('mode', 'purge')]
+        hdfsPath = HdfsPathItem()
+        query_string = [('mode', 'mode_example')]
         response = self.client.open(
             '/detapi/0.0.1/entity/hdfs_path/maintain',
             method='POST',

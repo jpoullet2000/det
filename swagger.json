@@ -453,23 +453,12 @@
     },
     "HdfsPathItem" : {
       "type" : "object",
-      "required" : [ "path" ],
+      "required" : [ "data_code" ],
       "properties" : {
-        "name" : {
+        "datacode" : {
           "type" : "string",
-          "example" : "ada_root"
-        },
-        "qualifiedName" : {
-          "type" : "string",
-          "example" : "envs_p0_dwh_ada@prod-datalake"
-        },
-        "path" : {
-          "type" : "string",
-          "example" : "/env/p0/dwh/ada"
-        },
-        "clusterName" : {
-          "type" : "string",
-          "example" : "prod-datalake"
+          "enum" : [ "data", "code" ],
+          "example" : "data"
         }
       }
     },

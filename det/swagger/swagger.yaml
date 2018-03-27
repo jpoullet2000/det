@@ -14,6 +14,8 @@ basePath: "/detapi/0.0.1"
 tags:
 - name: "admins"
   description: "Secured Admin-only calls"
+  security:
+    - basic: []
 - name: "developers"
   description: "Operations available to regular developers"
 schemes:
@@ -127,7 +129,7 @@ paths:
       - in: "body"
         name: "hdfsPath"
         description: "Hdfs path to add"
-        required: false
+        required: true
         schema:
           $ref: "#/definitions/HdfsPathItem"
       responses:
@@ -461,6 +463,7 @@ definitions:
   Environments:
     type: "string"
     example: "d0"
+    defaultValue: "d0"
     enum:
     - "p0"
     - "a7"
@@ -492,7 +495,7 @@ definitions:
     required:
     - "env"
     properties:
-      datacode:
+      data_code:
         type: "string"
         example: "data"
         enum:
@@ -716,3 +719,6 @@ responses:
     description: "Access token is missing or invalid"
   BadRequest:
     description: "invalid input, object invalid"
+securityDefinitions:
+  basic:
+    type: basic

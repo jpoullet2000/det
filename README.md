@@ -15,7 +15,7 @@ To run the server, please execute the following from the root directory:
 
 ```
 pip install -r requirements.txt
-python -m swagger_server
+python -m det 
 ```
 
 and open your browser to here:
@@ -42,8 +42,16 @@ To run the server on a Docker container, please execute the following from the r
 
 ```bash
 # building the image
-docker build -t swagger_server .
+docker build -t det .
 
 # starting up a container
-docker run -p 8080:8080 swagger_server
+docker run -p 8080:8080 det
+```
+
+## Development
+The API is based on the `swagger/swagger.yaml` file.
+Code is generated with the code generator available [here](https://github.com/swagger-api/swagger-codegen). 
+To run the code generator: 
+```bash
+java -jar <path_to_swagger-codegen-cli.jar_dir>/swagger-codegen-cli.jar generate -i det/swagger/swagger.yml -l python-flask -o <output_dir> -c det/swagger/python_codegen_config.json
 ```

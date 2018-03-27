@@ -3,7 +3,7 @@
 import sys
 from setuptools import setup, find_packages
 
-NAME = "swagger_server"
+NAME = "det"
 VERSION = "0.0.1"
 
 # To install the library, run the following
@@ -27,9 +27,9 @@ setup(
     package_data={'': ['swagger/swagger.yaml']},
     include_package_data=True,
     entry_points={
-        'console_scripts': ['swagger_server=swagger_server.__main__:main']},
+        'console_scripts': ['det=det.__main__:main']},
     long_description="""\
-    This is a simple API
+    Data engineering toolkit API
     """
 )
 

@@ -47,7 +47,7 @@ def clusters_get():  # noqa: E501
     return 'do some magic!'
 
 
-def create_hdfs_path(hdfsPath=None):  # noqa: E501
+def create_hdfs_path(hdfsPath):  # noqa: E501
     """create hdfs_path
 
     Add hdfs path  # noqa: E501
@@ -77,7 +77,7 @@ def create_process(process=None):  # noqa: E501
     return 'do some magic!'
 
 
-def hdfs_maintenance(hdfsPath=None, HdfsMaintenanceService=None):  # noqa: E501
+def hdfs_maintenance(hdfsPath, HdfsMaintenanceService):  # noqa: E501
     """Maintenance of hdfs_path
 
     Maintenance of hdfs_path - archiving/compressing/purging  # noqa: E501

@@ -17,11 +17,11 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, datacode=None, env=None, delivery_ingestion=None, classification=None):  # noqa: E501
+    def __init__(self, data_code: str=None, env: Environments=None, delivery_ingestion: str=None, classification: HdfsPathItemClassification=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
-        :param datacode: The datacode of this HdfsPathItem.  # noqa: E501
-        :type datacode: str
+        :param data_code: The data_code of this HdfsPathItem.  # noqa: E501
+        :type data_code: str
         :param env: The env of this HdfsPathItem.  # noqa: E501
         :type env: Environments
         :param delivery_ingestion: The delivery_ingestion of this HdfsPathItem.  # noqa: E501
@@ -30,26 +30,26 @@ class HdfsPathItem(Model):
         :type classification: HdfsPathItemClassification
         """
         self.swagger_types = {
-            'datacode': str,
+            'data_code': str,
             'env': Environments,
             'delivery_ingestion': str,
             'classification': HdfsPathItemClassification
         }
 
         self.attribute_map = {
-            'datacode': 'datacode',
+            'data_code': 'data_code',
             'env': 'env',
             'delivery_ingestion': 'delivery_ingestion',
             'classification': 'classification'
         }
 
-        self._datacode = datacode
+        self._data_code = data_code
         self._env = env
         self._delivery_ingestion = delivery_ingestion
         self._classification = classification
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'HdfsPathItem':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -60,34 +60,34 @@ class HdfsPathItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def datacode(self):
-        """Gets the datacode of this HdfsPathItem.
+    def data_code(self) -> str:
+        """Gets the data_code of this HdfsPathItem.
 
 
-        :return: The datacode of this HdfsPathItem.
+        :return: The data_code of this HdfsPathItem.
         :rtype: str
         """
-        return self._datacode
+        return self._data_code
 
-    @datacode.setter
-    def datacode(self, datacode):
-        """Sets the datacode of this HdfsPathItem.
+    @data_code.setter
+    def data_code(self, data_code: str):
+        """Sets the data_code of this HdfsPathItem.
 
 
-        :param datacode: The datacode of this HdfsPathItem.
-        :type datacode: str
+        :param data_code: The data_code of this HdfsPathItem.
+        :type data_code: str
         """
         allowed_values = ["data"]  # noqa: E501
-        if datacode not in allowed_values:
+        if data_code not in allowed_values:
             raise ValueError(
-                "Invalid value for `datacode` ({0}), must be one of {1}"
-                .format(datacode, allowed_values)
+                "Invalid value for `data_code` ({0}), must be one of {1}"
+                .format(data_code, allowed_values)
             )
 
-        self._datacode = datacode
+        self._data_code = data_code
 
     @property
-    def env(self):
+    def env(self) -> Environments:
         """Gets the env of this HdfsPathItem.
 
 
@@ -97,7 +97,7 @@ class HdfsPathItem(Model):
         return self._env
 
     @env.setter
-    def env(self, env):
+    def env(self, env: Environments):
         """Sets the env of this HdfsPathItem.
 
 
@@ -110,7 +110,7 @@ class HdfsPathItem(Model):
         self._env = env
 
     @property
-    def delivery_ingestion(self):
+    def delivery_ingestion(self) -> str:
         """Gets the delivery_ingestion of this HdfsPathItem.
 
 
@@ -120,7 +120,7 @@ class HdfsPathItem(Model):
         return self._delivery_ingestion
 
     @delivery_ingestion.setter
-    def delivery_ingestion(self, delivery_ingestion):
+    def delivery_ingestion(self, delivery_ingestion: str):
         """Sets the delivery_ingestion of this HdfsPathItem.
 
 
@@ -137,7 +137,7 @@ class HdfsPathItem(Model):
         self._delivery_ingestion = delivery_ingestion
 
     @property
-    def classification(self):
+    def classification(self) -> HdfsPathItemClassification:
         """Gets the classification of this HdfsPathItem.
 
 
@@ -147,7 +147,7 @@ class HdfsPathItem(Model):
         return self._classification
 
     @classification.setter
-    def classification(self, classification):
+    def classification(self, classification: HdfsPathItemClassification):
         """Sets the classification of this HdfsPathItem.
 
 

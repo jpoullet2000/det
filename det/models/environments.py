@@ -34,7 +34,7 @@ class Environments(Model):
         }
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'Environments':
         """Returns the dict as a model
 
         :param dikt: A dict.

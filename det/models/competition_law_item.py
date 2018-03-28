@@ -32,7 +32,7 @@ class CompetitionLawItem(Model):
         }
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'CompetitionLawItem':
         """Returns the dict as a model
 
         :param dikt: A dict.

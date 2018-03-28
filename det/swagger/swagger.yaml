@@ -14,15 +14,14 @@ basePath: "/detapi/0.0.1"
 tags:
 - name: "admins"
   description: "Secured Admin-only calls"
-  security:
-    - basic: []
+  # security:
+  #  - basic: []
 - name: "developers"
   description: "Operations available to regular developers"
 schemes:
 - "https"
 paths:
   /typedefs:
-    #  x-swagger-router-controller: det.controllers.admins_controller
     post:
       tags:
       - "admins"
@@ -155,19 +154,19 @@ paths:
       - in: "body"
         name: "hdfsPath"
         description: "Hdfs path to maintain"
-        required: false
+        required: true
         schema:
           $ref: "#/definitions/HdfsPathItem"
       - name: "HdfsMaintenanceService"
         in: "query"
         description: "all/archive/purge/compress"
-        required: false
         type: "string"
         enum:
-        - "all"
-        - "archive"
-        - "purge"
-        - "compress"
+          - "all"
+          - "archive"
+          - "purge"
+          - "compress"
+        required: true
       responses:
         400:
           description: "invalid input, object invalid"
@@ -463,7 +462,6 @@ definitions:
   Environments:
     type: "string"
     example: "d0"
-    defaultValue: "d0"
     enum:
     - "p0"
     - "a7"
@@ -702,18 +700,18 @@ definitions:
       cl: "s1"
       fb: "s1"
       retainable: 365
-parameters:
-  HdfsMaintenanceServices:
-    name: "HdfsMaintenanceService"
-    in: "query"
-    description: "all/archive/purge/compress"
-    required: false
-    type: "string"
-    enum:
-    - "all"
-    - "archive"
-    - "purge"
-    - "compress"
+#parameters:
+#  HdfsMaintenanceServices:
+#    name: "HdfsMaintenanceService"
+#    in: "query"
+#    description: "all/archive/purge/compress"
+#    required: false
+#    type: "string"
+#    enum:
+#    - "all"
+#    - "archive"
+#    - "purge"
+#    - "compress"
 responses:
   UnauthorizedError:
     description: "Access token is missing or invalid"

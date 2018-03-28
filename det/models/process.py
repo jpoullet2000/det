@@ -16,7 +16,7 @@ class Process(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None, inputs=None, outputs=None):  # noqa: E501
+    def __init__(self, name: str=None, inputs: List[Dataset]=None, outputs: List[Dataset]=None):  # noqa: E501
         """Process - a model defined in Swagger
 
         :param name: The name of this Process.  # noqa: E501
@@ -43,7 +43,7 @@ class Process(Model):
         self._outputs = outputs
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'Process':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -54,7 +54,7 @@ class Process(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this Process.
 
 
@@ -64,7 +64,7 @@ class Process(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this Process.
 
 
@@ -75,7 +75,7 @@ class Process(Model):
         self._name = name
 
     @property
-    def inputs(self):
+    def inputs(self) -> List[Dataset]:
         """Gets the inputs of this Process.
 
 
@@ -85,7 +85,7 @@ class Process(Model):
         return self._inputs
 
     @inputs.setter
-    def inputs(self, inputs):
+    def inputs(self, inputs: List[Dataset]):
         """Sets the inputs of this Process.
 
 
@@ -96,7 +96,7 @@ class Process(Model):
         self._inputs = inputs
 
     @property
-    def outputs(self):
+    def outputs(self) -> List[Dataset]:
         """Gets the outputs of this Process.
 
 
@@ -106,7 +106,7 @@ class Process(Model):
         return self._outputs
 
     @outputs.setter
-    def outputs(self, outputs):
+    def outputs(self, outputs: List[Dataset]):
         """Sets the outputs of this Process.
 
 

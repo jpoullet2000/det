@@ -32,7 +32,7 @@ class SecurityGovernanceItem(Model):
         }
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'SecurityGovernanceItem':
         """Returns the dict as a model
 
         :param dikt: A dict.

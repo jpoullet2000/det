@@ -13,6 +13,7 @@ from det.models.entity_defs_item import EntityDefsItem
 from det.models.enum_defs_item import EnumDefsItem
 from det.models.environments import Environments
 from det.models.functional_block_item import FunctionalBlockItem
+from det.models.hdfs_maintenance_service_item import HdfsMaintenanceServiceItem
 from det.models.hdfs_path_item import HdfsPathItem
 from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 from det.models.process import Process

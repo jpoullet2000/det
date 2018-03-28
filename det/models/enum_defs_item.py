@@ -16,7 +16,7 @@ class EnumDefsItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, category=None, name=None, description=None, type_version=None, element_defs=None):  # noqa: E501
+    def __init__(self, category: str=None, name: str=None, description: str=None, type_version: str=None, element_defs: List[ElementDefsItem]=None):  # noqa: E501
         """EnumDefsItem - a model defined in Swagger
 
         :param category: The category of this EnumDefsItem.  # noqa: E501
@@ -53,7 +53,7 @@ class EnumDefsItem(Model):
         self._element_defs = element_defs
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'EnumDefsItem':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -64,7 +64,7 @@ class EnumDefsItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def category(self):
+    def category(self) -> str:
         """Gets the category of this EnumDefsItem.
 
 
@@ -74,7 +74,7 @@ class EnumDefsItem(Model):
         return self._category
 
     @category.setter
-    def category(self, category):
+    def category(self, category: str):
         """Sets the category of this EnumDefsItem.
 
 
@@ -91,7 +91,7 @@ class EnumDefsItem(Model):
         self._category = category
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this EnumDefsItem.
 
 
@@ -101,7 +101,7 @@ class EnumDefsItem(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this EnumDefsItem.
 
 
@@ -114,7 +114,7 @@ class EnumDefsItem(Model):
         self._name = name
 
     @property
-    def description(self):
+    def description(self) -> str:
         """Gets the description of this EnumDefsItem.
 
 
@@ -124,7 +124,7 @@ class EnumDefsItem(Model):
         return self._description
 
     @description.setter
-    def description(self, description):
+    def description(self, description: str):
         """Sets the description of this EnumDefsItem.
 
 
@@ -137,7 +137,7 @@ class EnumDefsItem(Model):
         self._description = description
 
     @property
-    def type_version(self):
+    def type_version(self) -> str:
         """Gets the type_version of this EnumDefsItem.
 
 
@@ -147,7 +147,7 @@ class EnumDefsItem(Model):
         return self._type_version
 
     @type_version.setter
-    def type_version(self, type_version):
+    def type_version(self, type_version: str):
         """Sets the type_version of this EnumDefsItem.
 
 
@@ -158,7 +158,7 @@ class EnumDefsItem(Model):
         self._type_version = type_version
 
     @property
-    def element_defs(self):
+    def element_defs(self) -> List[ElementDefsItem]:
         """Gets the element_defs of this EnumDefsItem.
 
 
@@ -168,7 +168,7 @@ class EnumDefsItem(Model):
         return self._element_defs
 
     @element_defs.setter
-    def element_defs(self, element_defs):
+    def element_defs(self, element_defs: List[ElementDefsItem]):
         """Sets the element_defs of this EnumDefsItem.
 
 

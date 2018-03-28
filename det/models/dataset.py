@@ -15,7 +15,7 @@ class Dataset(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None):  # noqa: E501
+    def __init__(self, name: str=None):  # noqa: E501
         """Dataset - a model defined in Swagger
 
         :param name: The name of this Dataset.  # noqa: E501
@@ -32,7 +32,7 @@ class Dataset(Model):
         self._name = name
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'Dataset':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -43,7 +43,7 @@ class Dataset(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this Dataset.
 
 
@@ -53,7 +53,7 @@ class Dataset(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this Dataset.
 
 

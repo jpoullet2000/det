@@ -18,7 +18,7 @@ class TypedefsItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, classification_defs=None, enum_defs=None, entity_defs=None):  # noqa: E501
+    def __init__(self, classification_defs: List[ClassificationDefsItem]=None, enum_defs: List[EnumDefsItem]=None, entity_defs: List[EntityDefsItem]=None):  # noqa: E501
         """TypedefsItem - a model defined in Swagger
 
         :param classification_defs: The classification_defs of this TypedefsItem.  # noqa: E501
@@ -45,7 +45,7 @@ class TypedefsItem(Model):
         self._entity_defs = entity_defs
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'TypedefsItem':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -56,7 +56,7 @@ class TypedefsItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def classification_defs(self):
+    def classification_defs(self) -> List[ClassificationDefsItem]:
         """Gets the classification_defs of this TypedefsItem.
 
 
@@ -66,7 +66,7 @@ class TypedefsItem(Model):
         return self._classification_defs
 
     @classification_defs.setter
-    def classification_defs(self, classification_defs):
+    def classification_defs(self, classification_defs: List[ClassificationDefsItem]):
         """Sets the classification_defs of this TypedefsItem.
 
 
@@ -77,7 +77,7 @@ class TypedefsItem(Model):
         self._classification_defs = classification_defs
 
     @property
-    def enum_defs(self):
+    def enum_defs(self) -> List[EnumDefsItem]:
         """Gets the enum_defs of this TypedefsItem.
 
 
@@ -87,7 +87,7 @@ class TypedefsItem(Model):
         return self._enum_defs
 
     @enum_defs.setter
-    def enum_defs(self, enum_defs):
+    def enum_defs(self, enum_defs: List[EnumDefsItem]):
         """Sets the enum_defs of this TypedefsItem.
 
 
@@ -98,7 +98,7 @@ class TypedefsItem(Model):
         self._enum_defs = enum_defs
 
     @property
-    def entity_defs(self):
+    def entity_defs(self) -> List[EntityDefsItem]:
         """Gets the entity_defs of this TypedefsItem.
 
 
@@ -108,7 +108,7 @@ class TypedefsItem(Model):
         return self._entity_defs
 
     @entity_defs.setter
-    def entity_defs(self, entity_defs):
+    def entity_defs(self, entity_defs: List[EntityDefsItem]):
         """Sets the entity_defs of this TypedefsItem.
 
 

@@ -15,7 +15,7 @@ class Cluster(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None):  # noqa: E501
+    def __init__(self, name: str=None):  # noqa: E501
         """Cluster - a model defined in Swagger
 
         :param name: The name of this Cluster.  # noqa: E501
@@ -32,7 +32,7 @@ class Cluster(Model):
         self._name = name
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'Cluster':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -43,7 +43,7 @@ class Cluster(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this Cluster.
 
 
@@ -53,7 +53,7 @@ class Cluster(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this Cluster.
 
 

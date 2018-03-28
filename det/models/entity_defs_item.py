@@ -16,7 +16,7 @@ class EntityDefsItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, category=None, name=None, description=None, type_version=None, attribute_defs=None, super_types=None):  # noqa: E501
+    def __init__(self, category: str=None, name: str=None, description: str=None, type_version: str=None, attribute_defs: List[AttributeDefsItem]=None, super_types: List[str]=None):  # noqa: E501
         """EntityDefsItem - a model defined in Swagger
 
         :param category: The category of this EntityDefsItem.  # noqa: E501
@@ -58,7 +58,7 @@ class EntityDefsItem(Model):
         self._super_types = super_types
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'EntityDefsItem':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -69,7 +69,7 @@ class EntityDefsItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def category(self):
+    def category(self) -> str:
         """Gets the category of this EntityDefsItem.
 
 
@@ -79,7 +79,7 @@ class EntityDefsItem(Model):
         return self._category
 
     @category.setter
-    def category(self, category):
+    def category(self, category: str):
         """Sets the category of this EntityDefsItem.
 
 
@@ -96,7 +96,7 @@ class EntityDefsItem(Model):
         self._category = category
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this EntityDefsItem.
 
 
@@ -106,7 +106,7 @@ class EntityDefsItem(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this EntityDefsItem.
 
 
@@ -119,7 +119,7 @@ class EntityDefsItem(Model):
         self._name = name
 
     @property
-    def description(self):
+    def description(self) -> str:
         """Gets the description of this EntityDefsItem.
 
 
@@ -129,7 +129,7 @@ class EntityDefsItem(Model):
         return self._description
 
     @description.setter
-    def description(self, description):
+    def description(self, description: str):
         """Sets the description of this EntityDefsItem.
 
 
@@ -142,7 +142,7 @@ class EntityDefsItem(Model):
         self._description = description
 
     @property
-    def type_version(self):
+    def type_version(self) -> str:
         """Gets the type_version of this EntityDefsItem.
 
 
@@ -152,7 +152,7 @@ class EntityDefsItem(Model):
         return self._type_version
 
     @type_version.setter
-    def type_version(self, type_version):
+    def type_version(self, type_version: str):
         """Sets the type_version of this EntityDefsItem.
 
 
@@ -163,7 +163,7 @@ class EntityDefsItem(Model):
         self._type_version = type_version
 
     @property
-    def attribute_defs(self):
+    def attribute_defs(self) -> List[AttributeDefsItem]:
         """Gets the attribute_defs of this EntityDefsItem.
 
 
@@ -173,7 +173,7 @@ class EntityDefsItem(Model):
         return self._attribute_defs
 
     @attribute_defs.setter
-    def attribute_defs(self, attribute_defs):
+    def attribute_defs(self, attribute_defs: List[AttributeDefsItem]):
         """Sets the attribute_defs of this EntityDefsItem.
 
 
@@ -184,7 +184,7 @@ class EntityDefsItem(Model):
         self._attribute_defs = attribute_defs
 
     @property
-    def super_types(self):
+    def super_types(self) -> List[str]:
         """Gets the super_types of this EntityDefsItem.
 
 
@@ -194,7 +194,7 @@ class EntityDefsItem(Model):
         return self._super_types
 
     @super_types.setter
-    def super_types(self, super_types):
+    def super_types(self, super_types: List[str]):
         """Sets the super_types of this EntityDefsItem.
 
 

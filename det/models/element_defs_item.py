@@ -15,7 +15,7 @@ class ElementDefsItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, value=None, ordinal=None):  # noqa: E501
+    def __init__(self, value: str=None, ordinal: int=None):  # noqa: E501
         """ElementDefsItem - a model defined in Swagger
 
         :param value: The value of this ElementDefsItem.  # noqa: E501
@@ -37,7 +37,7 @@ class ElementDefsItem(Model):
         self._ordinal = ordinal
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'ElementDefsItem':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -48,7 +48,7 @@ class ElementDefsItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def value(self):
+    def value(self) -> str:
         """Gets the value of this ElementDefsItem.
 
 
@@ -58,7 +58,7 @@ class ElementDefsItem(Model):
         return self._value
 
     @value.setter
-    def value(self, value):
+    def value(self, value: str):
         """Sets the value of this ElementDefsItem.
 
 
@@ -71,7 +71,7 @@ class ElementDefsItem(Model):
         self._value = value
 
     @property
-    def ordinal(self):
+    def ordinal(self) -> int:
         """Gets the ordinal of this ElementDefsItem.
 
 
@@ -81,7 +81,7 @@ class ElementDefsItem(Model):
         return self._ordinal
 
     @ordinal.setter
-    def ordinal(self, ordinal):
+    def ordinal(self, ordinal: int):
         """Sets the ordinal of this ElementDefsItem.
 
 

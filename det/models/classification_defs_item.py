@@ -16,7 +16,7 @@ class ClassificationDefsItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, category=None, name=None, description=None, super_types=None, attribute_defs=None):  # noqa: E501
+    def __init__(self, category: str=None, name: str=None, description: str=None, super_types: List[str]=None, attribute_defs: List[AttributeDefsItem]=None):  # noqa: E501
         """ClassificationDefsItem - a model defined in Swagger
 
         :param category: The category of this ClassificationDefsItem.  # noqa: E501
@@ -53,7 +53,7 @@ class ClassificationDefsItem(Model):
         self._attribute_defs = attribute_defs
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'ClassificationDefsItem':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -64,7 +64,7 @@ class ClassificationDefsItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def category(self):
+    def category(self) -> str:
         """Gets the category of this ClassificationDefsItem.
 
 
@@ -74,7 +74,7 @@ class ClassificationDefsItem(Model):
         return self._category
 
     @category.setter
-    def category(self, category):
+    def category(self, category: str):
         """Sets the category of this ClassificationDefsItem.
 
 
@@ -91,7 +91,7 @@ class ClassificationDefsItem(Model):
         self._category = category
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this ClassificationDefsItem.
 
 
@@ -101,7 +101,7 @@ class ClassificationDefsItem(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this ClassificationDefsItem.
 
 
@@ -114,7 +114,7 @@ class ClassificationDefsItem(Model):
         self._name = name
 
     @property
-    def description(self):
+    def description(self) -> str:
         """Gets the description of this ClassificationDefsItem.
 
 
@@ -124,7 +124,7 @@ class ClassificationDefsItem(Model):
         return self._description
 
     @description.setter
-    def description(self, description):
+    def description(self, description: str):
         """Sets the description of this ClassificationDefsItem.
 
 
@@ -137,7 +137,7 @@ class ClassificationDefsItem(Model):
         self._description = description
 
     @property
-    def super_types(self):
+    def super_types(self) -> List[str]:
         """Gets the super_types of this ClassificationDefsItem.
 
 
@@ -147,7 +147,7 @@ class ClassificationDefsItem(Model):
         return self._super_types
 
     @super_types.setter
-    def super_types(self, super_types):
+    def super_types(self, super_types: List[str]):
         """Sets the super_types of this ClassificationDefsItem.
 
 
@@ -158,7 +158,7 @@ class ClassificationDefsItem(Model):
         self._super_types = super_types
 
     @property
-    def attribute_defs(self):
+    def attribute_defs(self) -> List[AttributeDefsItem]:
         """Gets the attribute_defs of this ClassificationDefsItem.
 
 
@@ -168,7 +168,7 @@ class ClassificationDefsItem(Model):
         return self._attribute_defs
 
     @attribute_defs.setter
-    def attribute_defs(self, attribute_defs):
+    def attribute_defs(self, attribute_defs: List[AttributeDefsItem]):
         """Sets the attribute_defs of this ClassificationDefsItem.
 
 

@@ -1,8 +1,11 @@
 import pprint
 
 import six
+import typing
 
 from det import util
+
+T = typing.TypeVar('T')
 
 
 class Model(object):
@@ -15,7 +18,7 @@ class Model(object):
     attribute_map = {}
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls: typing.Type[T], dikt) -> T:
         """Returns the dict as a model"""
         return util.deserialize_model(dikt, cls)
 

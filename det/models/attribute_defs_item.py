@@ -15,7 +15,7 @@ class AttributeDefsItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None, type_name=None, is_optional=None, cardinality=None, values_min_count=None, values_max_count=None, is_unique=None, is_indexable=None):  # noqa: E501
+    def __init__(self, name: str=None, type_name: str=None, is_optional: bool=None, cardinality: str=None, values_min_count: int=None, values_max_count: int=None, is_unique: bool=None, is_indexable: bool=None):  # noqa: E501
         """AttributeDefsItem - a model defined in Swagger
 
         :param name: The name of this AttributeDefsItem.  # noqa: E501
@@ -67,7 +67,7 @@ class AttributeDefsItem(Model):
         self._is_indexable = is_indexable
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'AttributeDefsItem':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -78,7 +78,7 @@ class AttributeDefsItem(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def name(self):
+    def name(self) -> str:
         """Gets the name of this AttributeDefsItem.
 
 
@@ -88,7 +88,7 @@ class AttributeDefsItem(Model):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str):
         """Sets the name of this AttributeDefsItem.
 
 
@@ -101,7 +101,7 @@ class AttributeDefsItem(Model):
         self._name = name
 
     @property
-    def type_name(self):
+    def type_name(self) -> str:
         """Gets the type_name of this AttributeDefsItem.
 
 
@@ -111,7 +111,7 @@ class AttributeDefsItem(Model):
         return self._type_name
 
     @type_name.setter
-    def type_name(self, type_name):
+    def type_name(self, type_name: str):
         """Sets the type_name of this AttributeDefsItem.
 
 
@@ -124,7 +124,7 @@ class AttributeDefsItem(Model):
         self._type_name = type_name
 
     @property
-    def is_optional(self):
+    def is_optional(self) -> bool:
         """Gets the is_optional of this AttributeDefsItem.
 
 
@@ -134,7 +134,7 @@ class AttributeDefsItem(Model):
         return self._is_optional
 
     @is_optional.setter
-    def is_optional(self, is_optional):
+    def is_optional(self, is_optional: bool):
         """Sets the is_optional of this AttributeDefsItem.
 
 
@@ -145,7 +145,7 @@ class AttributeDefsItem(Model):
         self._is_optional = is_optional
 
     @property
-    def cardinality(self):
+    def cardinality(self) -> str:
         """Gets the cardinality of this AttributeDefsItem.
 
 
@@ -155,7 +155,7 @@ class AttributeDefsItem(Model):
         return self._cardinality
 
     @cardinality.setter
-    def cardinality(self, cardinality):
+    def cardinality(self, cardinality: str):
         """Sets the cardinality of this AttributeDefsItem.
 
 
@@ -166,7 +166,7 @@ class AttributeDefsItem(Model):
         self._cardinality = cardinality
 
     @property
-    def values_min_count(self):
+    def values_min_count(self) -> int:
         """Gets the values_min_count of this AttributeDefsItem.
 
 
@@ -176,7 +176,7 @@ class AttributeDefsItem(Model):
         return self._values_min_count
 
     @values_min_count.setter
-    def values_min_count(self, values_min_count):
+    def values_min_count(self, values_min_count: int):
         """Sets the values_min_count of this AttributeDefsItem.
 
 
@@ -187,7 +187,7 @@ class AttributeDefsItem(Model):
         self._values_min_count = values_min_count
 
     @property
-    def values_max_count(self):
+    def values_max_count(self) -> int:
         """Gets the values_max_count of this AttributeDefsItem.
 
 
@@ -197,7 +197,7 @@ class AttributeDefsItem(Model):
         return self._values_max_count
 
     @values_max_count.setter
-    def values_max_count(self, values_max_count):
+    def values_max_count(self, values_max_count: int):
         """Sets the values_max_count of this AttributeDefsItem.
 
 
@@ -208,7 +208,7 @@ class AttributeDefsItem(Model):
         self._values_max_count = values_max_count
 
     @property
-    def is_unique(self):
+    def is_unique(self) -> bool:
         """Gets the is_unique of this AttributeDefsItem.
 
 
@@ -218,7 +218,7 @@ class AttributeDefsItem(Model):
         return self._is_unique
 
     @is_unique.setter
-    def is_unique(self, is_unique):
+    def is_unique(self, is_unique: bool):
         """Sets the is_unique of this AttributeDefsItem.
 
 
@@ -229,7 +229,7 @@ class AttributeDefsItem(Model):
         self._is_unique = is_unique
 
     @property
-    def is_indexable(self):
+    def is_indexable(self) -> bool:
         """Gets the is_indexable of this AttributeDefsItem.
 
 
@@ -239,7 +239,7 @@ class AttributeDefsItem(Model):
         return self._is_indexable
 
     @is_indexable.setter
-    def is_indexable(self, is_indexable):
+    def is_indexable(self, is_indexable: bool):
         """Sets the is_indexable of this AttributeDefsItem.
 
 

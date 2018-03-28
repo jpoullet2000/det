@@ -32,7 +32,7 @@ class FunctionalBlockItem(Model):
         }
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'FunctionalBlockItem':
         """Returns the dict as a model
 
         :param dikt: A dict.

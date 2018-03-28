@@ -19,7 +19,7 @@ class HdfsPathItemClassification(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, sg=None, cl=None, fb=None, retainable=None):  # noqa: E501
+    def __init__(self, sg: SecurityGovernanceItem=None, cl: CompetitionLawItem=None, fb: FunctionalBlockItem=None, retainable: Retainable=None):  # noqa: E501
         """HdfsPathItemClassification - a model defined in Swagger
 
         :param sg: The sg of this HdfsPathItemClassification.  # noqa: E501
@@ -51,7 +51,7 @@ class HdfsPathItemClassification(Model):
         self._retainable = retainable
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> 'HdfsPathItemClassification':
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -62,7 +62,7 @@ class HdfsPathItemClassification(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def sg(self):
+    def sg(self) -> SecurityGovernanceItem:
         """Gets the sg of this HdfsPathItemClassification.
 
 
@@ -72,7 +72,7 @@ class HdfsPathItemClassification(Model):
         return self._sg
 
     @sg.setter
-    def sg(self, sg):
+    def sg(self, sg: SecurityGovernanceItem):
         """Sets the sg of this HdfsPathItemClassification.
 
 
@@ -83,7 +83,7 @@ class HdfsPathItemClassification(Model):
         self._sg = sg
 
     @property
-    def cl(self):
+    def cl(self) -> CompetitionLawItem:
         """Gets the cl of this HdfsPathItemClassification.
 
 
@@ -93,7 +93,7 @@ class HdfsPathItemClassification(Model):
         return self._cl
 
     @cl.setter
-    def cl(self, cl):
+    def cl(self, cl: CompetitionLawItem):
         """Sets the cl of this HdfsPathItemClassification.
 
 
@@ -104,7 +104,7 @@ class HdfsPathItemClassification(Model):
         self._cl = cl
 
     @property
-    def fb(self):
+    def fb(self) -> FunctionalBlockItem:
         """Gets the fb of this HdfsPathItemClassification.
 
 
@@ -114,7 +114,7 @@ class HdfsPathItemClassification(Model):
         return self._fb
 
     @fb.setter
-    def fb(self, fb):
+    def fb(self, fb: FunctionalBlockItem):
         """Sets the fb of this HdfsPathItemClassification.
 
 
@@ -125,7 +125,7 @@ class HdfsPathItemClassification(Model):
         self._fb = fb
 
     @property
-    def retainable(self):
+    def retainable(self) -> Retainable:
         """Gets the retainable of this HdfsPathItemClassification.
 
 
@@ -135,7 +135,7 @@ class HdfsPathItemClassification(Model):
         return self._retainable
 
     @retainable.setter
-    def retainable(self, retainable):
+    def retainable(self, retainable: Retainable):
         """Sets the retainable of this HdfsPathItemClassification.
 
 

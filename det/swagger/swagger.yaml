@@ -133,7 +133,7 @@ paths:
           $ref: "#/definitions/HdfsPathItem"
       responses:
         201:
-          description: "item created"
+          description: "HDFS path created"
         400:
           description: "invalid input, object invalid"
         409:

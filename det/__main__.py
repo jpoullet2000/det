@@ -21,8 +21,8 @@ def main():
     app.app.config.from_object(CONFIG_MODULE)
     conf = app.app.config
     app.add_api('swagger.yaml', resolver=RestyResolver('det'), arguments={'packageName': 'det', 'title': 'Data engineering toolkit API'}) 
-    app.run(port=app.app.config['DET_WEBSERVER_PORT'])
-    atlas_client = Atlas(conf['ATLAS_SERVER', port=conf['ATLAS_PORT'], username=creds.atlas_login, password=creds.atlas_password)
+    app.run(port=conf['DET_WEBSERVER_PORT'])
+    atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=creds.atlas_login, password=creds.atlas_password)
 
 if __name__ == '__main__':
     main()

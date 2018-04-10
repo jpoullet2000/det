@@ -5,3 +5,5 @@ typing==3.5.2.2
 setuptools>=21.0.0
 flask-script==2.0.6
 atlasclient==0.1.2
+gunicorn==19.7.1
+colorama==0.3.7

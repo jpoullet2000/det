@@ -11,7 +11,7 @@ from det.models.entity_defs_item import EntityDefsItem  # noqa: E501
 from det.models.enum_defs_item import EnumDefsItem  # noqa: E501
 from det.models.hdfs_path_item import HdfsPathItem  # noqa: E501
 from det.models.process import Process  # noqa: E501
-from det.test import BaseTestCase
+from . import BaseTestCase
 
 
 class TestDevelopersController(BaseTestCase):

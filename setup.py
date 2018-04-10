@@ -34,7 +34,7 @@ setup(
     version=version,
     description="Data engineering toolkit API",
     author_email="jeanbaptistepoullet@statrgy.com",
-    url="",
+    url="https://github.com/jpoullet2000/det",
     keywords=["Swagger", "Data engineering toolkit API"],
     install_requires=requirements,
     packages=find_packages(),
@@ -44,6 +44,6 @@ setup(
         'console_scripts': ['det=det.__main__:main']},
     long_description="""\
     Data engineering toolkit API
-    """
+    """,
+    tests_require=test_requirements,
 )
-

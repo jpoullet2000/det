@@ -6,7 +6,7 @@ from flask import json
 from six import BytesIO
 
 from det.models.typedefs_item import TypedefsItem  # noqa: E501
-from det.test import BaseTestCase
+from . import BaseTestCase
 
 
 class TestAdminsController(BaseTestCase):

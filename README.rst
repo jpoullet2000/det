@@ -20,7 +20,7 @@ Usage
 To run the server, please execute the following from the root directory:: sh
 
   pip install -r requirements.txt
-  python -m det 
+  det runserver 
 
 
 and open your browser to here:: 

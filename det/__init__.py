@@ -1,4 +1,4 @@
- #from atlasclient.client import Atlas
+#from atlasclient.client import Atlas
 #from credentials import credentials 
 #creds = credentials.require(['atlas_login', 'atlas_password'])
 

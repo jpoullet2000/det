@@ -40,6 +40,7 @@ setup(
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},
     include_package_data=True,
+    scripts=['det/bin/det'],
     entry_points={
         'console_scripts': ['det=det.__main__:main']},
     long_description="""\

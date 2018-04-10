@@ -6,6 +6,7 @@ class AtlasEntityCreateOperator(BaseOperator):
     Record an entity on Atlas
 
     Args:
+       
       
     Returns:
       

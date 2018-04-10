@@ -14,7 +14,13 @@ from det import encoder
 
 CONFIG_MODULE = os.environ.get('DET_CONFIG', 'det.settings')
 
-creds = credentials.require(['atlas_login', 'atlas_password'])
+try: 
+    creds = credentials.require(['atlas_login', 'atlas_password'])
+    atlas_login = creds.atlas_login
+    atlas_password = creds.atlas_password
+except:
+    atlas_login = 'atlas_login'
+    atlas_password = 'atlas_password'
 
 app = connexion.App('det', specification_dir='./swagger/')
 app.app.json_encoder = encoder.JSONEncoder
@@ -26,7 +32,7 @@ manager = Manager(app.app)
 @manager.option(
         '-d', '--debug', action='store_true',
         help='Start the web server in debug mode')
-def runserver(debug):
+def runserver(debug=False):
     """Starts the det webserver"""
     app.run(port=conf['DET_WEBSERVER_PORT'])
-    atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=creds.atlas_login, password=creds.atlas_password)
+    atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=atlas_login, password=atlas_password)

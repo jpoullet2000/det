@@ -49,7 +49,7 @@ To run the server on a Docker container, please execute the following from the r
   docker build -t det .
 
   # starting up a container
-  docker run -p 8080:8080 det
+  docker run -p 8888:8888 det
 
 
 Development
@@ -60,5 +60,5 @@ To run the code generator::
 
   java -jar <path_to_swagger-codegen-cli.jar_dir>/swagger-codegen-cli.jar generate -i det/swagger/swagger.yml -l python-flask -o <output_dir> -c det/swagger/python_codegen_config.json
 
-.. _`swagger code generator`: https://github.com/swagger-api/swagger-codegen). 
+.. _`swagger code generator`: https://github.com/swagger-api/swagger-codegen 
  

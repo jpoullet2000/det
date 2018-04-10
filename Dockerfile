@@ -1,16 +1,18 @@
-FROM python:2-alpine
+FROM python:3-alpine
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+ENV PYTHONPATH=/home/det:$PYTHONPATH
 
-COPY requirements.txt /usr/src/app/
+WORKDIR /home/det
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt /home/det
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-COPY . /usr/src/app
+ADD . /home/det
+COPY det /usr/local/bin
 
-EXPOSE 8080
+VOLUME /home/det
+
+EXPOSE 8888
 
 ENTRYPOINT ["python"]
-
-CMD ["-m", "det"]
+CMD ["-c", "from det import cli; cli.runserver()"]

@@ -30,6 +30,7 @@ app.app.config.from_object(CONFIG_MODULE)
 conf = app.app.config
 app.add_api('swagger.yaml', resolver=RestyResolver('det'), arguments={'packageName': 'det', 'title': 'Data engineering toolkit API'}) 
 manager = Manager(app.app)
+atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=atlas_login, password=atlas_password)
 
 @manager.option(
         '-d', '--debug', action='store_true',
@@ -71,4 +72,3 @@ def runserver(debug, address, port, workers, timeout):
         print(Fore.YELLOW + cmd)
         print(Style.RESET_ALL)
         Popen(cmd, shell=True).wait()
-    atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=atlas_login, password=atlas_password)

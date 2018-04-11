@@ -516,7 +516,7 @@ definitions:
         cl: "s1"
         fb: "s1"
         retainable: 365
-      datacode: "data"
+      data_code: "data"
   Cluster:
     type: "object"
     properties:

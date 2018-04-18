@@ -8,3 +8,4 @@ atlasclient==0.1.2
 gunicorn==19.7.1
 colorama==0.3.7
 hdfs==2.1.0
+python-ambariclient==0.6.0

@@ -2,6 +2,7 @@
 
 from credentials import credentials 
 from atlasclient.client import Atlas
+from ambariclient.client import Ambari
 from colorama import Fore, Style
 
 from subprocess import Popen
@@ -17,12 +18,14 @@ from det import encoder
 CONFIG_MODULE = os.environ.get('DET_CONFIG', 'det.settings')
 
 try: 
-    creds = credentials.require(['atlas_login', 'atlas_password'])
+    creds = credentials.require(['atlas_login', 'atlas_password', 'ambari_login', 'ambari_password'])
     atlas_login = creds.atlas_login
     atlas_password = creds.atlas_password
 except:
     atlas_login = 'atlas_login'
     atlas_password = 'atlas_password'
+    ambari_login = 'ambari_login'
+    ambari_password = 'ambari_password'
 
 app = connexion.App('det', specification_dir='./swagger/')
 app.app.json_encoder = encoder.JSONEncoder
@@ -31,6 +34,8 @@ conf = app.app.config
 app.add_api('swagger.yaml', resolver=RestyResolver('det'), arguments={'packageName': 'det', 'title': 'Data engineering toolkit API'}) 
 manager = Manager(app.app)
 atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=atlas_login, password=atlas_password)
+ambari_client = Ambari(conf['AMBARI_SERVER'], port=conf['AMBARI_PORT'], username=ambari_login, password=ambari_password) 
+
 
 @manager.option(
         '-d', '--debug', action='store_true',

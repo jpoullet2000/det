@@ -4,8 +4,10 @@ from jinja2 import Template
 
 from det.task import BaseOperator
 from det.exceptions import DETException
-from det.cli import app
+from det.cli import app, atlas_client
+from det.utils.ambari import Ambari
 
+ambari = Ambari()
 _hdfs_user = app.app.config['HDFS_USER']
 _hdfs_data_root_folder = app.app.config['HDFS_DATA_ROOT_FOLDER']
 _hdfs_data_code_folder = app.app.config['HDFS_CODE_ROOT_FOLDER']
@@ -69,7 +71,7 @@ class HdfsPathCreateOperator(BaseOperator):
 
     def get_conn(self):
         try:
-            nn = get_hdfs_namenode()
+            nn = ambari.get_namenodes(cluster_name=, service_name='HDFS')[0]
             logging.debug('Trying namenode {}'.format(nn.host))
             connection_str = 'http://{nn.host}:{nn.port}'.format(nn=nn)
             if _kerberos_security_mode:

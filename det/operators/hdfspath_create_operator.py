@@ -6,6 +6,7 @@ from det.task import BaseOperator
 from det.exceptions import DETException
 from det.cli import app, atlas_client
 from det.utils.ambari import Ambari
+from det.cli import hdfs
 
 ambari = Ambari()
 _hdfs_user = app.app.config['HDFS_USER']
@@ -71,7 +72,7 @@ class HdfsPathCreateOperator(BaseOperator):
 
     def get_conn(self):
         try:
-            nn = ambari.get_namenodes(cluster_name=, service_name='HDFS')[0]
+            nn = hdfs.get_uri()
             logging.debug('Trying namenode {}'.format(nn.host))
             connection_str = 'http://{nn.host}:{nn.port}'.format(nn=nn)
             if _kerberos_security_mode:

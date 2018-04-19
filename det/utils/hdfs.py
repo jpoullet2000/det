@@ -16,7 +16,7 @@ class HDFS():
                                .format(webhdfs_host=self.webhdfs_host,
                                        webhdfs_port=self.webhdfs_port),
                                params=params)
-       uri = response['beans'][0].get('HostAndPort', '') 
-       active = response['beans'][0].get('State', '')
+       uri = response.json()['beans'][0].get('HostAndPort', '') 
+       active = response.json()['beans'][0].get('State', '')
        return(uri if active else '')
 

@@ -5,10 +5,10 @@ from jinja2 import Template
 from det.task import BaseOperator
 from det.exceptions import DETException
 from det.cli import app, atlas_client
-from det.utils.ambari import Ambari
 from det.cli import hdfs
+from det.operators.atlas_entity_create import AtlasEntityCreateOperator
+# from det.utils.ambari import Ambari
 
-ambari = Ambari()
 _hdfs_user = app.app.config['HDFS_USER']
 _hdfs_data_root_folder = app.app.config['HDFS_DATA_ROOT_FOLDER']
 _hdfs_data_code_folder = app.app.config['HDFS_CODE_ROOT_FOLDER']
@@ -72,42 +72,46 @@ class HdfsPathCreateOperator(BaseOperator):
 
     def get_conn(self):
         try:
-            nn = hdfs.get_uri()
-            logging.debug('Trying namenode {}'.format(nn.host))
-            connection_str = 'http://{nn.host}:{nn.port}'.format(nn=nn)
+            connection_str = hdfs.get_uri()
+            logging.debug('Trying uri {}'.format(hdfs_uri))
             if _kerberos_security_mode:
                 client = KerberosClient(connection_str)
             else:
-                proxy_user = self.proxy_user or nn.login
+                proxy_user = self.proxy_user
                 client = InsecureClient(connection_str, user=proxy_user)
             client.status('/')
-            self.log.debug('Using namenode %s for hook', nn.host)
+            self.log.debug('Using HDFS uri %s for hook', hdfs_uri)
             return client
         except HdfsError as e:
-            logging.debug("Read operation on namenode {nn.host} failed with"
+            logging.debug("Read operation from uri {hdfs_uri} failed with"
                           " error: {e.message}".format(**locals()))
 
     def create_hdfs_folder(self, hdfs_client):
         try: 
-            pass    
+            hdfs_client.makedirs(hdfs_path=self.hdfs_path)    
         except: 
             raise HDFSPathCreateOperatorException('HDFS folder could not be created')
 
     def delete_hdfs_folder(self, hdfs_client, recursive=False):
         """Delete HDFS folder if exists
         """
-        hdfs_client.delete(self.hdfs_path_item.path, recursive)
+        hdfs_client.delete(self.hdfs_path, recursive)
 
     def create_atlas_hdfs_path(self):
         """
         """
         try:
-            pass
+            entity_create_op = AtlasEntityCreateOperator(attributes=dict(qualified_name = self.hdfs_path,
+                                                                         name = self.hdfs_path.replace('/','_')
+                                                                         path = self.hdfs_path),
+                                                         classifications=self.hdfs_path_item.classifications,
+                                                         entity_type='hdfs_path')
+            entity_create_op.execute()
+
         except:
             self.delete_hdfs_folder(hdfs_client)
             raise HDFSPathCreateOperatorException('Atlas hdfs path could not be created.'
                                                   'The HDFS folder has therefore been deleted.')
-
 
     def execute(self, context):
         hdfs_client = self.get_conn()

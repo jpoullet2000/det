@@ -102,7 +102,7 @@ class HdfsPathCreateOperator(BaseOperator):
         """
         try:
             entity_create_op = AtlasEntityCreateOperator(attributes=dict(qualified_name = self.hdfs_path,
-                                                                         name = self.hdfs_path.replace('/','_')
+                                                                         name = self.hdfs_path.replace('/','_'),
                                                                          path = self.hdfs_path),
                                                          classifications=self.hdfs_path_item.classifications,
                                                          entity_type='hdfs_path')

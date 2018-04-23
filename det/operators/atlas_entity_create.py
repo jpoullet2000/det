@@ -13,7 +13,7 @@ class AtlasEntityCreateOperator(BaseOperator):
 
         Args:
            attributes(dict): dictionary of attributes as defined in Apache Atlas
-           classifications(dict): dictionary of classifications or tags as defined in Apache Atlas
+           classifications(list): list of classifications or tags as defined in Apache Atlas
            referred_entities(dict): dictionary of referred entities as defined in Atlas 
            entity_type(str): entity type (e.g. hdfs_path, hbase_column, etc) to validate that minimum info is provided to create the entity in Atlas 
         """
@@ -31,13 +31,13 @@ class AtlasEntityCreateOperator(BaseOperator):
             entity_data['entity']['attributes'][attribute] = self.attributes[attribute]
         if self.classifications:
             entity_data['entity']['classifications'] = self.classifications
-        body = json.dumps(entity_data)        
+        body = json.dumps(entity_data)
         return body
 
     def validate_body(self):
         """Validates if the body contains the minimum information to create the Atlas entity
         """
-        if 'qualified_name' not in self.attributes:
+        if 'qualifiedName' not in self.attributes:
             error_message = 'The attribute "qualified_name" must be defined'
             raise DETException(error_message)
         if self.entity_type and self.entity_type == 'hdfs_path' and 'path' not in self.attributes:
@@ -45,7 +45,7 @@ class AtlasEntityCreateOperator(BaseOperator):
             raise DETException(error_message)
         return True
 
-    def execute(self, context): 
+    def execute(self, context=None): 
         """Creates or updates existing entity on Atlas
         """
         if not self.body:

@@ -17,7 +17,7 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, data_code: str=None, env: Environments=None, delivery_ingestion: str=None, classification: HdfsPathItemClassification=None):  # noqa: E501
+    def __init__(self, data_code: str=None, env: Environments=None, delivery_ingestion: str=None, app: str=None, subfolder: str=None, classification: HdfsPathItemClassification=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
         :param data_code: The data_code of this HdfsPathItem.  # noqa: E501
@@ -26,6 +26,10 @@ class HdfsPathItem(Model):
         :type env: Environments
         :param delivery_ingestion: The delivery_ingestion of this HdfsPathItem.  # noqa: E501
         :type delivery_ingestion: str
+        :param app: The app of this HdfsPathItem.  # noqa: E501
+        :type app: str
+        :param subfolder: The subfolder of this HdfsPathItem.  # noqa: E501
+        :type subfolder: str
         :param classification: The classification of this HdfsPathItem.  # noqa: E501
         :type classification: HdfsPathItemClassification
         """
@@ -33,6 +37,8 @@ class HdfsPathItem(Model):
             'data_code': str,
             'env': Environments,
             'delivery_ingestion': str,
+            'app': str,
+            'subfolder': str,
             'classification': HdfsPathItemClassification
         }
 
@@ -40,12 +46,16 @@ class HdfsPathItem(Model):
             'data_code': 'data_code',
             'env': 'env',
             'delivery_ingestion': 'delivery_ingestion',
+            'app': 'app',
+            'subfolder': 'subfolder',
             'classification': 'classification'
         }
 
         self._data_code = data_code
         self._env = env
         self._delivery_ingestion = delivery_ingestion
+        self._app = app
+        self._subfolder = subfolder
         self._classification = classification
 
     @classmethod
@@ -137,6 +147,50 @@ class HdfsPathItem(Model):
         self._delivery_ingestion = delivery_ingestion
 
     @property
+    def app(self) -> str:
+        """Gets the app of this HdfsPathItem.
+
+
+        :return: The app of this HdfsPathItem.
+        :rtype: str
+        """
+        return self._app
+
+    @app.setter
+    def app(self, app: str):
+        """Sets the app of this HdfsPathItem.
+
+
+        :param app: The app of this HdfsPathItem.
+        :type app: str
+        """
+        if app is None:
+            raise ValueError("Invalid value for `app`, must not be `None`")  # noqa: E501
+
+        self._app = app
+
+    @property
+    def subfolder(self) -> str:
+        """Gets the subfolder of this HdfsPathItem.
+
+
+        :return: The subfolder of this HdfsPathItem.
+        :rtype: str
+        """
+        return self._subfolder
+
+    @subfolder.setter
+    def subfolder(self, subfolder: str):
+        """Sets the subfolder of this HdfsPathItem.
+
+
+        :param subfolder: The subfolder of this HdfsPathItem.
+        :type subfolder: str
+        """
+
+        self._subfolder = subfolder
+
+    @property
     def classification(self) -> HdfsPathItemClassification:
         """Gets the classification of this HdfsPathItem.
 
@@ -154,5 +208,7 @@ class HdfsPathItem(Model):
         :param classification: The classification of this HdfsPathItem.
         :type classification: HdfsPathItemClassification
         """
+        if classification is None:
+            raise ValueError("Invalid value for `classification`, must not be `None`")  # noqa: E501
 
         self._classification = classification

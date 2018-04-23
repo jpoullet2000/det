@@ -101,9 +101,10 @@ class HdfsPathCreateOperator(BaseOperator):
         """
         """
         try:
-            entity_create_op = AtlasEntityCreateOperator(attributes=dict(qualified_name = self.hdfs_path,
+            entity_create_op = AtlasEntityCreateOperator(attributes=dict(qualifiedName = self.hdfs_path,
                                                                          name = self.hdfs_path.replace('/','_'),
-                                                                         path = self.hdfs_path),
+                                                                         path = self.hdfs_path,
+                                                                         clusterName=self.hdfs_path_item.get('clusterName', '')),
                                                          classifications=self.hdfs_path_item.classifications,
                                                          entity_type='hdfs_path')
             entity_create_op.execute()

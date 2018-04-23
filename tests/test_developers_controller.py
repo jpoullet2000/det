@@ -4,6 +4,9 @@ from __future__ import absolute_import
 
 from flask import json
 from six import BytesIO
+import pytest
+from pytest_mock import mocker
+
 
 from det.models.classification_defs_item import ClassificationDefsItem  # noqa: E501
 from det.models.cluster import Cluster  # noqa: E501
@@ -11,7 +14,14 @@ from det.models.entity_defs_item import EntityDefsItem  # noqa: E501
 from det.models.enum_defs_item import EnumDefsItem  # noqa: E501
 from det.models.hdfs_path_item import HdfsPathItem  # noqa: E501
 from det.models.process import Process  # noqa: E501
+from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 from . import BaseTestCase
+
+
+hdfs_path_item_classification = HdfsPathItemClassification(sg='s1',
+                                                           cl='s1',
+                                                           fb='s1',
+                                                           retainable=315)
 
 
 class TestDevelopersController(BaseTestCase):
@@ -55,7 +65,8 @@ class TestDevelopersController(BaseTestCase):
 
         create hdfs_path
         """
-        hdfsPath = HdfsPathItem(env='d0')
+
+        hdfsPath = HdfsPathItem(env='d0', app='myapp', classification=hdfs_path_item_classification)
         response = self.client.open(
             '/detapi/0.0.1/entity/hdfs_path',
             method='POST',
@@ -83,7 +94,7 @@ class TestDevelopersController(BaseTestCase):
 
         Maintenance of hdfs_path
         """
-        hdfsPath = HdfsPathItem(env='d0')
+        hdfsPath = HdfsPathItem(env='d0', app='myapp', classification=hdfs_path_item_classification)
         query_string = [('HdfsMaintenanceService', 'purge')]
         response = self.client.open(
             '/detapi/0.0.1/entity/hdfs_path/maintain',

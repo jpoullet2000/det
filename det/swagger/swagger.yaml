@@ -492,6 +492,8 @@ definitions:
     type: "object"
     required:
     - "env"
+    - "app"
+    - "classification"
     properties:
       data_code:
         type: "string"
@@ -506,6 +508,12 @@ definitions:
         enum:
         - "delivery"
         - "ingestion"
+      app:
+        type: "string"
+        example: "myapp"
+      subfolder:
+        type: "string"
+        example: "app_subfolder"
       classification:
         $ref: "#/definitions/HdfsPathItem_classification"
     example:
@@ -700,18 +708,6 @@ definitions:
       cl: "s1"
       fb: "s1"
       retainable: 365
-#parameters:
-#  HdfsMaintenanceServices:
-#    name: "HdfsMaintenanceService"
-#    in: "query"
-#    description: "all/archive/purge/compress"
-#    required: false
-#    type: "string"
-#    enum:
-#    - "all"
-#    - "archive"
-#    - "purge"
-#    - "compress"
 responses:
   UnauthorizedError:
     description: "Access token is missing or invalid"

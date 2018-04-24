@@ -36,7 +36,7 @@ app.add_api('swagger.yaml', resolver=RestyResolver('det'), arguments={'packageNa
 manager = Manager(app.app)
 atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=atlas_login, password=atlas_password)
 ambari_client = Ambari(conf['AMBARI_SERVER'], port=conf['AMBARI_PORT'], username=ambari_login, password=ambari_password) 
-hdfs = HDFS(webhdfs_host=conf['WEBHDFS_HOST'], webhdfs_port=conf['WEBHDFS_PORT']) 
+hdfs_client = HDFS(webhdfs_host=conf['WEBHDFS_HOST'], webhdfs_port=conf['WEBHDFS_PORT'])
 
 @manager.option(
         '-d', '--debug', action='store_true',

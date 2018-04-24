@@ -1,22 +1,22 @@
-from hdfs import InsecureClient, HdfsError
 import logging
 from jinja2 import Template
+from hdfs import InsecureClient, HdfsError
 
 from det.task import BaseOperator
 from det.exceptions import DETException
-from det.cli import app, atlas_client
-from det.cli import hdfs
+from det.cli import app
 from det.operators.atlas_entity_create import AtlasEntityCreateOperator
-# from det.utils.ambari import Ambari
+from det.cli import hdfs_client
 
-_hdfs_user = app.app.config['HDFS_USER']
-_hdfs_data_root_folder = app.app.config['HDFS_DATA_ROOT_FOLDER']
-_hdfs_data_code_folder = app.app.config['HDFS_CODE_ROOT_FOLDER']
-_hdfs_data_ingestion_folder_structure = app.app.config['HDFS_DATA_INGESTION_FOLDER_STRUCTURE']
-_hdfs_data_delivery_folder_structure = app.app.config['HDFS_DATA_DELIVERY_FOLDER_STRUCTURE']
-_kerberos_active = app.app.config['KERBEROS_ACTIVE']  
+_HDFS_USER = app.app.config['HDFS_USER']
+_HDFS_DATA_ROOT_FOLDER = app.app.config['HDFS_DATA_ROOT_FOLDER']
+_HDFS_DATA_CODE_FOLDER = app.app.config['HDFS_CODE_ROOT_FOLDER']
+_HDFS_DATA_INGESTION_FOLDER_STRUCTURE = app.app.config['HDFS_DATA_INGESTION_FOLDER_STRUCTURE']
+_HDFS_DATA_DELIVERY_FOLDER_STRUCTURE = app.app.config['HDFS_DATA_DELIVERY_FOLDER_STRUCTURE']
+_KERBEROS_ACTIVE = app.app.config['KERBEROS_ACTIVE']
+_DEFAULT_CLUSTER = app.app.config['DEFAULT_CLUSTER']
 
-if _kerberos_active:
+if _KERBEROS_ACTIVE:
     try:
         from hdfs.ext.kerberos import KerberosClient
     except ImportError:
@@ -25,7 +25,7 @@ if _kerberos_active:
 
 
 class HDFSPathCreateOperatorException(DETException):
-        pass
+    pass
 
 
 class HdfsPathCreateOperator(BaseOperator):
@@ -41,80 +41,91 @@ class HdfsPathCreateOperator(BaseOperator):
       
         """
         self.proxy_user = proxy_user
-        self.hdfs_path_item = hdfs_path_item 
-   
+        self.hdfs_path_item = hdfs_path_item
+        super(HdfsPathCreateOperator, self).__init__()
+
     @property
     def hdfs_path(self):
-        if self.hdfs_path.item.data_code == 'code':
+        if self.hdfs_path_item.data_code == 'code':
             raise HDFSPathCreateOperatorException('Code folder is not yet implemented')
         if self.hdfs_path_item.delivery_ingestion == 'delivery':
             logging.info('Building delivery path')
-            folder_structure = Template(_hdfs_data_delivery_folder_structure)
-            if hdfs_path_item.app_subfolders:
-                return '{}/{}'.format(
-                                      folder_structure.render(env=hdfs_path_item.env,
-                                                              app=hdfs_path_item.app),
-                                      hdfs_path_item.app_subfolders)
-            else:
-                return folder_structure.render(env=hdfs_path_item.env,
-                                               app=hdfs_path_item.app)
+            folder_structure = Template(_HDFS_DATA_DELIVERY_FOLDER_STRUCTURE)
         else:
             logging.info('Building ingestion path')
-            folder_structure = Template(_hdfs_data_ingestion_folder_structure)
-            if hdfs_path_item.src_subfolders:
-                return '{}/{}'.format(
-                                      folder_structure.render(env=hdfs_path_item.env,
-                                                              src=hdfs_path_item.src),
-                                      hdfs_path_item.src_subfolders)
-            else:
-                return folder_structure.render(env=hdfs_path_item.env,
-                                               src=hdfs_path_item.src)
+            folder_structure = Template(_HDFS_DATA_INGESTION_FOLDER_STRUCTURE)
+        if self.hdfs_path_item.subfolder:
+            return '{}/{}'.format(
+                folder_structure.render(env=self.hdfs_path_item.env,
+                                        app=self.hdfs_path_item.app),
+                self.hdfs_path_item.subfolder)
+        return folder_structure.render(env=self.hdfs_path_item.env,
+                                       app=self.hdfs_path_item.app)
 
     def get_conn(self):
         try:
-            connection_str = hdfs.get_uri()
-            logging.debug('Trying uri {}'.format(hdfs_uri))
-            if _kerberos_security_mode:
+            connection_str = hdfs_client.get_uri()
+            logging.debug('Trying uri %s', connection_str)
+            if _KERBEROS_ACTIVE:
                 client = KerberosClient(connection_str)
             else:
                 proxy_user = self.proxy_user
                 client = InsecureClient(connection_str, user=proxy_user)
             client.status('/')
-            self.log.debug('Using HDFS uri %s for hook', hdfs_uri)
+            logging.debug('Using HDFS uri %s for hook', connection_str)
             return client
-        except HdfsError as e:
-            logging.debug("Read operation from uri {hdfs_uri} failed with"
-                          " error: {e.message}".format(**locals()))
+        except HdfsError as err:
+            logging.debug("Read operation from uri {connection_str} failed with"
+                          " error: {err.message}".format(**locals()))
 
-    def create_hdfs_folder(self, hdfs_client):
-        try: 
-            hdfs_client.makedirs(hdfs_path=self.hdfs_path)    
-        except: 
+    def create_hdfs_folder(self, current_hdfs_client):
+        try:
+            current_hdfs_client.makedirs(hdfs_path=self.hdfs_path)
+        except:
             raise HDFSPathCreateOperatorException('HDFS folder could not be created')
 
-    def delete_hdfs_folder(self, hdfs_client, recursive=False):
+    def delete_hdfs_folder(self, current_hdfs_client, recursive=False):
         """Delete HDFS folder if exists
         """
-        hdfs_client.delete(self.hdfs_path, recursive)
+        try:
+            current_hdfs_client.delete(self.hdfs_path, recursive)
+        except:
+            raise HDFSPathCreateOperatorException('HDFS folder {} could not be deleted'
+                                                  .format(self.hdfs_path))
 
-    def create_atlas_hdfs_path(self):
+    def get_cluster_name(self):
+        """ Get cluster name (where the hdfs path will be handled)
+
+        Cluster name is the one provided via the API, if none is provided it uses DEFAULT_CLUSTER
+
+        TO BE DONE:
+        if none is provided it depends on the CLUSTER_SELECT_MODE:
+        if CLUSTER_SELECT_MODE == 'env' : CLUSTER is chosen depending on the env ('dev', 'tst', 'acc', 'prod')
+        if CLUSTER_SELECT_MODE == 'local':  CLUSTER is chosen as DEFAULT_CLUSTER
+        """
+        if hasattr(self.hdfs_path_item, 'cluster_name'):
+            return self.hdfs_path_item.cluster_name
+        return _DEFAULT_CLUSTER
+
+    def create_atlas_hdfs_path(self, current_hdfs_client):
         """
         """
         try:
-            entity_create_op = AtlasEntityCreateOperator(attributes=dict(qualifiedName = self.hdfs_path,
-                                                                         name = self.hdfs_path.replace('/','_'),
-                                                                         path = self.hdfs_path,
-                                                                         clusterName=self.hdfs_path_item.get('clusterName', '')),
-                                                         classifications=self.hdfs_path_item.classifications,
-                                                         entity_type='hdfs_path')
+            entity_create_op = AtlasEntityCreateOperator(
+                attributes=dict(qualifiedName=self.hdfs_path,
+                                name=self.hdfs_path.replace('/', '_'),
+                                path=self.hdfs_path,
+                                clusterName=self.get_cluster_name()),
+                classifications=self.hdfs_path_item.classification,
+                entity_type='hdfs_path')
             entity_create_op.execute()
 
         except:
-            self.delete_hdfs_folder(hdfs_client)
+            self.delete_hdfs_folder(current_hdfs_client)
             raise HDFSPathCreateOperatorException('Atlas hdfs path could not be created.'
                                                   'The HDFS folder has therefore been deleted.')
 
-    def execute(self, context):
-        hdfs_client = self.get_conn()
-        self.create_hdfs_folder(hfds_client)
-        self.create_atlas_hdfs_path(hdfs_client)
+    def execute(self, context=None):
+        current_hdfs_client = self.get_conn()
+        self.create_hdfs_folder(current_hdfs_client)
+        self.create_atlas_hdfs_path(current_hdfs_client)

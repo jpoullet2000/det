@@ -6,6 +6,7 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from det.models.base_model_ import Model
+from det.models.cluster import Cluster  # noqa: F401,E501
 from det.models.environments import Environments  # noqa: F401,E501
 from det.models.hdfs_path_item_classification import HdfsPathItemClassification  # noqa: F401,E501
 from det import util
@@ -17,7 +18,7 @@ class HdfsPathItem(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, data_code: str=None, env: Environments=None, delivery_ingestion: str=None, app: str=None, subfolder: str=None, classification: HdfsPathItemClassification=None):  # noqa: E501
+    def __init__(self, data_code: str='data', env: Environments=None, delivery_ingestion: str='ingestion', app: str=None, subfolder: str=None, classification: HdfsPathItemClassification=None, cluster_name: Cluster=None):  # noqa: E501
         """HdfsPathItem - a model defined in Swagger
 
         :param data_code: The data_code of this HdfsPathItem.  # noqa: E501
@@ -32,6 +33,8 @@ class HdfsPathItem(Model):
         :type subfolder: str
         :param classification: The classification of this HdfsPathItem.  # noqa: E501
         :type classification: HdfsPathItemClassification
+        :param cluster_name: The cluster_name of this HdfsPathItem.  # noqa: E501
+        :type cluster_name: Cluster
         """
         self.swagger_types = {
             'data_code': str,
@@ -39,7 +42,8 @@ class HdfsPathItem(Model):
             'delivery_ingestion': str,
             'app': str,
             'subfolder': str,
-            'classification': HdfsPathItemClassification
+            'classification': HdfsPathItemClassification,
+            'cluster_name': Cluster
         }
 
         self.attribute_map = {
@@ -48,7 +52,8 @@ class HdfsPathItem(Model):
             'delivery_ingestion': 'delivery_ingestion',
             'app': 'app',
             'subfolder': 'subfolder',
-            'classification': 'classification'
+            'classification': 'classification',
+            'cluster_name': 'cluster_name'
         }
 
         self._data_code = data_code
@@ -57,6 +62,7 @@ class HdfsPathItem(Model):
         self._app = app
         self._subfolder = subfolder
         self._classification = classification
+        self._cluster_name = cluster_name
 
     @classmethod
     def from_dict(cls, dikt) -> 'HdfsPathItem':
@@ -212,3 +218,24 @@ class HdfsPathItem(Model):
             raise ValueError("Invalid value for `classification`, must not be `None`")  # noqa: E501
 
         self._classification = classification
+
+    @property
+    def cluster_name(self) -> Cluster:
+        """Gets the cluster_name of this HdfsPathItem.
+
+
+        :return: The cluster_name of this HdfsPathItem.
+        :rtype: Cluster
+        """
+        return self._cluster_name
+
+    @cluster_name.setter
+    def cluster_name(self, cluster_name: Cluster):
+        """Sets the cluster_name of this HdfsPathItem.
+
+
+        :param cluster_name: The cluster_name of this HdfsPathItem.
+        :type cluster_name: Cluster
+        """
+
+        self._cluster_name = cluster_name

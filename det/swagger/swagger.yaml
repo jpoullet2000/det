@@ -500,6 +500,7 @@ definitions:
         example: "data"
         enum:
         - "data"
+        default: "data"
       env:
         $ref: "#/definitions/Environments"
       delivery_ingestion:
@@ -508,6 +509,7 @@ definitions:
         enum:
         - "delivery"
         - "ingestion"
+        default: "ingestion"
       app:
         type: "string"
         example: "myapp"
@@ -516,6 +518,8 @@ definitions:
         example: "app_subfolder"
       classification:
         $ref: "#/definitions/HdfsPathItem_classification"
+      cluster_name:
+        $ref: "#/definitions/Cluster"
     example:
       delivery_ingestion: "delivery"
       env: "d0"

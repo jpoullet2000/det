@@ -5,7 +5,10 @@ if 'DET_HOME' not in os.environ:
     os.environ['DET_HOME'] = os.path.join(os.path.expanduser('~'), '.det')
 
 if not os.path.exists(os.environ['DET_HOME']):
-    os.makedirs(os.environ['DET_HOME']) 
+    os.makedirs(os.environ['DET_HOME'])
+
+# DEFAULT
+DEFAULT_CLUSTER = 'el1538'
 
 # DET
 DET_WEBSERVER_PORT = 8888
@@ -18,17 +21,15 @@ DET_WORKERS = 2
 HDFS_USER = 'id995002'
 HDFS_DATA_ROOT_FOLDER = '/data'
 HDFS_CODE_ROOT_FOLDER = '/code'
-HDFS_DATA_INGESTION_FOLDER_STRUCTURE = '/data/{{ env }}/raw/{{ src }}'
+HDFS_DATA_INGESTION_FOLDER_STRUCTURE = '/data/{{ env }}/raw/{{ app }}'
 HDFS_DATA_DELIVERY_FOLDER_STRUCTURE = '/data/{{ env }}/{{ app }}/out'
 
-HDFS_DATA_INGESTION_FOLDER_STRUCTURE_EXTENDED = '/data/{{ env }}/raw/{{ src }}/{{ src_subfolders }}'
-HDFS_DATA_DELIVERY_FOLDER_STRUCTURE_EXTENDED = '/data/{{ env }}/{{ app }}/out/{{ workflow }}/{{ app_subfolders }}'
 # ATLAS
 ATLAS_SERVER = 'el1538'
 ATLAS_PORT = 21000
 
 # AMBARI
-AMBARI_SERVER = 'el1538' 
+AMBARI_SERVER = 'el1538'
 AMBARI_PORT = 8080
 
 # WEBHDFS

@@ -1,0 +1,34 @@
+classifications:
+        # SECURITY GOVERNANCE CLASSIFICATION
+        - SG_UNR:
+                description: Security Governance Unrestricted Data
+                ranger_policy: Read Any Unrestricted
+        - SG_IUO:
+                description: Security Governance Internal Use Only Data
+                ranger_policy: Read Any Internal Use Only
+        - SG_CONF:
+                description: Security Governance Confidential Data
+                ranger_policy: Read Any Confidential
+        - SG_HICONF:
+                description: Security Governance Highly Confidential Data
+                ranger_policy: Read Any Highly Confidential
+        # COMPETITION LAW CLASSIFICATION
+        - CL_WR:
+                description: Competition Law Wholesale and Retail Data
+                ranger_policy: Read Any Wholesale and Retail
+        - CL_RT:
+                description: Competition Law Retail Data
+                ranger_policy: Read Any Retail
+        - CL_WS:
+                description: Competition Law Wholesale Data
+                ranger_policy: Read Any Wholesale 
+        # PRIVACY LAW CLASSIFICATION
+        - PL_AUDIOTR:
+                description: Audio & Texting Records
+        - PL_BILLING:
+                description: Billing information
+        # FAST FUNCTIONAL BLOCKS CLASSIFICATION
+        - FB001_INTERAMGT:
+                description: Interaction Management
+        - FB002_MARKETING:
+                description: Marketing

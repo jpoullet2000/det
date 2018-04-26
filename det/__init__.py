@@ -2,4 +2,4 @@
 #from credentials import credentials 
 #creds = credentials.require(['atlas_login', 'atlas_password'])
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'

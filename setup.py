@@ -36,6 +36,7 @@ setup(
     author_email="jeanbaptistepoullet@statrgy.com",
     url="https://github.com/jpoullet2000/det",
     keywords=["Swagger", "Data engineering toolkit API"],
+    license='Apache Software License 2.0',
     install_requires=requirements,
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},

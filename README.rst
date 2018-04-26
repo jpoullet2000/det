@@ -26,6 +26,7 @@ Usage
 To run the server, please execute the following from the root directory:: 
 
   pip install -r requirements.txt
+  python setup.py install
   det runserver 
 
 

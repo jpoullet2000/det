@@ -4,17 +4,17 @@ from hdfs import InsecureClient, HdfsError
 
 from det.task import BaseOperator
 from det.exceptions import DETException
-from det.cli import app
 from det.operators.atlas_entity_create import AtlasEntityCreateOperator
-from det.cli import hdfs_client
+from det import HDFS_CLIENT
+from det import APP
 
-_HDFS_USER = app.app.config['HDFS_USER']
-_HDFS_DATA_ROOT_FOLDER = app.app.config['HDFS_DATA_ROOT_FOLDER']
-_HDFS_DATA_CODE_FOLDER = app.app.config['HDFS_CODE_ROOT_FOLDER']
-_HDFS_DATA_INGESTION_FOLDER_STRUCTURE = app.app.config['HDFS_DATA_INGESTION_FOLDER_STRUCTURE']
-_HDFS_DATA_DELIVERY_FOLDER_STRUCTURE = app.app.config['HDFS_DATA_DELIVERY_FOLDER_STRUCTURE']
-_KERBEROS_ACTIVE = app.app.config['KERBEROS_ACTIVE']
-_DEFAULT_CLUSTER = app.app.config['DEFAULT_CLUSTER']
+_HDFS_USER = APP.app.config['HDFS_USER']
+_HDFS_DATA_ROOT_FOLDER = APP.app.config['HDFS_DATA_ROOT_FOLDER']
+_HDFS_DATA_CODE_FOLDER = APP.app.config['HDFS_CODE_ROOT_FOLDER']
+_HDFS_DATA_INGESTION_FOLDER_STRUCTURE = APP.app.config['HDFS_DATA_INGESTION_FOLDER_STRUCTURE']
+_HDFS_DATA_DELIVERY_FOLDER_STRUCTURE = APP.app.config['HDFS_DATA_DELIVERY_FOLDER_STRUCTURE']
+_KERBEROS_ACTIVE = APP.app.config['KERBEROS_ACTIVE']
+_DEFAULT_CLUSTER = APP.app.config['DEFAULT_CLUSTER']
 
 if _KERBEROS_ACTIVE:
     try:
@@ -64,7 +64,7 @@ class HdfsPathCreateOperator(BaseOperator):
 
     def get_conn(self):
         try:
-            connection_str = hdfs_client.get_uri()
+            connection_str = HDFS_CLIENT.webhdfs_uri
             logging.debug('Trying uri %s', connection_str)
             if _KERBEROS_ACTIVE:
                 client = KerberosClient(connection_str)
@@ -75,8 +75,8 @@ class HdfsPathCreateOperator(BaseOperator):
             logging.debug('Using HDFS uri %s for hook', connection_str)
             return client
         except HdfsError as err:
-            logging.debug("Read operation from uri {connection_str} failed with"
-                          " error: {err.message}".format(**locals()))
+            logging.debug('Read operation from uri {connection_str} failed with'
+                          ' error: {err}'.format(**locals()))
 
     def create_hdfs_folder(self, current_hdfs_client):
         try:
@@ -84,7 +84,7 @@ class HdfsPathCreateOperator(BaseOperator):
         except:
             raise HDFSPathCreateOperatorException('HDFS folder could not be created')
 
-    def delete_hdfs_folder(self, current_hdfs_client, recursive=False):
+    def delete_hdfs_folder(self, current_hdfs_client, recursive=True):
         """Delete HDFS folder if exists
         """
         try:

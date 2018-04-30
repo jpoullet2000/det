@@ -1,10 +1,10 @@
-from det.cli import ambari_client
+from det import AMBARI_CLIENT
 
 
 class Ambari():
     """Utils to get info from the Ambari API 
     """
-    def __init__(self, ambari_client=ambari_client):
+    def __init__(self, ambari_client=AMBARI_CLIENT):
         """
         """
         self.ambari_client = ambari_client

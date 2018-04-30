@@ -7,9 +7,9 @@ from pytest_mock import mocker
 from det.operators.atlas_entity_create import AtlasEntityCreateOperator
 from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 from det.exceptions import DETException
-from det.operators.atlas_entity_create import atlas_client
+from det.operators.atlas_entity_create import ATLAS_CLIENT
 from det.models.hdfs_path_item import HdfsPathItem
-from det.cli import hdfs_client
+from det import HDFS_CLIENT
 import det.operators.hdfspath_create_operator
 
 ATTRIBUTES = {'clusterName': 'bdlab',
@@ -51,10 +51,10 @@ class TestAtlasEntity():
         assert 'CL_RT' in ATLAS_CREATE_OPERATOR.body
 
     def test_atlas_entity_create(self, mocker):
-        with mocker.patch.object(atlas_client, 'entity_post'):
-            mocker.patch.object(atlas_client.entity_post, 'create', return_value={})
+        with mocker.patch.object(ATLAS_CLIENT, 'entity_post'):
+            mocker.patch.object(ATLAS_CLIENT.entity_post, 'create', return_value={})
             ATLAS_CREATE_OPERATOR.execute() 
-            atlas_client.entity_post.create.assert_called_with(data=ATLAS_CREATE_OPERATOR.body)
+            ATLAS_CLIENT.entity_post.create.assert_called_with(data=ATLAS_CREATE_OPERATOR.body)
 
 
 class TestHDFSCreateOperator():
@@ -66,7 +66,6 @@ class TestHDFSCreateOperator():
             assert hdfs_path_item.subfolder in hdfspath_create_operator.hdfs_path
 
     def test_get_conn(self, mocker, hdfs_path_item):
-        mocker.patch.object(hdfs_client, 'get_uri', return_value='hdfs://localhost:50070')
         mocker.patch.object(det.operators.hdfspath_create_operator, 'InsecureClient') 
         hdfspath_create_operator = HdfsPathCreateOperator(hdfs_path_item=hdfs_path_item)
         client = hdfspath_create_operator.get_conn()

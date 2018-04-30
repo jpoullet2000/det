@@ -1,8 +1,12 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 import json
 
-from det.task import BaseOperator
-from det.cli import atlas_client 
+from det import ATLAS_CLIENT 
 from det.exceptions import DETException
+from det.task import BaseOperator
 
 class AtlasEntityCreateOperator(BaseOperator):
     """
@@ -31,6 +35,7 @@ class AtlasEntityCreateOperator(BaseOperator):
             entity_data['entity']['attributes'][attribute] = self.attributes[attribute]
         if self.classifications:
             entity_data['entity']['classifications'] = self.classifications
+        entity_data['entity']['typeName'] = self.entity_type
         body = json.dumps(entity_data)
         return body
 
@@ -51,4 +56,4 @@ class AtlasEntityCreateOperator(BaseOperator):
         if not self.body:
             error_message = 'The body could not be created. Info is missing'
             raise DETException(error_message)
-        atlas_client.entity_post.create(data=self.body)
+        ATLAS_CLIENT.entity_post.create(data=self.body)

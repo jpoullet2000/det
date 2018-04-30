@@ -8,7 +8,6 @@ from det.models.enum_defs_item import EnumDefsItem  # noqa: E501
 from det.models.hdfs_path_item import HdfsPathItem  # noqa: E501
 from det.models.process import Process  # noqa: E501
 from det import util
-#from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 
 def clusters_cluster_id_get(cluster_id):  # noqa: E501
     """get cluster info
@@ -57,10 +56,10 @@ def create_hdfs_path(hdfsPath):  # noqa: E501
 
     :rtype: None
     """
+    from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
     if connexion.request.is_json:
         hdfsPath = HdfsPathItem.from_dict(connexion.request.get_json())  # noqa: E501
-    # return HdfsPathCreateOperator(hdfsPath).execute() 
-    return 'some magic' 
+    return HdfsPathCreateOperator(hdfsPath).execute() 
 
 def create_process(process=None):  # noqa: E501
     """Create process

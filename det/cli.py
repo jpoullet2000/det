@@ -13,12 +13,51 @@ import connexion
 from connexion.resolver import RestyResolver
 from flask_script import Manager 
 
+<<<<<<< HEAD
 from det import APP
+=======
+from det import encoder
+from det.utils.hdfs import HDFS
+from det.utils.security import get_credentials
+>>>>>>> fc838fd3033afb8da620d60c788f4d8816e0fbca
 
 
+<<<<<<< HEAD
 conf = APP.app.config
 manager = Manager(APP.app)
 
+=======
+#try: 
+#    _creds = credentials.require(['atlas_login', 'atlas_password', 'ambari_login', 'ambari_password'])
+#    atlas_login = _creds.atlas_login
+#    atlas_password = _creds.atlas_password
+#except:
+#    atlas_login = 'atlas_login'
+#    atlas_password = 'atlas_password'
+#    ambari_login = 'ambari_login'
+#    ambari_password = 'ambari_password'
+
+app = connexion.App('det', specification_dir='./swagger/')
+app.app.json_encoder = encoder.JSONEncoder
+app.app.config.from_object(CONFIG_MODULE)
+conf = app.app.config
+app.add_api('swagger.yaml', resolver=RestyResolver('det'), arguments={'packageName': 'det', 'title': 'Data engineering toolkit API'}) 
+manager = Manager(app.app)
+
+cred_vars = ['ATLAS_LOGIN', 
+             'ATLAS_PASSWORD', 
+             'AMBARI_LOGIN', 
+             'AMBARI_PASSWORD']
+creds = get_credentials(cred_vars)
+if not creds:
+    logging.info('Using test credentials')
+    creds = dict()
+    for var in cred_vars:
+        creds[var] = conf['TEST_{}'.format(var)]
+atlas_client = Atlas(conf['ATLAS_SERVER'], port=conf['ATLAS_PORT'], username=creds['ATLAS_LOGIN'], password=creds['ATLAS_PASSWORD'])
+ambari_client = Ambari(conf['AMBARI_SERVER'], port=conf['AMBARI_PORT'], username=creds['AMBARI_LOGIN'], password=creds['AMBARI_PASSWORD']) 
+hdfs_client = HDFS(webhdfs_host=conf['WEBHDFS_HOST'], webhdfs_port=conf['WEBHDFS_PORT'])
+>>>>>>> fc838fd3033afb8da620d60c788f4d8816e0fbca
 
 @manager.option(
         '-d', '--debug', action='store_true',

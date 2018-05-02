@@ -4,9 +4,7 @@ from __future__ import absolute_import
 
 from flask import json
 from six import BytesIO
-import pytest
-from pytest_mock import mocker
-
+from unittest.mock import Mock
 
 from det.models.classification_defs_item import ClassificationDefsItem  # noqa: E501
 from det.models.cluster import Cluster  # noqa: E501
@@ -15,7 +13,10 @@ from det.models.enum_defs_item import EnumDefsItem  # noqa: E501
 from det.models.hdfs_path_item import HdfsPathItem  # noqa: E501
 from det.models.process import Process  # noqa: E501
 from det.models.hdfs_path_item_classification import HdfsPathItemClassification
+from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
+from det import __version__
 from . import BaseTestCase
+
 
 
 hdfs_path_item_classification = HdfsPathItemClassification(sg='s1',
@@ -33,7 +34,8 @@ class TestDevelopersController(BaseTestCase):
         get cluster info
         """
         response = self.client.open(
-            '/detapi/0.0.1/clusters/{cluster_id}'.format(cluster_id='cluster_id_example'),
+            '/detapi/{version}/clusters/{cluster_id}'.format(version=__version__, 
+                                                             cluster_id='cluster_id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,7 +46,8 @@ class TestDevelopersController(BaseTestCase):
         get cluster services
         """
         response = self.client.open(
-            '/detapi/0.0.1/clusters/{cluster_id}/services'.format(cluster_id='cluster_id_example'),
+            '/detapi/{version}/clusters/{cluster_id}/services'.format(version=__version__,
+                                                                      cluster_id='cluster_id_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -55,7 +58,7 @@ class TestDevelopersController(BaseTestCase):
         get cluster names
         """
         response = self.client.open(
-            '/detapi/0.0.1/clusters',
+            '/detapi/{version}/clusters'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -67,8 +70,10 @@ class TestDevelopersController(BaseTestCase):
         """
 
         hdfsPath = HdfsPathItem(env='d0', app='myapp', classification=hdfs_path_item_classification)
+        MockHdfsCreateOperator = HdfsPathCreateOperator
+        MockHdfsCreateOperator.execute = Mock(return_value=False)
         response = self.client.open(
-            '/detapi/0.0.1/entity/hdfs_path',
+            '/detapi/{version}/entity/hdfs_path'.format(version=__version__),
             method='POST',
             data=json.dumps(hdfsPath),
             content_type='application/json')
@@ -82,7 +87,7 @@ class TestDevelopersController(BaseTestCase):
         """
         process = Process()
         response = self.client.open(
-            '/detapi/0.0.1/process',
+            '/detapi/{version}/process'.format(version=__version__),
             method='POST',
             data=json.dumps(process),
             content_type='application/json')
@@ -97,7 +102,7 @@ class TestDevelopersController(BaseTestCase):
         hdfsPath = HdfsPathItem(env='d0', app='myapp', classification=hdfs_path_item_classification)
         query_string = [('HdfsMaintenanceService', 'purge')]
         response = self.client.open(
-            '/detapi/0.0.1/entity/hdfs_path/maintain',
+            '/detapi/{version}/entity/hdfs_path/maintain'.format(version=__version__),
             method='POST',
             data=json.dumps(hdfsPath),
             content_type='application/json',
@@ -111,7 +116,7 @@ class TestDevelopersController(BaseTestCase):
         get classification defs
         """
         response = self.client.open(
-            '/detapi/0.0.1/typedefs/classificationdefs',
+            '/detapi/{version}/typedefs/classificationdefs'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -122,7 +127,7 @@ class TestDevelopersController(BaseTestCase):
         get entity defs
         """
         response = self.client.open(
-            '/detapi/0.0.1/typedefs/entitydefs',
+            '/detapi/{version}/typedefs/entitydefs'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -133,7 +138,7 @@ class TestDevelopersController(BaseTestCase):
         get enum defs
         """
         response = self.client.open(
-            '/detapi/0.0.1/typedefs/enumdefs',
+            '/detapi/{version}/typedefs/enumdefs'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

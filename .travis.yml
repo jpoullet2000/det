@@ -2,6 +2,7 @@
 language: python
 python:
   #- "2.7"
+  - "3.6"
   - "3.5"
   #- "3.5-dev" # 3.5 development branch
   #- "nightly" # points to the latest development branch e.g. 3.6-dev
@@ -10,4 +11,6 @@ install:
    - pip install -r requirements.txt
    - pip install -r test-requirements.txt
 # command to run tests
-script: pytest
+script: 
+   - pytest tests/controllers 
+   - pytest --ignore=tests/controllers

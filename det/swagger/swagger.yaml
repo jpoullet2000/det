@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "Data engineering toolkit API"
-  version: "0.0.1"
+  version: "0.0.3"
   title: "Data engineering toolkit API"
   contact:
     email: "jeanbaptistepoullet@statrgy.com"
@@ -10,7 +10,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "localhost:9999"
-basePath: "/detapi/0.0.1"
+basePath: "/detapi/0.0.3"
 tags:
 - name: "admins"
   description: "Secured Admin-only calls"

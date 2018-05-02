@@ -4,7 +4,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 import json
 
-from det import ATLAS_CLIENT 
+from det.app import ATLAS_CLIENT 
 from det.exceptions import DETException
 from det.task import BaseOperator
 

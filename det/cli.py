@@ -2,7 +2,6 @@
 
 from subprocess import Popen
 import os 
-import logging 
 from colorama import Fore, Style
 
 from credentials import credentials 

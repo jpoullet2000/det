@@ -5,8 +5,8 @@ from hdfs import InsecureClient, HdfsError
 from det.task import BaseOperator
 from det.exceptions import DETException
 from det.operators.atlas_entity_create import AtlasEntityCreateOperator
-from det import HDFS_CLIENT
-from det import APP
+from det.app import HDFS_CLIENT
+from det.app import APP
 
 _HDFS_USER = APP.app.config['HDFS_USER']
 _HDFS_DATA_ROOT_FOLDER = APP.app.config['HDFS_DATA_ROOT_FOLDER']

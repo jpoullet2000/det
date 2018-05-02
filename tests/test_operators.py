@@ -7,9 +7,9 @@ from pytest_mock import mocker
 from det.operators.atlas_entity_create import AtlasEntityCreateOperator
 from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 from det.exceptions import DETException
-from det.operators.atlas_entity_create import ATLAS_CLIENT
+from det.app import ATLAS_CLIENT
 from det.models.hdfs_path_item import HdfsPathItem
-from det import HDFS_CLIENT
+from det.app import HDFS_CLIENT
 import det.operators.hdfspath_create_operator
 
 ATTRIBUTES = {'clusterName': 'bdlab',

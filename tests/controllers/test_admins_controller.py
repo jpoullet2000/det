@@ -6,6 +6,7 @@ from flask import json
 from six import BytesIO
 
 from det.models.typedefs_item import TypedefsItem  # noqa: E501
+from det import __version__
 from . import BaseTestCase
 
 
@@ -19,7 +20,7 @@ class TestAdminsController(BaseTestCase):
         """
         Typedefs = TypedefsItem()
         response = self.client.open(
-            '/detapi/0.0.1/typedefs',
+            '/detapi/{version}/typedefs'.format(version=__version__),
             method='POST',
             data=json.dumps(Typedefs),
             content_type='application/json')

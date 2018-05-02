@@ -1,5 +1,5 @@
 import pytest
-from det.models.hdfs_path_item_classification import HdfsPathItemClassification
+#from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 
 #@pytest.fixture(scope='module')
 #def hdfs_path_item_classification():

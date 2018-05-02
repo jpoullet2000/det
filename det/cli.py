@@ -12,7 +12,7 @@ import connexion
 from connexion.resolver import RestyResolver
 from flask_script import Manager 
 
-from det import APP
+from det.app import APP
 
 
 conf = APP.app.config

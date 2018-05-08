@@ -12,12 +12,15 @@ info:
 host: "localhost:9999"
 basePath: "/detapi/0.0.3"
 tags:
-- name: "admins"
-  description: "Secured Admin-only calls"
-  # security:
-  #  - basic: []
-- name: "developers"
-  description: "Operations available to regular developers"
+  - name: "admins"
+    description: "Secured Admin-only calls"
+  - name: "developers"
+    description: "Operations available to regular developers"
+#securityDefinitions:
+#  basicAuth:
+#    type: Basic
+#security:
+#   - basic: []
 schemes:
 - "https"
 paths:
@@ -469,16 +472,19 @@ definitions:
     - "d0"
   SecurityGovernanceItem:
     type: "string"
-    example: "s1"
+    example: "SG_CONF"
     enum:
-    - "s1"
-    - "s2"
+    - "SG_UNR"
+    - "SG_IUO"
+    - "SG_CONF"
+    - "SG_HICONF"
   CompetitionLawItem:
     type: "string"
-    example: "s1"
+    example: "CL_RT"
     enum:
-    - "s1"
-    - "s2"
+    - "CL_WR"
+    - "CL_RT"
+    - "CL_WS"
   FunctionalBlockItem:
     type: "string"
     example: "s1"
@@ -488,6 +494,14 @@ definitions:
   Retainable:
     type: "integer"
     example: 365
+#  Retainable:
+#    type: "object"
+#    required:
+#    - "retentionPeriod"
+#    properties:
+#      retentionPeriod:
+#        type: "integer"
+#        example: 365
   HdfsPathItem:
     type: "object"
     required:
@@ -524,10 +538,12 @@ definitions:
       delivery_ingestion: "delivery"
       env: "d0"
       classification:
-        sg: "s1"
-        cl: "s1"
+        sg: "SG_CONF"
+        cl: "CL_RT"
         fb: "s1"
         retainable: 365
+#        retainable: 
+#          retentionPeriod: 365
       data_code: "data"
   Cluster:
     type: "object"
@@ -711,12 +727,10 @@ definitions:
       sg: "s1"
       cl: "s1"
       fb: "s1"
-      retainable: 365
+      retainable: 
+        retentionPeriod: 365
 responses:
   UnauthorizedError:
     description: "Access token is missing or invalid"
   BadRequest:
     description: "invalid input, object invalid"
-securityDefinitions:
-  basic:
-    type: basic

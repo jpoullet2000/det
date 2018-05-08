@@ -9,6 +9,7 @@ from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 from det.exceptions import DETException
 from det.app import ATLAS_CLIENT
 from det.models.hdfs_path_item import HdfsPathItem
+from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 from det.app import HDFS_CLIENT
 import det.operators.hdfspath_create_operator
 
@@ -16,11 +17,13 @@ ATTRIBUTES = {'clusterName': 'bdlab',
               'owner': 'username',
               'description': 'Customer address',
               'name': 'data_d0_app_workflowid_appfolder',
+              'path': '/data/d0/app/workflowid/appfolder',
               'qualifiedName': '/data/d0/app/workflowid/appfolder'}
 CLASSIFICATIONS = ['PL_BILLING', 'CL_RT', 'SG_CONF']
 ENTITY_TYPE = 'hdfs_path'
 ATLAS_CREATE_OPERATOR = AtlasEntityCreateOperator(attributes=ATTRIBUTES,
-                                                  classifications=CLASSIFICATIONS
+                                                  classifications=CLASSIFICATIONS,
+                                                  entity_type=ENTITY_TYPE
                                                  )
 @pytest.fixture(scope='module',
                 params=[('data', 'delivery', None),
@@ -31,6 +34,7 @@ def hdfs_path_item(request):
     item = HdfsPathItem(data_code=request.param[0],
                         env='d0',
                         app='myapp',
+                        classification=HdfsPathItemClassification(sg='SG_CONF', fb='s1', cl='CL_RT'),
                         delivery_ingestion=request.param[1],
                         subfolder=request.param[2])
     return item
@@ -47,8 +51,8 @@ class TestAtlasEntity():
             bad_atlas_create_operator.validate_body()
 
     def test_body(self):
-        assert 'qualifiedName' in ATLAS_CREATE_OPERATOR.body
-        assert 'CL_RT' in ATLAS_CREATE_OPERATOR.body
+        assert 'entity' in ATLAS_CREATE_OPERATOR.body
+        assert 'classifications' in ATLAS_CREATE_OPERATOR.body['entity']
 
     def test_atlas_entity_create(self, mocker):
         with mocker.patch.object(ATLAS_CLIENT, 'entity_post'):

@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 import json
+import ast
 
 from det.app import ATLAS_CLIENT 
 from det.exceptions import DETException
@@ -36,7 +37,8 @@ class AtlasEntityCreateOperator(BaseOperator):
         if self.classifications:
             entity_data['entity']['classifications'] = self.classifications
         entity_data['entity']['typeName'] = self.entity_type
-        body = json.dumps(entity_data)
+        body_str = json.dumps(entity_data)
+        body = ast.literal_eval(body_str)
         return body
 
     def validate_body(self):

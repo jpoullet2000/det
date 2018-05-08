@@ -19,8 +19,8 @@ from . import BaseTestCase
 
 
 
-hdfs_path_item_classification = HdfsPathItemClassification(sg='s1',
-                                                           cl='s1',
+hdfs_path_item_classification = HdfsPathItemClassification(sg='SG_CONF',
+                                                           cl='CL_RT',
                                                            fb='s1',
                                                            retainable=315)
 

@@ -27,16 +27,16 @@ To run the server, please execute the following from the root directory::
 
   pip install -r requirements.txt
   python setup.py install
-  det runserver 
+  det runserver -p 8888 
 
 
 and open your browser to here:: 
 
-  http://localhost:8888/detapi/0.0.1/ui/
+  http://localhost:8888/detapi/0.0.3/ui/
 
 Your Swagger definition lives here::
 
-  http://localhost:8888/detapi/0.0.1/swagger.json
+  http://localhost:8888/detapi/0.0.3/swagger.json
 
 
 To launch the integration tests, use tox::
@@ -62,7 +62,7 @@ The API is based on the `swagger/swagger.yaml` file.
 Code is generated with the `swagger code generator`_.
 To run the code generator::
 
-  java -jar <path_to_swagger-codegen-cli.jar_dir>/swagger-codegen-cli.jar generate -i det/swagger/swagger.yml -l python-flask -o <output_dir> -c det/swagger/python_codegen_config.json
+  java -jar <path_to_swagger-codegen-cli.jar_dir>/swagger-codegen-cli.jar generate -i det/swagger/swagger.yaml -l python-flask -o <output_dir> -c det/swagger/python_codegen_config.json
 
 .. _`swagger code generator`: https://github.com/swagger-api/swagger-codegen 
  

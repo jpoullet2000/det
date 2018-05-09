@@ -491,17 +491,17 @@ definitions:
     enum:
     - "s1"
     - "s2"
-  Retainable:
-    type: "integer"
-    example: 365
 #  Retainable:
-#    type: "object"
-#    required:
-#    - "retentionPeriod"
-#    properties:
-#      retentionPeriod:
-#        type: "integer"
-#        example: 365
+#    type: "integer"
+#    example: 365
+  Retainable:
+    type: "object"
+    required:
+    - "retentionPeriod"
+    properties:
+      retentionPeriod:
+        type: "integer"
+        example: 365
   HdfsPathItem:
     type: "object"
     required:
@@ -541,10 +541,11 @@ definitions:
         sg: "SG_CONF"
         cl: "CL_RT"
         fb: "s1"
-        retainable: 365
-#        retainable: 
-#          retentionPeriod: 365
+#        retainable: 365
+        retainable: 
+          retentionPeriod: 365
       data_code: "data"
+      app: "myapp"
   Cluster:
     type: "object"
     properties:
@@ -724,8 +725,8 @@ definitions:
       retainable:
         $ref: "#/definitions/Retainable"
     example:
-      sg: "s1"
-      cl: "s1"
+      sg: "SG_CONF"
+      cl: "CL_RT"
       fb: "s1"
       retainable: 
         retentionPeriod: 365

@@ -9,6 +9,7 @@ from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 from det.exceptions import DETException
 from det.app import ATLAS_CLIENT
 from det.models.hdfs_path_item import HdfsPathItem
+from det.models.retainable import Retainable
 from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 from det.app import HDFS_CLIENT
 import det.operators.hdfspath_create_operator
@@ -19,7 +20,8 @@ ATTRIBUTES = {'clusterName': 'bdlab',
               'name': 'data_d0_app_workflowid_appfolder',
               'path': '/data/d0/app/workflowid/appfolder',
               'qualifiedName': '/data/d0/app/workflowid/appfolder'}
-CLASSIFICATIONS = ['PL_BILLING', 'CL_RT', 'SG_CONF']
+CLASSIFICATIONS = ['PL_BILLING', 'CL_RT', 'SG_CONF', 
+                   {'typename': 'retainable', 'attributes': {'retentionPeriod': 365}}]
 ENTITY_TYPE = 'hdfs_path'
 ATLAS_CREATE_OPERATOR = AtlasEntityCreateOperator(attributes=ATTRIBUTES,
                                                   classifications=CLASSIFICATIONS,
@@ -34,7 +36,7 @@ def hdfs_path_item(request):
     item = HdfsPathItem(data_code=request.param[0],
                         env='d0',
                         app='myapp',
-                        classification=HdfsPathItemClassification(sg='SG_CONF', fb='s1', cl='CL_RT'),
+                        classification=HdfsPathItemClassification(sg='SG_CONF', fb='s1', cl='CL_RT', retainable=Retainable(retention_period=365)),
                         delivery_ingestion=request.param[1],
                         subfolder=request.param[2])
     return item

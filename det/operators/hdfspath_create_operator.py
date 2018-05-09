@@ -107,14 +107,19 @@ class HdfsPathCreateOperator(BaseOperator):
             return self.hdfs_path_item.cluster_name
         return _DEFAULT_CLUSTER
 
-#    def build_classification_list(self, keys=None):
-#        keys = keys or ['cl', 'sg', 'fb', 'retainable']
-#        classifications = list()
-#        for key in keys:
-#            classification_typename = getattr(self.hdfs_path_item.classification, key) 
-#            classification = {'typeName': classification_typeName}
-#            if key == 'retainable':
-#                classfication['retentionPeriod'] = 365
+    def build_classification_list(self, keys=None):
+        keys = keys or ['retainable', 'cl', 'sg', 'fb']
+        classifications = list()
+        for key in keys:
+            if key == 'retainable':
+                classification_typename = key
+            else:
+                classification_typename = getattr(self.hdfs_path_item.classification, key)
+            classification = {'typeName': classification_typename}
+            if key == 'retainable':
+                classification['attributes'] = {'retentionPeriod': self.hdfs_path_item.classification.retainable.retention_period}
+            classifications.append(classification)
+        return classifications
 
     def create_atlas_hdfs_path(self, current_hdfs_client):
         """
@@ -126,7 +131,7 @@ class HdfsPathCreateOperator(BaseOperator):
                              clusterName=self.get_cluster_name())
             entity_create_op = AtlasEntityCreateOperator(
                 attributes = {k: v for k, v in attributes_.items() if v is not None},
-                classifications=[getattr(self.hdfs_path_item.classification, a) for a in ['cl', 'sg', 'fb']],
+                classifications=self.build_classification_list(),
                 entity_type='hdfs_path')
             entity_create_op.execute()
 

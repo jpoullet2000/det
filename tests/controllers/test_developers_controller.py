@@ -22,7 +22,7 @@ from . import BaseTestCase
 hdfs_path_item_classification = HdfsPathItemClassification(sg='SG_CONF',
                                                            cl='CL_RT',
                                                            fb='s1',
-                                                           retainable=315)
+                                                           retainable={'retentionPeriod': 315})
 
 
 class TestDevelopersController(BaseTestCase):

@@ -45,6 +45,16 @@ To launch the integration tests, use tox::
   tox
 
 
+The port 8888 is often taken by other apps, especially If your are running the det server on a machine with Hortonworks or Cloudera distro. In that case, you'd better choose a different port::
+
+  det runserver -p <port>
+
+
+For a detailed usage description of the command::
+
+  det runserver --help
+
+
 Running with Docker
 -------------------
 To run the server on a Docker container, please execute the following from the root directory:: 

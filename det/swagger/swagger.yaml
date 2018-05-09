@@ -491,9 +491,26 @@ definitions:
     enum:
     - "s1"
     - "s2"
-#  Retainable:
-#    type: "integer"
-#    example: 365
+#  EnvironmentItem:
+#    type: "string"
+#    example: "EN_DWH_DEV"
+#    enum:
+#    - "EN_DWH_DEV"
+#    - "EN_DWH_TST"
+#    - "EN_DWH_ACC"
+#    - "EN_DWH_PRD"
+#    - "EN_EUD_DEV"
+#    - "EN_EUD_TST"
+#    - "EN_EUD_ACC"
+#    - "EN_EUD_PRD"
+#    - "EN_PPADS_DEV"
+#    - "EN_PPADS_TST"
+#    - "EN_PPADS_ACC"
+#    - "EN_PPADS_PRD"
+#    - "EN_UXMT_DEV"
+#    - "EN_UXMT_TST"
+#    - "EN_UXMT_ACC"
+#    - "EN_UXMT_PRD"
   Retainable:
     type: "object"
     required:
@@ -526,7 +543,7 @@ definitions:
         default: "ingestion"
       app:
         type: "string"
-        example: "myapp"
+        example: "DWH"
       subfolder:
         type: "string"
         example: "app_subfolder"
@@ -541,11 +558,10 @@ definitions:
         sg: "SG_CONF"
         cl: "CL_RT"
         fb: "s1"
-#        retainable: 365
         retainable: 
           retentionPeriod: 365
       data_code: "data"
-      app: "myapp"
+      app: "DWH"
   Cluster:
     type: "object"
     properties:

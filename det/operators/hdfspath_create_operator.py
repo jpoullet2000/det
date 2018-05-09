@@ -7,6 +7,7 @@ from det.exceptions import DETException
 from det.operators.atlas_entity_create import AtlasEntityCreateOperator
 from det.app import HDFS_CLIENT
 from det.app import APP
+from det.utils.tools import get_env_type
 
 _HDFS_USER = APP.app.config['HDFS_USER']
 _HDFS_DATA_ROOT_FOLDER = APP.app.config['HDFS_DATA_ROOT_FOLDER']
@@ -107,7 +108,20 @@ class HdfsPathCreateOperator(BaseOperator):
             return self.hdfs_path_item.cluster_name
         return _DEFAULT_CLUSTER
 
+
+    def build_environment_classification(self):
+        env = self.hdfs_path_item.env
+        app = self.hdfs_path_item.app
+        env_type = get_env_type(env)
+        env_class = "EN_{app}_{env_type}".format(**locals())
+        return env_class
+
     def build_classification_list(self, keys=None):
+        """ Build the classification dictionary that will be posted to Atlas
+
+        TODO: this function is very specific (the required fields are hardcoded: cl, sg, ...)
+              For better maintenance and evolution it should be based on the swagger file
+        """
         keys = keys or ['retainable', 'cl', 'sg', 'fb']
         classifications = list()
         for key in keys:
@@ -119,6 +133,7 @@ class HdfsPathCreateOperator(BaseOperator):
             if key == 'retainable':
                 classification['attributes'] = {'retentionPeriod': self.hdfs_path_item.classification.retainable.retention_period}
             classifications.append(classification)
+        classifications.append({'typeName': self.build_environment_classification()})
         return classifications
 
     def create_atlas_hdfs_path(self, current_hdfs_client):

@@ -1,6 +1,9 @@
 import random
 import string
 import os
+import yaml
+from pkg_resources import resource_filename
+
 
 import smtplib
 from os.path import basename
@@ -134,3 +137,16 @@ def mkdir_p(path):
                     pass
                 else:
                     raise
+
+def get_env_type(env):
+    """ Reads the YAML file with the list of environments and returns the environment type
+        
+        For instance if env = 'd0' it will return as env_type 'DEV'
+    """
+    with open(resource_filename(__name__, os.path.join('..', 'templates', 'environment_types.yaml'))) as env_types_handle:
+        env_types = yaml.load(env_types_handle)
+        for k, v in env_types.items():
+            if env in v:
+                return k
+    raise ValueError('Environment {} cannot be found'.format(env)) 
+    return None

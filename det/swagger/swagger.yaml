@@ -16,6 +16,20 @@ tags:
     description: "Secured Admin-only calls"
   - name: "developers"
     description: "Operations available to regular developers"
+securityDefinitions:
+   # X-API-Key: abcdef12345
+   APIKeyHeader:
+     type: apiKey
+     in: header
+     name: X-API-Key
+   # /path?api_key=abcdef12345
+   APIKeyQueryParam:
+     type: apiKey
+     in: query
+     name: api_key
+# Global security (applies to all operations):
+security:
+  - APIKeyHeader: []
 #securityDefinitions:
 #  basicAuth:
 #    type: Basic
@@ -42,6 +56,9 @@ paths:
         required: false
         schema:
           $ref: "#/definitions/TypedefsItem"
+      # Operation-specific security:
+      security:
+        - APIKeyQueryParam: []
       responses:
         201:
           description: "item created"

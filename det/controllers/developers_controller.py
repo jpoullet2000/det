@@ -8,6 +8,8 @@ from det.models.enum_defs_item import EnumDefsItem  # noqa: E501
 from det.models.hdfs_path_item import HdfsPathItem  # noqa: E501
 from det.models.process import Process  # noqa: E501
 from det import util
+from det.utils.security import token_required
+
 
 def clusters_cluster_id_get(cluster_id):  # noqa: E501
     """get cluster info
@@ -45,7 +47,7 @@ def clusters_get():  # noqa: E501
     """
     return 'do some magic!'
 
-
+@token_required
 def create_hdfs_path(hdfsPath):  # noqa: E501
     """create hdfs_path
 

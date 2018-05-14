@@ -23,6 +23,12 @@ Python 3.5+
 
 Usage
 -----
+First you need to set up your credentials::
+
+  echo  '{"ATLAS_LOGIN": "admin", "ATLAS_PASSWORD": "admin", "AMBARI_LOGIN": "admin", "AMBARI_PASSWORD": "admin", "DET_API_TOKEN": "mytoken"}' > ~/.credentials.json
+
+Please modify based on your current settings.
+
 To run the server, please execute the following from the root directory:: 
 
   pip install -r requirements.txt

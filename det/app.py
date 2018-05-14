@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 import os
 import logging 
+from flask import request
 from pkg_resources import resource_filename
 from credentials import credentials 
 from atlasclient.client import Atlas
@@ -20,7 +21,18 @@ from det.utils.hdfs import HDFS
 
 CONFIG_MODULE = os.environ.get('DET_CONFIG', 'det.settings')
 
-APP = connexion.App('det', specification_dir=resource_filename(__name__, 'swagger'))
+authorizations = {
+    'apikey': {
+        'type': 'apiKey',
+        'in': 'header',
+        'name': 'X-API-KEY'
+    }
+}
+
+APP = connexion.App('det', 
+                    specification_dir=resource_filename(__name__, 'swagger'),
+                    authorizations=authorizations)
+                 
 APP.app.json_encoder = encoder.JSONEncoder
 APP.app.config.from_object(CONFIG_MODULE)
 conf = APP.app.config
@@ -29,7 +41,8 @@ APP.add_api('swagger.yaml', resolver=RestyResolver('det'), arguments={'packageNa
 cred_vars = ['ATLAS_LOGIN', 
              'ATLAS_PASSWORD', 
              'AMBARI_LOGIN', 
-             'AMBARI_PASSWORD']
+             'AMBARI_PASSWORD',
+             'DET_API_TOKEN']
 CREDS = get_credentials(cred_vars)
 if not CREDS:
     logging.info('Using test credentials')

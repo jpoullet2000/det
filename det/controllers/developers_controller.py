@@ -10,7 +10,6 @@ from det.models.process import Process  # noqa: E501
 from det import util
 from det.utils.security import token_required
 
-
 def clusters_cluster_id_get(cluster_id):  # noqa: E501
     """get cluster info
 
@@ -21,7 +20,9 @@ def clusters_cluster_id_get(cluster_id):  # noqa: E501
 
     :rtype: List[Cluster]
     """
-    return 'do some magic!'
+    from det.utils.ambari import Ambari
+    cluster_info = Ambari().get_cluster_info(cluster_id)
+    return cluster_info
 
 
 def clusters_cluster_id_services_get(cluster_id):  # noqa: E501
@@ -34,7 +35,9 @@ def clusters_cluster_id_services_get(cluster_id):  # noqa: E501
 
     :rtype: List[Cluster]
     """
-    return 'do some magic!'
+    from det.utils.ambari import Ambari
+    cluster_services = Ambari().get_cluster_services(cluster_id)
+    return cluster_services
 
 
 def clusters_get():  # noqa: E501
@@ -45,7 +48,9 @@ def clusters_get():  # noqa: E501
 
     :rtype: List[Cluster]
     """
-    return 'do some magic!'
+    from det.utils.ambari import Ambari
+    clusters = Ambari().get_clusters()
+    return clusters
 
 @token_required
 def create_hdfs_path(hdfsPath):  # noqa: E501

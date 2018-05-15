@@ -15,6 +15,7 @@ from det.models.process import Process  # noqa: E501
 from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 from det import __version__
+from det.utils.ambari import Ambari
 from . import BaseTestCase
 
 
@@ -33,6 +34,8 @@ class TestDevelopersController(BaseTestCase):
 
         get cluster info
         """
+        MockAmbari = Ambari
+        Ambari.get_cluster_info = Mock(return_value={'cluster_name': 'cluster_name'})
         response = self.client.open(
             '/detapi/{version}/clusters/{cluster_id}'.format(version=__version__, 
                                                              cluster_id='cluster_id_example'),
@@ -45,6 +48,8 @@ class TestDevelopersController(BaseTestCase):
 
         get cluster services
         """
+        MockAmbari = Ambari
+        Ambari.get_cluster_services = Mock(return_value={'service_name': 'HDFS'})
         response = self.client.open(
             '/detapi/{version}/clusters/{cluster_id}/services'.format(version=__version__,
                                                                       cluster_id='cluster_id_example'),

@@ -42,7 +42,8 @@ cred_vars = ['ATLAS_LOGIN',
              'ATLAS_PASSWORD', 
              'AMBARI_LOGIN', 
              'AMBARI_PASSWORD',
-             'DET_API_TOKEN']
+             'DET_API_TOKEN',
+             'DET_API_ADMIN_TOKEN']
 CREDS = get_credentials(cred_vars)
 if not CREDS:
     logging.info('Using test credentials')

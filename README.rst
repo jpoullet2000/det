@@ -25,9 +25,11 @@ Usage
 -----
 First you need to set up your credentials::
 
-  echo  '{"ATLAS_LOGIN": "admin", "ATLAS_PASSWORD": "admin", "AMBARI_LOGIN": "admin", "AMBARI_PASSWORD": "admin", "DET_API_TOKEN": "mytoken"}' > ~/.credentials.json
+  chmod +x create_credentials.sh
+  ./create_credentials.sh
 
-Please modify based on your current settings.
+And modify the file `~/.credentials.json` based on your current settings.
+The 'TEST_FLAG' item should be switched to `false` to secure the app based on the API tokens.
 
 To run the server, please execute the following from the root directory:: 
 

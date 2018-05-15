@@ -58,7 +58,7 @@ paths:
           $ref: "#/definitions/TypedefsItem"
       # Operation-specific security:
       security:
-        - APIKeyQueryParam: []
+        - APIKeyHeader: []
       responses:
         201:
           description: "item created"

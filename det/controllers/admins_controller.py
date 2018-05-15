@@ -4,10 +4,10 @@ import json
 
 from det.models.typedefs_item import TypedefsItem  # noqa: E501
 from det import util
-from det.utils.security import token_required
+from det.utils.security import admin_token_required
 
 
-@token_required
+@admin_token_required
 def add_typedefs(Typedefs=None):  # noqa: E501
     """create type definitions
 

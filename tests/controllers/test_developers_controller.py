@@ -16,6 +16,7 @@ from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 from det import __version__
 from det.utils.ambari import Ambari
+from det.utils.atlas import Atlas
 from . import BaseTestCase
 
 
@@ -122,6 +123,8 @@ class TestDevelopersController(BaseTestCase):
 
         get classification defs
         """
+        MockAtlas = Atlas
+        Atlas.get_classification_defs = Mock(return_value=[{'category': 'CLASSIFICATION'}])
         response = self.client.open(
             '/detapi/{version}/typedefs/classificationdefs'.format(version=__version__),
             method='GET')
@@ -133,6 +136,8 @@ class TestDevelopersController(BaseTestCase):
 
         get entity defs
         """
+        MockAtlas = Atlas
+        Atlas.get_entity_defs = Mock(return_value=[{'category': 'ENTITY'}])
         response = self.client.open(
             '/detapi/{version}/typedefs/entitydefs'.format(version=__version__),
             method='GET')
@@ -144,6 +149,8 @@ class TestDevelopersController(BaseTestCase):
 
         get enum defs
         """
+        MockAtlas = Atlas
+        Atlas.get_enum_defs = Mock(return_value=[{'category': 'ENUM'}])
         response = self.client.open(
             '/detapi/{version}/typedefs/enumdefs'.format(version=__version__),
             method='GET')

@@ -62,6 +62,8 @@ class TestDevelopersController(BaseTestCase):
 
         get cluster names
         """
+        MockAmbari = Ambari
+        Ambari.get_clusters = Mock(return_value=['cluster_name'])
         response = self.client.open(
             '/detapi/{version}/clusters'.format(version=__version__),
             method='GET')

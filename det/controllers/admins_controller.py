@@ -18,7 +18,7 @@ def add_typedefs(Typedefs=None):  # noqa: E501
 
     :rtype: None
     """
-    from det.app import ATLAS_CLIENT
+#    from det.app import ATLAS_CLIENT
     if connexion.request.is_json:
         Typedefs = TypedefsItem.from_dict(connexion.request.get_json())  # noqa: E501
 #    ATLAS_CLIENT.typedefs.create(data=connexion.request.get_json())

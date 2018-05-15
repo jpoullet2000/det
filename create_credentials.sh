@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 if [ ! -f ~/.credentials.json ]
-then echo '{"atlas_login": "atlas_login", "atlas_password": "atlas_password", "ambari_login": "ambari_login", "ambari_password": "ambari_password"}' > ~/.credentials.json
+then echo '{"ATLAS_LOGIN": "atlas_login", "ATLAS_PASSWORD": "atlas_password", "AMBARI_LOGIN": "ambari_login", "AMBARI_PASSWORD": "ambari_password", "TEST_FLAG": true}' > ~/.credentials.json
 fi

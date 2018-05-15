@@ -7,6 +7,7 @@ python:
   #- "nightly" # points to the latest development branch e.g. 3.6-dev
 # command to install dependencies
 install: 
+   - chmod +x create_credentials.sh
    - ./create_credentials.sh
    - pip install -r requirements.txt
    - pip install -r test-requirements.txt

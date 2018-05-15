@@ -44,4 +44,12 @@ class Ambari():
                 service[field] = getattr(cluster_service, field)
             services.append(service)
         return services
-        
+
+    def get_classification_defs(self):
+        classifications = []
+        for typedefs in self.ambari_client.typedefs:
+            for classification_def in typedefs.classificationDefs:
+                for field in classification_def.fields:
+                    classification[field] = getattr(classification_def, field)
+                    classifications.append(classification)
+        return classifications

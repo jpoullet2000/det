@@ -80,7 +80,7 @@ def create_process(process=None):  # noqa: E501
     """
     if connexion.request.is_json:
         process = Process.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'Not yet implemented'
 
 
 def hdfs_maintenance(hdfsPath, HdfsMaintenanceService):  # noqa: E501
@@ -97,7 +97,7 @@ def hdfs_maintenance(hdfsPath, HdfsMaintenanceService):  # noqa: E501
     """
     if connexion.request.is_json:
         hdfsPath = HdfsPathItem.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'Not yet implemented'
 
 
 def typedefs_classificationdefs_get():  # noqa: E501
@@ -108,7 +108,9 @@ def typedefs_classificationdefs_get():  # noqa: E501
 
     :rtype: List[ClassificationDefsItem]
     """
-    return 'do some magic!'
+    from det.utils.atlas import Atlas
+    classification_defs = Atlas().get_classification_defs()
+    return classification_defs
 
 
 def typedefs_entitydefs_get():  # noqa: E501
@@ -119,7 +121,9 @@ def typedefs_entitydefs_get():  # noqa: E501
 
     :rtype: List[EntityDefsItem]
     """
-    return 'do some magic!'
+    from det.utils.atlas import Atlas
+    entity_defs = Atlas().get_entity_defs()
+    return entity_defs
 
 
 def typedefs_enumdefs_get():  # noqa: E501
@@ -130,4 +134,6 @@ def typedefs_enumdefs_get():  # noqa: E501
 
     :rtype: List[EnumDefsItem]
     """
-    return 'do some magic!'
+    from det.utils.atlas import Atlas
+    enum_defs = Atlas().get_enum_defs()
+    return enum_defs

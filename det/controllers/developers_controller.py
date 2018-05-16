@@ -10,33 +10,33 @@ from det.models.process import Process  # noqa: E501
 from det import util
 from det.utils.security import token_required
 
-def clusters_cluster_id_get(cluster_id):  # noqa: E501
+def clusters_cluster_name_get(cluster_name):  # noqa: E501
     """get cluster info
 
     Get the cluster info  # noqa: E501
 
-    :param cluster_id: cluster identifier
-    :type cluster_id: str
+    :param cluster_name: cluster name
+    :type cluster_name: str
 
     :rtype: List[Cluster]
     """
     from det.utils.ambari import Ambari
-    cluster_info = Ambari().get_cluster_info(cluster_id)
+    cluster_info = Ambari().get_cluster_info(cluster_name)
     return cluster_info
 
 
-def clusters_cluster_id_services_get(cluster_id):  # noqa: E501
+def clusters_cluster_name_services_get(cluster_name):  # noqa: E501
     """get cluster services
 
     Get the services from the specified cluster  # noqa: E501
 
-    :param cluster_id: cluster identifier
-    :type cluster_id: str
+    :param cluster_name: cluster identifier
+    :type cluster_name: str
 
     :rtype: List[Cluster]
     """
     from det.utils.ambari import Ambari
-    cluster_services = Ambari().get_cluster_services(cluster_id)
+    cluster_services = Ambari().get_cluster_services(cluster_name)
     return cluster_services
 
 

@@ -235,17 +235,17 @@ paths:
         401:
           description: "Access token is missing or invalid"
       x-swagger-router-controller: "det.controllers.developers_controller"
-  /clusters/{cluster_id}:
+  /clusters/{cluster_name}:
     get:
       tags:
       - "developers"
       summary: "get cluster info"
       description: "Get the cluster info\n"
-      operationId: "clusters_cluster_id_get"
+      operationId: "clusters_cluster_name_get"
       produces:
       - "application/json"
       parameters:
-      - name: "cluster_id"
+      - name: "cluster_name"
         in: "path"
         description: "cluster identifier"
         required: true
@@ -262,17 +262,17 @@ paths:
         401:
           description: "Access token is missing or invalid"
       x-swagger-router-controller: "det.controllers.developers_controller"
-  /clusters/{cluster_id}/services:
+  /clusters/{cluster_name}/services:
     get:
       tags:
       - "developers"
       summary: "get cluster services"
       description: "Get the services from the specified cluster\n"
-      operationId: "clusters_cluster_id_services_get"
+      operationId: "clusters_cluster_name_services_get"
       parameters:
-      - name: "cluster_id"
+      - name: "cluster_name"
         in: "path"
-        description: "cluster identifier"
+        description: "cluster name"
         required: true
         type: "string"
       responses:

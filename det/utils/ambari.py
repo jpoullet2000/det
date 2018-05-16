@@ -29,16 +29,16 @@ class Ambari():
             clusters.append(cluster.cluster_name)
         return clusters
 
-    def get_cluster_info(self, cluster_id):
+    def get_cluster_info(self, cluster_name):
         cluster_info = {}
-        cluster = self.ambari_client.clusters(cluster_id)
+        cluster = self.ambari_client.clusters(cluster_name)
         for field in cluster.fields:
             cluster_info[field] = getattr(cluster, field)
         return cluster_info
 
-    def get_cluster_services(self, cluster_id):
+    def get_cluster_services(self, cluster_name):
         services = []
-        for cluster_service in self.ambari_client.clusters(cluster_id).services:
+        for cluster_service in self.ambari_client.clusters(cluster_name).services:
             service = {}
             for field in cluster_service.fields:
                 service[field] = getattr(cluster_service, field)

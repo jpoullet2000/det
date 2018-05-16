@@ -30,30 +30,30 @@ hdfs_path_item_classification = HdfsPathItemClassification(sg='SG_CONF',
 class TestDevelopersController(BaseTestCase):
     """DevelopersController integration test stubs"""
 
-    def test_clusters_cluster_id_get(self):
-        """Test case for clusters_cluster_id_get
+    def test_clusters_cluster_name_get(self):
+        """Test case for clusters_cluster_name_get
 
         get cluster info
         """
         MockAmbari = Ambari
         Ambari.get_cluster_info = Mock(return_value={'cluster_name': 'cluster_name'})
         response = self.client.open(
-            '/detapi/{version}/clusters/{cluster_id}'.format(version=__version__, 
-                                                             cluster_id='cluster_id_example'),
+            '/detapi/{version}/clusters/{cluster_name}'.format(version=__version__, 
+                                                             cluster_name='cluster_name_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_clusters_cluster_id_services_get(self):
-        """Test case for clusters_cluster_id_services_get
+    def test_clusters_cluster_name_services_get(self):
+        """Test case for clusters_cluster_name_services_get
 
         get cluster services
         """
         MockAmbari = Ambari
         Ambari.get_cluster_services = Mock(return_value={'service_name': 'HDFS'})
         response = self.client.open(
-            '/detapi/{version}/clusters/{cluster_id}/services'.format(version=__version__,
-                                                                      cluster_id='cluster_id_example'),
+            '/detapi/{version}/clusters/{cluster_name}/services'.format(version=__version__,
+                                                                      cluster_name='cluster_name_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

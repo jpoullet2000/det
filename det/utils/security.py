@@ -26,7 +26,6 @@ def get_credentials(cred_vars):
 def admin_token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-
         token = None
         creds = get_credentials(['TEST_FLAG', 'DET_API_ADMIN_TOKEN'])
         if 'TEST_FLAG' in creds and creds['TEST_FLAG']:
@@ -47,7 +46,6 @@ def admin_token_required(f):
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-
         token = None
         creds = get_credentials(['TEST_FLAG', 'DET_API_TOKEN'])
         if 'TEST_FLAG' in creds and creds['TEST_FLAG']:

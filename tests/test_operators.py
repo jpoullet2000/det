@@ -5,10 +5,14 @@ import logging
 from pytest_mock import mocker
 
 from det.operators.atlas_entity_create import AtlasEntityCreateOperator
+from det.operators.atlas_typedefs_create import AtlasTypedefsCreateOperator
 from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
 from det.exceptions import DETException
 from det.app import ATLAS_CLIENT
 from det.models.hdfs_path_item import HdfsPathItem
+from det.models.typedefs_item import TypedefsItem
+from det.models.attribute_defs_item import AttributeDefsItem
+from det.models.classification_defs_item import ClassificationDefsItem
 from det.models.retainable import Retainable
 from det.models.hdfs_path_item_classification import HdfsPathItemClassification
 from det.app import HDFS_CLIENT
@@ -27,6 +31,7 @@ ATLAS_CREATE_OPERATOR = AtlasEntityCreateOperator(attributes=ATTRIBUTES,
                                                   classifications=CLASSIFICATIONS,
                                                   entity_type=ENTITY_TYPE
                                                  )
+
 @pytest.fixture(scope='module',
                 params=[('data', 'delivery', None),
                         ('data', 'ingestion', None),
@@ -41,6 +46,24 @@ def hdfs_path_item(request):
                         subfolder=request.param[2])
     return item
 
+
+TYPEDEFS_ITEM = TypedefsItem(classification_defs=ClassificationDefsItem(category='CLASSIFICATION',
+                                                                        name='retainable', 
+                                                                        description='Retainable',
+                                                                        super_types=[],
+                                                                        attribute_defs=AttributeDefsItem(name='retentionPeriod', type_name='int')))
+CLASSIFICATION_DEFS_JSON = {'classificationDefs': {'category': 'CLASSIFICATION', 
+                                                   'name': 'retainable',
+                                                   'description': 'Retainable',
+                                                   'super_types': [],
+                                                   'attributeDefs': {'name': 'retentionPeriod',
+                                                                     'typeName': 'int'}}}
+ATLAS_TYPEDEFS_CREATE_OPERATOR = AtlasTypedefsCreateOperator(typedefs=TYPEDEFS_ITEM, body_json=CLASSIFICATION_DEFS_JSON)
+
+
+class TestAtlasTypedefs():
+    def test_validate_typedefs_body(self):
+        ATLAS_TYPEDEFS_CREATE_OPERATOR.validate_body()
 
 class TestAtlasEntity():
 

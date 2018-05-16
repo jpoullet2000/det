@@ -18,9 +18,10 @@ def add_typedefs(Typedefs=None):  # noqa: E501
 
     :rtype: None
     """
-#    from det.app import ATLAS_CLIENT
     if connexion.request.is_json:
         Typedefs = TypedefsItem.from_dict(connexion.request.get_json())  # noqa: E501
-#    ATLAS_CLIENT.typedefs.create(data=connexion.request.get_json())
-#    return 'Typedefs have been created'
-    return 'Not yet implemented'
+        from det.operators.atlas_typedefs_create import AtlasTypedefsCreateOperator
+        atlas_typedefs_operator = AtlasTypedefsCreateOperator(typedefs=Typedefs, body_json=connexion.request.get_json())
+        message = atlas_typedefs_operator.execute()
+    return message  
+    #return 'Please enter a correct json string'

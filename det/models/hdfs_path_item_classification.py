@@ -42,7 +42,7 @@ class HdfsPathItemClassification(Model):
             'sg': 'sg',
             'cl': 'cl',
             'fb': 'fb',
-            'retainable': 'retainable'
+            'retainable': 'Retainable'
         }
 
         self._sg = sg

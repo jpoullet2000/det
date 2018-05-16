@@ -81,7 +81,10 @@ class HdfsPathCreateOperator(BaseOperator):
 
     def create_hdfs_folder(self, current_hdfs_client):
         try:
-            current_hdfs_client.makedirs(hdfs_path=self.hdfs_path)
+            #import pdb; pdb.set_trace()
+            logging.info('The folder {} has been created'.format(self.hdfs_path))
+            mypath = self.hdfs_path
+            current_hdfs_client.makedirs(hdfs_path=mypath)
         except:
             raise HDFSPathCreateOperatorException('HDFS folder could not be created')
 
@@ -122,15 +125,15 @@ class HdfsPathCreateOperator(BaseOperator):
         TODO: this function is very specific (the required fields are hardcoded: cl, sg, ...)
               For better maintenance and evolution it should be based on the swagger file
         """
-        keys = keys or ['retainable', 'cl', 'sg', 'fb']
+        keys = keys or ['Retainable', 'cl', 'sg', 'fb']
         classifications = list()
         for key in keys:
-            if key == 'retainable':
+            if key == 'Retainable':
                 classification_typename = key
             else:
                 classification_typename = getattr(self.hdfs_path_item.classification, key)
             classification = {'typeName': classification_typename}
-            if key == 'retainable':
+            if key == 'Retainable':
                 classification['attributes'] = {'retentionPeriod': self.hdfs_path_item.classification.retainable.retention_period}
             classifications.append(classification)
         classifications.append({'typeName': self.build_environment_classification()})

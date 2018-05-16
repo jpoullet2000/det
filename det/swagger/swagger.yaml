@@ -575,7 +575,7 @@ definitions:
         sg: "SG_CONF"
         cl: "CL_RT"
         fb: "s1"
-        retainable: 
+        Retainable: 
           retentionPeriod: 365
       data_code: "data"
       app: "DWH"
@@ -755,13 +755,13 @@ definitions:
         $ref: "#/definitions/CompetitionLawItem"
       fb:
         $ref: "#/definitions/FunctionalBlockItem"
-      retainable:
+      Retainable:
         $ref: "#/definitions/Retainable"
     example:
       sg: "SG_CONF"
       cl: "CL_RT"
       fb: "s1"
-      retainable: 
+      Retainable: 
         retentionPeriod: 365
 responses:
   UnauthorizedError:

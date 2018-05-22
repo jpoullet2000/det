@@ -31,6 +31,12 @@ First you need to set up your credentials::
 And modify the file `~/.credentials.json` based on your current settings.
 The 'TEST_FLAG' item should be switched to `false` to secure the app based on the API tokens.
 
+Clone the repository::
+
+  git clone https://github.com/jpoullet2000/det.git
+
+Modify the `det/settings.py` file according to your settings.
+
 To run the server, please execute the following from the root directory:: 
 
   pip install -r requirements.txt
@@ -46,6 +52,9 @@ Your Swagger definition lives here::
 
   http://localhost:8888/detapi/0.0.3/swagger.json
 
+Note that if your WebHDFS service is kerberized, you also need to install the `requests_kerberos` module::
+
+  pip install requests_kerberos
 
 To launch the integration tests, use tox::
  

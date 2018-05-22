@@ -36,7 +36,7 @@ APP = connexion.App('det',
 APP.app.json_encoder = encoder.JSONEncoder
 APP.app.config.from_object(CONFIG_MODULE)
 conf = APP.app.config
-APP.add_api('swagger.yaml', resolver=RestyResolver('det'), arguments={'packageName': 'det', 'title': 'Data engineering toolkit API'}) 
+APP.add_api('swagger.yaml', host=conf['DET_WEBSERVER_ADDRESS'], resolver=RestyResolver('det'), arguments={'packageName': 'det', 'title': 'Data engineering toolkit API'}) 
 
 cred_vars = ['ATLAS_LOGIN', 
              'ATLAS_PASSWORD', 

@@ -28,8 +28,10 @@ First you need to set up your credentials::
   chmod +x create_credentials.sh
   ./create_credentials.sh
 
-And modify the file `~/.credentials.json` based on your current settings.
+And modify the file `~/.credentials.json` based on your current settings. So far, this file cannot be named differently, due to some inherent limitation in the `credentials`_ package.
 The 'TEST_FLAG' item should be switched to `false` to secure the app based on the API tokens.
+
+.. _`credentials`: https://github.com/OniOni/credentials
 
 Clone the repository::
 

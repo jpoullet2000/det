@@ -355,7 +355,7 @@ definitions:
         cardinality: "SINGLE"
         valuesMinCount: 1
       name: "data_delivery"
-      description: "A subtype of Process that delivers data on the ata lake."
+      description: "A subtype of Process that delivers data on the data lake."
       category: "ENTITY"
   ClassificationDefsItem:
     type: "object"
@@ -448,28 +448,28 @@ definitions:
     properties:
       name:
         type: "string"
-        example: "delivery_application_acronym"
+        #example: "delivery_application_acronym"
       typeName:
         type: "string"
-        example: "data_delivery_apps"
+        #example: "data_delivery_apps"
       isOptional:
         type: "boolean"
-        example: false
+        #example: false
       cardinality:
         type: "string"
-        example: "SINGLE"
+        #example: "SINGLE"
       valuesMinCount:
         type: "integer"
-        example: 1
+        #example: 1
       valuesMaxCount:
         type: "integer"
-        example: 1
+        #example: 1
       isUnique:
         type: "boolean"
-        example: false
+        #example: false
       isIndexable:
         type: "boolean"
-        example: false
+        #example: false
     example:
       isIndexable: false
       name: "delivery_application_acronym"

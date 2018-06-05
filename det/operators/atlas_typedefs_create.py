@@ -27,10 +27,39 @@ class AtlasTypedefsCreateOperator(BaseOperator):
         self.body_json = body_json
         self.types = ['classification_defs', 'enum_defs', 'entity_defs']
 
-    def exist_typedefs(self, typedef_name):
-        """ Check in Atlas if the typedef already exists
+    def get_typedefs_not_in_atlas(self):
+        """ Check in Atlas if the typedefs already exist and returns a json with only those that are not yet in Atlas
         """
-        pass
+        existing_entitydefs_names = []
+        existing_enumdefs_names = []
+        existing_classificationdefs_names = []
+        for typedef in ATLAS_CLIENT.typedefs:
+            existing_entitydefs_names = [entity.name for entity in typedef.entityDefs]
+            existing_enumdefs_names = [enum.name for enum in typedef.enumDefs]
+            existing_classificationdefs_names = [classification.name for classification in typedef.classificationDefs]
+        new_body = dict() 
+        if 'enitityDefs' in self.body_json:
+            new_body['entityDefs'] = list()
+            for entity in self.body_json['entityDefs']:
+                if entity['name'] not in existing_entitydefs_names:
+                    new_body['entityDefs'].append(entity)
+            if len(new_body['entityDefs']) == 0:
+                del new_body['entityDefs']
+        if 'classificationDefs' in self.body_json:
+            new_body['classificationDefs'] = list()
+            for classification in self.body_json['classificationDefs']:
+                if classification['name'] not in existing_classificationdefs_names:
+                    new_body['classificationDefs'].append(classification)
+            if len(new_body['classificationDefs']) == 0:
+                del new_body['classificationDefs']
+        if 'enumDefs' in self.body_json:
+            new_body['enumDefs'] = list()
+            for enum in self.body_json['enumDefs']:
+                if enum['name'] not in existing_enumdefs_names:
+                    new_body['enumDefs'].append(enum)
+            if len(new_body['enumDefs']) == 0:
+                del new_body['enumDefs']
+        return new_body
 
 
     def validate_body(self):
@@ -49,7 +78,11 @@ class AtlasTypedefsCreateOperator(BaseOperator):
             error_message = 'The body is not correct.'
             return error_message, 403
         try: 
-            ATLAS_CLIENT.typedefs.create(data=self.body_json)
+            self.body_not_yet_in_atlas = self.get_typedefs_not_in_atlas()
+            if len(self.body_not_yet_in_atlas) == 0:
+                return 'All typedefs already exist!'
+            ATLAS_CLIENT.typedefs.create(data=self.body_not_yet_in_atlas)
+            #ATLAS_CLIENT.typedefs.create(data=self.body_json)
             return 'Typedef has been created successfully!'
         except:
             return handle_atlas_error(traceback.format_exc())

@@ -41,7 +41,7 @@ def hdfs_path_item(request):
     item = HdfsPathItem(data_code=request.param[0],
                         env='d0',
                         app='myapp',
-                        classification=HdfsPathItemClassification(sg='SG_CONF', fb='s1', cl='CL_RT', retainable=Retainable(retention_period=365)),
+                        classification=HdfsPathItemClassification(sg='SG_CONF', pl='PL_HEALTH', cl='CL_RT', retainable=Retainable(retention_period=365)),
                         delivery_ingestion=request.param[1],
                         subfolder=request.param[2])
     return item

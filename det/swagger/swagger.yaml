@@ -502,12 +502,36 @@ definitions:
     - "CL_WR"
     - "CL_RT"
     - "CL_WS"
-  FunctionalBlockItem:
+  PrivacyLawItem:
     type: "string"
-    example: "s1"
+    example: "PL_HEALTH"
     enum:
-    - "s1"
-    - "s2"
+    - "PL_GDPRPII"
+    - "PL_AUDIOTR"
+    - "PL_BILLING"
+    - "PL_CONSUMH"
+    - "PL_CONTENT"
+    - "PL_CUSINTER"
+    - "PL_EXTERID"
+    - "PL_FAMILYC"
+    - "PL_FINANCE"
+    - "PL_HEALTH"
+    - "PL_IDENTIF"
+    - "PL_IMAGEVR"
+    - "PL_INTERID"
+    - "PL_JUDICLI"
+    - "PL_LEISURE"
+    - "PL_LOCDATA"
+    - "PL_PERCHAR"
+    - "PL_PRDPERF"
+    - "PL_PROFEDU"
+    - "PL_SEGMENT"
+    - "PL_SUBSCRI"
+    - "PL_TECHNID"
+    - "PL_3RDPART"
+    - "PL_TRFDATA"
+    - "PL_USGDATA"
+
 #  EnvironmentItem:
 #    type: "string"
 #    example: "EN_DWH_DEV"
@@ -574,7 +598,7 @@ definitions:
       classification:
         sg: "SG_CONF"
         cl: "CL_RT"
-        fb: "s1"
+        pl: "PL_HEALTH"
         Retainable: 
           retentionPeriod: 365
       data_code: "data"
@@ -753,14 +777,14 @@ definitions:
         $ref: "#/definitions/SecurityGovernanceItem"
       cl:
         $ref: "#/definitions/CompetitionLawItem"
-      fb:
-        $ref: "#/definitions/FunctionalBlockItem"
+      pl:
+        $ref: "#/definitions/PrivacyLawItem"
       Retainable:
         $ref: "#/definitions/Retainable"
     example:
       sg: "SG_CONF"
       cl: "CL_RT"
-      fb: "s1"
+      pl: "PL_HEALTH"
       Retainable: 
         retentionPeriod: 365
 responses:

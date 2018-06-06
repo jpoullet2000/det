@@ -125,7 +125,7 @@ class HdfsPathCreateOperator(BaseOperator):
         TODO: this function is very specific (the required fields are hardcoded: cl, sg, ...)
               For better maintenance and evolution it should be based on the swagger file
         """
-        keys = keys or ['Retainable', 'cl', 'sg', 'fb']
+        keys = keys or ['Retainable', 'cl', 'sg', 'pl']
         classifications = list()
         for key in keys:
             if key == 'Retainable':

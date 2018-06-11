@@ -62,6 +62,8 @@ Note that if your WebHDFS service is kerberized, you also need to install the `r
 
   pip install requests_kerberos
 
+Make sure to use a version of `pykerberos >= 1.2.1`. It has been noted that the version `pykerberos == 1.1.14` was not properly working with DET. 
+
 To launch the integration tests, use tox::
  
   sudo pip install tox

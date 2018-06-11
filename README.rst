@@ -23,7 +23,17 @@ Python 3.5+
 
 Usage
 -----
-First you need to set up your credentials::
+
+Clone the repository::
+
+  git clone https://github.com/jpoullet2000/det.git
+
+Modify the `det/settings.py` file according to your settings.
+If you want to set up your own custom configuration file/module, you need to create the environment variable `DET_CONFIG`::
+
+  export DET_CONFIG=/path/to/your/settings.py
+
+You also need to set up your credentials::
 
   chmod +x create_credentials.sh
   ./create_credentials.sh
@@ -32,15 +42,6 @@ And modify the file `~/.credentials.json` based on your current settings. So far
 The 'TEST_FLAG' item should be switched to `false` to secure the app based on the API tokens.
 
 .. _`credentials`: https://github.com/OniOni/credentials
-
-Clone the repository::
-
-  git clone https://github.com/jpoullet2000/det.git
-
-Modify the `det/settings.py` file according to your settings.
-If you want to your own custom configuration file/module, you need to create the environment variable `DET_CONFIG`::
-
-  export DET_CONFIG=/path/to/your/config.py
 
 To run the server, please execute the following from the root directory:: 
 

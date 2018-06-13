@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 from flask import json
 from six import BytesIO
+from unittest.mock import Mock
 
 from det.models.classification_defs_item import ClassificationDefsItem  # noqa: E501
 from det.models.cluster import Cluster  # noqa: E501
@@ -11,30 +12,48 @@ from det.models.entity_defs_item import EntityDefsItem  # noqa: E501
 from det.models.enum_defs_item import EnumDefsItem  # noqa: E501
 from det.models.hdfs_path_item import HdfsPathItem  # noqa: E501
 from det.models.process import Process  # noqa: E501
-from det.test import BaseTestCase
+from det.models.hdfs_path_item_classification import HdfsPathItemClassification
+from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
+from det import __version__
+from det.utils.ambari import Ambari
+from det.utils.atlas import Atlas
+from . import BaseTestCase
+
+
+
+hdfs_path_item_classification = HdfsPathItemClassification(sg='SG_CONF',
+                                                           cl='CL_RT',
+                                                           pl='PL_HEALTH',
+                                                           retainable={'retentionPeriod': 315})
 
 
 class TestDevelopersController(BaseTestCase):
     """DevelopersController integration test stubs"""
 
-    def test_clusters_cluster_id_get(self):
-        """Test case for clusters_cluster_id_get
+    def test_clusters_cluster_name_get(self):
+        """Test case for clusters_cluster_name_get
 
         get cluster info
         """
+        MockAmbari = Ambari
+        Ambari.get_cluster_info = Mock(return_value={'cluster_name': 'cluster_name'})
         response = self.client.open(
-            '/detapi/0.0.1/clusters/{cluster_id}'.format(cluster_id='cluster_id_example'),
+            '/detapi/{version}/clusters/{cluster_name}'.format(version=__version__, 
+                                                             cluster_name='cluster_name_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    def test_clusters_cluster_id_services_get(self):
-        """Test case for clusters_cluster_id_services_get
+    def test_clusters_cluster_name_services_get(self):
+        """Test case for clusters_cluster_name_services_get
 
         get cluster services
         """
+        MockAmbari = Ambari
+        Ambari.get_cluster_services = Mock(return_value={'service_name': 'HDFS'})
         response = self.client.open(
-            '/detapi/0.0.1/clusters/{cluster_id}/services'.format(cluster_id='cluster_id_example'),
+            '/detapi/{version}/clusters/{cluster_name}/services'.format(version=__version__,
+                                                                      cluster_name='cluster_name_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -44,8 +63,10 @@ class TestDevelopersController(BaseTestCase):
 
         get cluster names
         """
+        MockAmbari = Ambari
+        Ambari.get_clusters = Mock(return_value=['cluster_name'])
         response = self.client.open(
-            '/detapi/0.0.1/clusters',
+            '/detapi/{version}/clusters'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -55,9 +76,12 @@ class TestDevelopersController(BaseTestCase):
 
         create hdfs_path
         """
-        hdfsPath = HdfsPathItem(env='d0')
+
+        hdfsPath = HdfsPathItem(env='d0', app='myapp', classification=hdfs_path_item_classification)
+        MockHdfsCreateOperator = HdfsPathCreateOperator
+        MockHdfsCreateOperator.execute = Mock(return_value=False)
         response = self.client.open(
-            '/detapi/0.0.1/entity/hdfs_path',
+            '/detapi/{version}/entity/hdfs_path'.format(version=__version__),
             method='POST',
             data=json.dumps(hdfsPath),
             content_type='application/json')
@@ -71,7 +95,7 @@ class TestDevelopersController(BaseTestCase):
         """
         process = Process()
         response = self.client.open(
-            '/detapi/0.0.1/process',
+            '/detapi/{version}/process'.format(version=__version__),
             method='POST',
             data=json.dumps(process),
             content_type='application/json')
@@ -83,10 +107,10 @@ class TestDevelopersController(BaseTestCase):
 
         Maintenance of hdfs_path
         """
-        hdfsPath = HdfsPathItem(env='d0')
+        hdfsPath = HdfsPathItem(env='d0', app='myapp', classification=hdfs_path_item_classification)
         query_string = [('HdfsMaintenanceService', 'purge')]
         response = self.client.open(
-            '/detapi/0.0.1/entity/hdfs_path/maintain',
+            '/detapi/{version}/entity/hdfs_path/maintain'.format(version=__version__),
             method='POST',
             data=json.dumps(hdfsPath),
             content_type='application/json',
@@ -99,8 +123,10 @@ class TestDevelopersController(BaseTestCase):
 
         get classification defs
         """
+        MockAtlas = Atlas
+        Atlas.get_classification_defs = Mock(return_value=[{'category': 'CLASSIFICATION'}])
         response = self.client.open(
-            '/detapi/0.0.1/typedefs/classificationdefs',
+            '/detapi/{version}/typedefs/classificationdefs'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -110,8 +136,10 @@ class TestDevelopersController(BaseTestCase):
 
         get entity defs
         """
+        MockAtlas = Atlas
+        Atlas.get_entity_defs = Mock(return_value=[{'category': 'ENTITY'}])
         response = self.client.open(
-            '/detapi/0.0.1/typedefs/entitydefs',
+            '/detapi/{version}/typedefs/entitydefs'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -121,8 +149,10 @@ class TestDevelopersController(BaseTestCase):
 
         get enum defs
         """
+        MockAtlas = Atlas
+        Atlas.get_enum_defs = Mock(return_value=[{'category': 'ENUM'}])
         response = self.client.open(
-            '/detapi/0.0.1/typedefs/enumdefs',
+            '/detapi/{version}/typedefs/enumdefs'.format(version=__version__),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

@@ -12,7 +12,7 @@ from det.models.element_defs_item import ElementDefsItem
 from det.models.entity_defs_item import EntityDefsItem
 from det.models.enum_defs_item import EnumDefsItem
 from det.models.environments import Environments
-from det.models.functional_block_item import FunctionalBlockItem
+from det.models.privacy_law_item import PrivacyLawItem
 from det.models.hdfs_maintenance_service_item import HdfsMaintenanceServiceItem
 from det.models.hdfs_path_item import HdfsPathItem
 from det.models.hdfs_path_item_classification import HdfsPathItemClassification

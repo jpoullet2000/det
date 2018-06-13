@@ -8,32 +8,36 @@ from det.models.enum_defs_item import EnumDefsItem  # noqa: E501
 from det.models.hdfs_path_item import HdfsPathItem  # noqa: E501
 from det.models.process import Process  # noqa: E501
 from det import util
+from det.utils.security import token_required
 
-
-def clusters_cluster_id_get(cluster_id):  # noqa: E501
+def clusters_cluster_name_get(cluster_name):  # noqa: E501
     """get cluster info
 
     Get the cluster info  # noqa: E501
 
-    :param cluster_id: cluster identifier
-    :type cluster_id: str
+    :param cluster_name: cluster name
+    :type cluster_name: str
 
     :rtype: List[Cluster]
     """
-    return 'do some magic!'
+    from det.utils.ambari import Ambari
+    cluster_info = Ambari().get_cluster_info(cluster_name)
+    return cluster_info
 
 
-def clusters_cluster_id_services_get(cluster_id):  # noqa: E501
+def clusters_cluster_name_services_get(cluster_name):  # noqa: E501
     """get cluster services
 
     Get the services from the specified cluster  # noqa: E501
 
-    :param cluster_id: cluster identifier
-    :type cluster_id: str
+    :param cluster_name: cluster identifier
+    :type cluster_name: str
 
     :rtype: List[Cluster]
     """
-    return 'do some magic!'
+    from det.utils.ambari import Ambari
+    cluster_services = Ambari().get_cluster_services(cluster_name)
+    return cluster_services
 
 
 def clusters_get():  # noqa: E501
@@ -44,9 +48,11 @@ def clusters_get():  # noqa: E501
 
     :rtype: List[Cluster]
     """
-    return 'do some magic!'
+    from det.utils.ambari import Ambari
+    clusters = Ambari().get_clusters()
+    return clusters
 
-
+@token_required
 def create_hdfs_path(hdfsPath):  # noqa: E501
     """create hdfs_path
 
@@ -57,10 +63,10 @@ def create_hdfs_path(hdfsPath):  # noqa: E501
 
     :rtype: None
     """
+    from det.operators.hdfspath_create_operator import HdfsPathCreateOperator
     if connexion.request.is_json:
         hdfsPath = HdfsPathItem.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
-
+    return HdfsPathCreateOperator(hdfsPath).execute() 
 
 def create_process(process=None):  # noqa: E501
     """Create process
@@ -74,7 +80,7 @@ def create_process(process=None):  # noqa: E501
     """
     if connexion.request.is_json:
         process = Process.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'Not yet implemented'
 
 
 def hdfs_maintenance(hdfsPath, HdfsMaintenanceService):  # noqa: E501
@@ -91,7 +97,7 @@ def hdfs_maintenance(hdfsPath, HdfsMaintenanceService):  # noqa: E501
     """
     if connexion.request.is_json:
         hdfsPath = HdfsPathItem.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'Not yet implemented'
 
 
 def typedefs_classificationdefs_get():  # noqa: E501
@@ -102,7 +108,9 @@ def typedefs_classificationdefs_get():  # noqa: E501
 
     :rtype: List[ClassificationDefsItem]
     """
-    return 'do some magic!'
+    from det.utils.atlas import Atlas
+    classification_defs = Atlas().get_classification_defs()
+    return classification_defs
 
 
 def typedefs_entitydefs_get():  # noqa: E501
@@ -113,7 +121,9 @@ def typedefs_entitydefs_get():  # noqa: E501
 
     :rtype: List[EntityDefsItem]
     """
-    return 'do some magic!'
+    from det.utils.atlas import Atlas
+    entity_defs = Atlas().get_entity_defs()
+    return entity_defs
 
 
 def typedefs_enumdefs_get():  # noqa: E501
@@ -124,4 +134,6 @@ def typedefs_enumdefs_get():  # noqa: E501
 
     :rtype: List[EnumDefsItem]
     """
-    return 'do some magic!'
+    from det.utils.atlas import Atlas
+    enum_defs = Atlas().get_enum_defs()
+    return enum_defs

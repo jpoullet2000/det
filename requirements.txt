@@ -1,4 +1,12 @@
-connexion == 1.1.15
-python_dateutil == 2.6.0
-typing == 3.5.2.2
-setuptools >= 21.0.0
+flask==0.12.2
+credentials>=1.1
+connexion==1.1.15
+python_dateutil==2.6.0
+typing==3.5.2.2
+setuptools>=21.0.0
+flask-script==2.0.6
+atlasclient==0.1.2
+gunicorn==19.7.1
+colorama==0.3.7
+hdfs==2.1.0
+python-ambariclient==0.6.0

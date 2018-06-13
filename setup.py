@@ -1,10 +1,26 @@
 # coding: utf-8
 
 import sys
+import os
 from setuptools import setup, find_packages
 
 NAME = "det"
-VERSION = "0.0.1"
+
+here = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(0, here)
+from det import __version__ as version
+
+with open(os.path.join(here, 'README.rst')) as readme_file:
+    readme = readme_file.read()
+
+requirements_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'requirements.txt')
+test_requirements_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'test-requirements.txt')
+
+with open(requirements_path) as requirements_file:
+    requirements = requirements_file.readlines()
+
+with open(test_requirements_path) as test_requirements_file:
+    test_requirements = test_requirements_file.readlines()
 
 # To install the library, run the following
 #
@@ -13,23 +29,23 @@ VERSION = "0.0.1"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = ["connexion"]
-
 setup(
     name=NAME,
-    version=VERSION,
+    version=version,
     description="Data engineering toolkit API",
     author_email="jeanbaptistepoullet@statrgy.com",
-    url="",
+    url="https://github.com/jpoullet2000/det",
     keywords=["Swagger", "Data engineering toolkit API"],
-    install_requires=REQUIRES,
+    license='Apache Software License 2.0',
+    install_requires=requirements,
     packages=find_packages(),
     package_data={'': ['swagger/swagger.yaml']},
     include_package_data=True,
-    entry_points={
-        'console_scripts': ['det=det.__main__:main']},
+    scripts=['det/bin/det'],
+#    entry_points={
+#        'console_scripts': ['det=det.__main__:main']},
     long_description="""\
     Data engineering toolkit API
-    """
+    """,
+    tests_require=test_requirements,
 )
-

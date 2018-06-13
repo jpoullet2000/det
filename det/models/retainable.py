@@ -15,15 +15,21 @@ class Retainable(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self):  # noqa: E501
+    def __init__(self, retention_period: int=None):  # noqa: E501
         """Retainable - a model defined in Swagger
 
+        :param retention_period: The retention_period of this Retainable.  # noqa: E501
+        :type retention_period: int
         """
         self.swagger_types = {
+            'retention_period': int
         }
 
         self.attribute_map = {
+            'retention_period': 'retentionPeriod'
         }
+
+        self._retention_period = retention_period
 
     @classmethod
     def from_dict(cls, dikt) -> 'Retainable':
@@ -35,3 +41,26 @@ class Retainable(Model):
         :rtype: Retainable
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def retention_period(self) -> int:
+        """Gets the retention_period of this Retainable.
+
+
+        :return: The retention_period of this Retainable.
+        :rtype: int
+        """
+        return self._retention_period
+
+    @retention_period.setter
+    def retention_period(self, retention_period: int):
+        """Sets the retention_period of this Retainable.
+
+
+        :param retention_period: The retention_period of this Retainable.
+        :type retention_period: int
+        """
+        if retention_period is None:
+            raise ValueError("Invalid value for `retention_period`, must not be `None`")  # noqa: E501
+
+        self._retention_period = retention_period

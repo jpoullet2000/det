@@ -2,12 +2,17 @@
 language: python
 python:
   #- "2.7"
-  - "3.5"
+  - "3.6"
   #- "3.5-dev" # 3.5 development branch
   #- "nightly" # points to the latest development branch e.g. 3.6-dev
 # command to install dependencies
 install: 
+   - chmod +x create_credentials.sh
+   - ./create_credentials.sh
    - pip install -r requirements.txt
    - pip install -r test-requirements.txt
+   - pip install -e . 
 # command to run tests
-script: nosetests
+script: 
+   - pytest tests/controllers 
+   - pytest --ignore=tests/controllers

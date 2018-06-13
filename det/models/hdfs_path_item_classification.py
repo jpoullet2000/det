@@ -7,7 +7,7 @@ from typing import List, Dict  # noqa: F401
 
 from det.models.base_model_ import Model
 from det.models.competition_law_item import CompetitionLawItem  # noqa: F401,E501
-from det.models.functional_block_item import FunctionalBlockItem  # noqa: F401,E501
+from det.models.privacy_law_item import PrivacyLawItem  # noqa: F401,E501
 from det.models.retainable import Retainable  # noqa: F401,E501
 from det.models.security_governance_item import SecurityGovernanceItem  # noqa: F401,E501
 from det import util
@@ -19,35 +19,35 @@ class HdfsPathItemClassification(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, sg: SecurityGovernanceItem=None, cl: CompetitionLawItem=None, fb: FunctionalBlockItem=None, retainable: Retainable=None):  # noqa: E501
+    def __init__(self, sg: SecurityGovernanceItem=None, cl: CompetitionLawItem=None, pl: PrivacyLawItem=None, retainable: Retainable=None):  # noqa: E501
         """HdfsPathItemClassification - a model defined in Swagger
 
         :param sg: The sg of this HdfsPathItemClassification.  # noqa: E501
         :type sg: SecurityGovernanceItem
         :param cl: The cl of this HdfsPathItemClassification.  # noqa: E501
         :type cl: CompetitionLawItem
-        :param fb: The fb of this HdfsPathItemClassification.  # noqa: E501
-        :type fb: FunctionalBlockItem
+        :param pl: The pl of this HdfsPathItemClassification.  # noqa: E501
+        :type pl: PrivacyLawItem
         :param retainable: The retainable of this HdfsPathItemClassification.  # noqa: E501
         :type retainable: Retainable
         """
         self.swagger_types = {
             'sg': SecurityGovernanceItem,
             'cl': CompetitionLawItem,
-            'fb': FunctionalBlockItem,
+            'pl': PrivacyLawItem,
             'retainable': Retainable
         }
 
         self.attribute_map = {
             'sg': 'sg',
             'cl': 'cl',
-            'fb': 'fb',
-            'retainable': 'retainable'
+            'pl': 'pl',
+            'retainable': 'Retainable'
         }
 
         self._sg = sg
         self._cl = cl
-        self._fb = fb
+        self._pl = pl
         self._retainable = retainable
 
     @classmethod
@@ -104,25 +104,25 @@ class HdfsPathItemClassification(Model):
         self._cl = cl
 
     @property
-    def fb(self) -> FunctionalBlockItem:
-        """Gets the fb of this HdfsPathItemClassification.
+    def pl(self) -> PrivacyLawItem:
+        """Gets the pl of this HdfsPathItemClassification.
 
 
-        :return: The fb of this HdfsPathItemClassification.
-        :rtype: FunctionalBlockItem
+        :return: The pl of this HdfsPathItemClassification.
+        :rtype: PrivacyLawItem
         """
-        return self._fb
+        return self._pl
 
-    @fb.setter
-    def fb(self, fb: FunctionalBlockItem):
-        """Sets the fb of this HdfsPathItemClassification.
+    @pl.setter
+    def pl(self, pl: PrivacyLawItem):
+        """Sets the pl of this HdfsPathItemClassification.
 
 
-        :param fb: The fb of this HdfsPathItemClassification.
-        :type fb: FunctionalBlockItem
+        :param pl: The pl of this HdfsPathItemClassification.
+        :type pl: PrivacyLawItem
         """
 
-        self._fb = fb
+        self._pl = pl
 
     @property
     def retainable(self) -> Retainable:

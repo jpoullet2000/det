@@ -2,22 +2,39 @@
 swagger: "2.0"
 info:
   description: "Data engineering toolkit API"
-  version: "0.0.1"
+  version: "0.0.3"
   title: "Data engineering toolkit API"
   contact:
     email: "jeanbaptistepoullet@statrgy.com"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "virtserver.swaggerhub.com"
-basePath: "/detapi/0.0.1"
+#host: "localhost:9999"
+basePath: "/detapi/0.0.3"
 tags:
-- name: "admins"
-  description: "Secured Admin-only calls"
-  # security:
-  #  - basic: []
-- name: "developers"
-  description: "Operations available to regular developers"
+  - name: "admins"
+    description: "Secured Admin-only calls"
+  - name: "developers"
+    description: "Operations available to regular developers"
+securityDefinitions:
+   # X-API-Key: abcdef12345
+   APIKeyHeader:
+     type: apiKey
+     in: header
+     name: X-API-Key
+   # /path?api_key=abcdef12345
+   APIKeyQueryParam:
+     type: apiKey
+     in: query
+     name: api_key
+# Global security (applies to all operations):
+security:
+  - APIKeyHeader: []
+#securityDefinitions:
+#  basicAuth:
+#    type: Basic
+#security:
+#   - basic: []
 schemes:
 - "https"
 paths:
@@ -39,6 +56,9 @@ paths:
         required: false
         schema:
           $ref: "#/definitions/TypedefsItem"
+      # Operation-specific security:
+      security:
+        - APIKeyHeader: []
       responses:
         201:
           description: "item created"
@@ -133,7 +153,7 @@ paths:
           $ref: "#/definitions/HdfsPathItem"
       responses:
         201:
-          description: "item created"
+          description: "HDFS path created"
         400:
           description: "invalid input, object invalid"
         409:
@@ -215,17 +235,17 @@ paths:
         401:
           description: "Access token is missing or invalid"
       x-swagger-router-controller: "det.controllers.developers_controller"
-  /clusters/{cluster_id}:
+  /clusters/{cluster_name}:
     get:
       tags:
       - "developers"
       summary: "get cluster info"
       description: "Get the cluster info\n"
-      operationId: "clusters_cluster_id_get"
+      operationId: "clusters_cluster_name_get"
       produces:
       - "application/json"
       parameters:
-      - name: "cluster_id"
+      - name: "cluster_name"
         in: "path"
         description: "cluster identifier"
         required: true
@@ -242,17 +262,17 @@ paths:
         401:
           description: "Access token is missing or invalid"
       x-swagger-router-controller: "det.controllers.developers_controller"
-  /clusters/{cluster_id}/services:
+  /clusters/{cluster_name}/services:
     get:
       tags:
       - "developers"
       summary: "get cluster services"
       description: "Get the services from the specified cluster\n"
-      operationId: "clusters_cluster_id_services_get"
+      operationId: "clusters_cluster_name_services_get"
       parameters:
-      - name: "cluster_id"
+      - name: "cluster_name"
         in: "path"
-        description: "cluster identifier"
+        description: "cluster name"
         required: true
         type: "string"
       responses:
@@ -335,7 +355,7 @@ definitions:
         cardinality: "SINGLE"
         valuesMinCount: 1
       name: "data_delivery"
-      description: "A subtype of Process that delivers data on the ata lake."
+      description: "A subtype of Process that delivers data on the data lake."
       category: "ENTITY"
   ClassificationDefsItem:
     type: "object"
@@ -428,28 +448,28 @@ definitions:
     properties:
       name:
         type: "string"
-        example: "delivery_application_acronym"
+        #example: "delivery_application_acronym"
       typeName:
         type: "string"
-        example: "data_delivery_apps"
+        #example: "data_delivery_apps"
       isOptional:
         type: "boolean"
-        example: false
+        #example: false
       cardinality:
         type: "string"
-        example: "SINGLE"
+        #example: "SINGLE"
       valuesMinCount:
         type: "integer"
-        example: 1
+        #example: 1
       valuesMaxCount:
         type: "integer"
-        example: 1
+        #example: 1
       isUnique:
         type: "boolean"
-        example: false
+        #example: false
       isIndexable:
         type: "boolean"
-        example: false
+        #example: false
     example:
       isIndexable: false
       name: "delivery_application_acronym"
@@ -469,35 +489,90 @@ definitions:
     - "d0"
   SecurityGovernanceItem:
     type: "string"
-    example: "s1"
+    example: "SG_CONF"
     enum:
-    - "s1"
-    - "s2"
+    - "SG_UNR"
+    - "SG_IUO"
+    - "SG_CONF"
+    - "SG_HICONF"
   CompetitionLawItem:
     type: "string"
-    example: "s1"
+    example: "CL_RT"
     enum:
-    - "s1"
-    - "s2"
-  FunctionalBlockItem:
+    - "CL_WR"
+    - "CL_RT"
+    - "CL_WS"
+  PrivacyLawItem:
     type: "string"
-    example: "s1"
+    example: "PL_HEALTH"
     enum:
-    - "s1"
-    - "s2"
+    - "PL_GDPRPII"
+    - "PL_AUDIOTR"
+    - "PL_BILLING"
+    - "PL_CONSUMH"
+    - "PL_CONTENT"
+    - "PL_CUSINTER"
+    - "PL_EXTERID"
+    - "PL_FAMILYC"
+    - "PL_FINANCE"
+    - "PL_HEALTH"
+    - "PL_IDENTIF"
+    - "PL_IMAGEVR"
+    - "PL_INTERID"
+    - "PL_JUDICLI"
+    - "PL_LEISURE"
+    - "PL_LOCDATA"
+    - "PL_PERCHAR"
+    - "PL_PRDPERF"
+    - "PL_PROFEDU"
+    - "PL_SEGMENT"
+    - "PL_SUBSCRI"
+    - "PL_TECHNID"
+    - "PL_3RDPART"
+    - "PL_TRFDATA"
+    - "PL_USGDATA"
+
+#  EnvironmentItem:
+#    type: "string"
+#    example: "EN_DWH_DEV"
+#    enum:
+#    - "EN_DWH_DEV"
+#    - "EN_DWH_TST"
+#    - "EN_DWH_ACC"
+#    - "EN_DWH_PRD"
+#    - "EN_EUD_DEV"
+#    - "EN_EUD_TST"
+#    - "EN_EUD_ACC"
+#    - "EN_EUD_PRD"
+#    - "EN_PPADS_DEV"
+#    - "EN_PPADS_TST"
+#    - "EN_PPADS_ACC"
+#    - "EN_PPADS_PRD"
+#    - "EN_UXMT_DEV"
+#    - "EN_UXMT_TST"
+#    - "EN_UXMT_ACC"
+#    - "EN_UXMT_PRD"
   Retainable:
-    type: "integer"
-    example: 365
+    type: "object"
+    required:
+    - "retentionPeriod"
+    properties:
+      retentionPeriod:
+        type: "integer"
+        example: 365
   HdfsPathItem:
     type: "object"
     required:
     - "env"
+    - "app"
+    - "classification"
     properties:
       data_code:
         type: "string"
         example: "data"
         enum:
         - "data"
+        default: "data"
       env:
         $ref: "#/definitions/Environments"
       delivery_ingestion:
@@ -506,17 +581,28 @@ definitions:
         enum:
         - "delivery"
         - "ingestion"
+        default: "ingestion"
+      app:
+        type: "string"
+        example: "DWH"
+      subfolder:
+        type: "string"
+        example: "app_subfolder"
       classification:
         $ref: "#/definitions/HdfsPathItem_classification"
+      cluster_name:
+        $ref: "#/definitions/Cluster"
     example:
       delivery_ingestion: "delivery"
       env: "d0"
       classification:
-        sg: "s1"
-        cl: "s1"
-        fb: "s1"
-        retainable: 365
-      datacode: "data"
+        sg: "SG_CONF"
+        cl: "CL_RT"
+        pl: "PL_HEALTH"
+        Retainable: 
+          retentionPeriod: 365
+      data_code: "data"
+      app: "DWH"
   Cluster:
     type: "object"
     properties:
@@ -691,32 +777,18 @@ definitions:
         $ref: "#/definitions/SecurityGovernanceItem"
       cl:
         $ref: "#/definitions/CompetitionLawItem"
-      fb:
-        $ref: "#/definitions/FunctionalBlockItem"
-      retainable:
+      pl:
+        $ref: "#/definitions/PrivacyLawItem"
+      Retainable:
         $ref: "#/definitions/Retainable"
     example:
-      sg: "s1"
-      cl: "s1"
-      fb: "s1"
-      retainable: 365
-#parameters:
-#  HdfsMaintenanceServices:
-#    name: "HdfsMaintenanceService"
-#    in: "query"
-#    description: "all/archive/purge/compress"
-#    required: false
-#    type: "string"
-#    enum:
-#    - "all"
-#    - "archive"
-#    - "purge"
-#    - "compress"
+      sg: "SG_CONF"
+      cl: "CL_RT"
+      pl: "PL_HEALTH"
+      Retainable: 
+        retentionPeriod: 365
 responses:
   UnauthorizedError:
     description: "Access token is missing or invalid"
   BadRequest:
     description: "invalid input, object invalid"
-securityDefinitions:
-  basic:
-    type: basic

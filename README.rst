@@ -96,6 +96,8 @@ To run the server on a Docker container, please execute the following from the r
   # starting up a container
   docker run -p 8888:8888 det
 
+Note that the ~/.credentials.json must be created before running the above commands.
+
 
 Development
 -----------

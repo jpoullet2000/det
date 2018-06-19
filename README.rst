@@ -2,9 +2,10 @@
 Data Engineering Toolkit
 =============================
 
-Based on a REST API (Swagger generated server), it provides different services such as the creation of HDFS file/folders and their underlying purge/archiving, the access of cluster services and their parameters, etc.  
+Based on a REST API (Swagger generated server), it provides different services such as the creation of HDFS file/folders and their underlying purge/archiving, the access of cluster services and their parameters, etc. The changes in HDFS are automatically recorded in `Atlas`_. 
 
 .. image:: https://user-images.githubusercontent.com/684574/40125807-188aeada-592c-11e8-9e7c-f97609c5648b.png
+.. _Atlas: https://github.com/apache/atlas 
 
 
 Overview

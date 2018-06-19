@@ -81,8 +81,8 @@ class HdfsPathCreateOperator(BaseOperator):
     def create_hdfs_folder(self, current_hdfs_client):
         try:
             #import pdb; pdb.set_trace()
-            logging.info('The folder {} has been created'.format(self.hdfs_path))
-            mypath = self.hdfs_path
+            mypath = self.hdfs_path.lower()
+            logging.info('The folder {} has been created'.format(mypath))
             current_hdfs_client.makedirs(hdfs_path=mypath)
         except:
             raise HDFSPathCreateOperatorException('HDFS folder could not be created')

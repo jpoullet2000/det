@@ -18,7 +18,7 @@ DET_WEBSERVER_TIMEOUT = 45
 DET_WORKERS = 2
 
 # HDFS
-HDFS_USER = 'hdfs'
+HDFS_USER = 'hdfs'  # impersonation as HDFS_USER when creating hdfs folder, if not use None
 HDFS_DATA_ROOT_FOLDER = '/data'
 HDFS_CODE_ROOT_FOLDER = '/code'
 HDFS_DATA_INGESTION_FOLDER_STRUCTURE = '/data/{{ env }}/raw/{{ app }}'
@@ -38,6 +38,7 @@ WEBHDFS_PORT = 50070
 
 # SECURITY
 KERBEROS_ACTIVE = False
+
 # TEST CREDENTIALS
 TEST_ATLAS_LOGIN = 'atlas_login'
 TEST_ATLAS_PASSWORD = 'atlas_password'

@@ -33,7 +33,7 @@ class HdfsPathCreateOperator(BaseOperator):
     """
     Creates an HDFS folder and records the dataset on Atlas
     """
-    def __init__(self, hdfs_path_item, proxy_user=None):
+    def __init__(self, hdfs_path_item, proxy_user=_HDFS_USER):
         """
         Args:
             hdfs_path_item(HdfsPathItem): 
@@ -68,10 +68,9 @@ class HdfsPathCreateOperator(BaseOperator):
             connection_str = HDFS_CLIENT.webhdfs_uri
             logging.debug('Trying uri %s', connection_str)
             if _KERBEROS_ACTIVE:
-                client = KerberosClient(connection_str)
+                client = KerberosClient(connection_str, proxy=self.proxy_user)
             else:
-                proxy_user = self.proxy_user
-                client = InsecureClient(connection_str, user=proxy_user)
+                client = InsecureClient(connection_str, user=self.proxy_user)
             client.status('/')
             logging.debug('Using HDFS uri %s for hook', connection_str)
             return client
@@ -143,9 +142,10 @@ class HdfsPathCreateOperator(BaseOperator):
         """
         """
         try:
-            attributes_=dict(qualifiedName=self.hdfs_path,
-                             name=self.hdfs_path.replace('/', '_')[1:],
-                             path=self.hdfs_path,
+            hdfs_path = self.hdfs_path.lower()
+            attributes_=dict(qualifiedName=hdfs_path,
+                             name=hdfs_path.replace('/', '_')[1:],
+                             path=hdfs_path,
                              clusterName=self.get_cluster_name())
             entity_create_op = AtlasEntityCreateOperator(
                 attributes = {k: v for k, v in attributes_.items() if v is not None},

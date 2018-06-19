@@ -43,7 +43,7 @@ setup(
     include_package_data=True,
     scripts=['det/bin/det'],
 #    entry_points={
-#        'console_scripts': ['det=det.__main__:main']},
+#        'console_scripts': ['det=det.cli:APP']},
     long_description="""\
     Data engineering toolkit API
     """,

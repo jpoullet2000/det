@@ -33,6 +33,8 @@ If you want to set up your own custom configuration file/module, you need to cre
 
   export DET_CONFIG=/path/to/your/settings.py
 
+Make sure to set `HDFS_USER = None` if you don't want to impersonate as `hdfs` when writing on HDFS. 
+
 You also need to set up your credentials::
 
   chmod +x create_credentials.sh
@@ -62,7 +64,11 @@ Note that if your WebHDFS service is kerberized, you also need to install the `r
 
   pip install requests_kerberos
 
-Make sure to use a version of `pykerberos >= 1.2.1`. It has been noted that the version `pykerberos == 1.1.14` was not properly working with DET. 
+Make sure to use a version of `pykerberos >= 1.2.1`. It has been noted that the version `pykerberos == 1.1.14` was not properly working with DET. Note that other dependencies such as `krb5` are also needed. Therefore if you are in a conda environment, it is strongly recommended to use the command::
+
+  conda install pykerberos>=1.2.1 requests-kerberos
+
+To activate the use of Kerberos in `det/settings.py`, set `KERBEROS_ACTIVE = True`. 
 
 To launch the integration tests, use tox::
  

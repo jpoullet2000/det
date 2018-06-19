@@ -1,3 +1,2 @@
 include *.txt
-recursive-include det/swagger *
-recursive-include det/templates *
+recursive det *

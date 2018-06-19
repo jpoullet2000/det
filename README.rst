@@ -1,3 +1,5 @@
+.. image:: https://travis-ci.org/jpoullet2000/det.svg?branch=master 
+
 =============================
 Data Engineering Toolkit
 =============================
@@ -50,16 +52,16 @@ To run the server, please execute the following from the root directory::
 
   pip install -r requirements.txt
   python setup.py install
-  det runserver -p 8888 
+  det runserver -p 9999 
 
 
 and open your browser to here:: 
 
-  http://localhost:8888/detapi/0.0.3/ui/
+  http://localhost:9999/detapi/0.0.3/ui/
 
 Your Swagger definition lives here::
 
-  http://localhost:8888/detapi/0.0.3/swagger.json
+  http://localhost:9999/detapi/0.0.3/swagger.json
 
 Note that if your WebHDFS service is kerberized, you also need to install the `requests_kerberos` module::
 
@@ -77,10 +79,11 @@ To launch the integration tests, use tox::
   tox
 
 
-The port 8888 is often taken by other apps, especially If your are running the det server on a machine with Hortonworks or Cloudera distro. In that case, you'd better choose a different port::
-
+You can choose to run the webserver on a different port:: 
+  
   det runserver -p <port>
 
+Note that the port 8888 is often taken by other apps, especially If your are running the det server on a machine with Hortonworks or Cloudera distro. 
 
 For a detailed usage description of the command::
 
@@ -89,16 +92,23 @@ For a detailed usage description of the command::
 
 Running with Docker
 -------------------
+First add the .credentials.json to the root directory (make sure you are in the root directory)::
+
+  cp ~/.credentials.json .
+
 To run the server on a Docker container, please execute the following from the root directory:: 
 
   # building the image
   docker build -t det .
 
   # starting up a container
-  docker run -p 8888:8888 det
+  docker run -p 9999:9999 det
 
-Note that the ~/.credentials.json must be created before running the above commands.
+If you are running `HDP`_ locally, it is recommended to replace the last command by::
 
+  docker run -network host -p 9999:9999 det
+
+.. _`HDP`: https://fr.hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/ 
 
 Development
 -----------

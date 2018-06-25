@@ -17,5 +17,4 @@ RUN cd /home/det \
     python setup.py install \
     cd -
 EXPOSE $DET_WEBSERVER_PORT
-ENTRYPOINT ["python"]
-CMD ["/home/det/det/bin/det", "runserver", "-p", "$DET_WEBSERVER_PORT", "-d"]
+CMD python /home/det/det/bin/det runserver -p $DET_WEBSERVER_PORT -d

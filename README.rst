@@ -106,7 +106,7 @@ To run the server on a Docker container, please execute the following from the r
 
 If you are running `HDP`_ locally, it is recommended to replace the last command by::
 
-  docker run -network host -p 9999:9999 det
+  docker run --network host -p 9999:9999 det
 
 .. _`HDP`: https://fr.hortonworks.com/tutorial/sandbox-deployment-and-install-guide/section/3/ 
 

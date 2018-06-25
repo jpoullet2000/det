@@ -44,7 +44,7 @@ def runserver(debug, address, port, workers, timeout):
               Fore.YELLOW + ' mode')
         print(Fore.BLUE + '-=' * 20)
         print(Style.RESET_ALL)
-        APP.run(port=conf['DET_WEBSERVER_PORT'])
+        APP.run(port=port)
     else:
         addr_str = '{address}:{port} '
         cmd = (

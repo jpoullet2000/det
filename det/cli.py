@@ -44,7 +44,7 @@ def runserver(debug, address, port, workers, timeout):
               Fore.YELLOW + ' mode')
         print(Fore.BLUE + '-=' * 20)
         print(Style.RESET_ALL)
-        APP.run(port=port)
+        APP.run(port=int(port))
     else:
         addr_str = '{address}:{port} '
         cmd = (
